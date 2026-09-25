@@ -54,7 +54,7 @@ The two working repositories remain the source of truth for raw runs and per-ite
 | V2-T | Adapted direct vs pipeline | **1.000 vs 0.762** · Δ **−23.84 pts** [−28.33; −19.60] |
 | V2.1 | Depth-8 bench (n = 400, frozen) | direct 0.2800 · pipeline 0.5975 · propagation 0.8525 |
 | V2.2 | A1-bis propagation, zero training | c_prop **0.83–0.86 invariant in depth**; Δ vs discretisation IC > 0 on 8/8 benches |
-| total | registered compute | V2: ≈ **4.96 h** GPU; full project ≤ **6 h** of GPU time, ⟨ 2.1 GiB VRAM peak |
+| total | registered compute | V1: several GPU hours across a ~12 h window; V2: **4.96 h** registered; VRAM peak ≈ 2.1 GiB |
 
 ---
 

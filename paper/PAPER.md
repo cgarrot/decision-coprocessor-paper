@@ -326,7 +326,7 @@ We asked whether a small explicit computation improves multi-step decisions of a
 - **V2-S:** unique successor, acyclic, ≥3 terminals, unreachable distractors, opaque entities, shuffled order; trace weights summing to 1 with absorbing-mass spreading.
 - **V2-T:** deterministic French rendering; 8/6/5/7 formulation decks; recall (p = 0.30) and second-declaration (p = 0.25) noise; no lexical shortcut (probe at chance); decisive-edge and paraphrase pairs.
 - **V2.1:** 8 benches × 400, seeds 2205–2212, matched variants by `base_group_id`, strict disjunction, `token_len` ≤ 512 by construction.
-- **V2.2:** selection bench seed 2213 (selection only); INUNKNOWN semantics fixed before use.
+- **V2.2:** selection bench seed 2213 (selection only); UNKNOWN semantics fixed before use.
 
 ## Appendix B — Gate criteria (summary)
 

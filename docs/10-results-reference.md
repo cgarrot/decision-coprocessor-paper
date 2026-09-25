@@ -119,7 +119,7 @@ Sources: `reports/v22_a1_qa_review.md` (addendum D), `V22_A1BIS_SPEC.md`, `V22_A
 
 | Phase | Registered compute |
 |---|---|
-| V1 all phases (P0–P7) | on the order of hours of GPU across 24 h wall-clock; exact per-run numbers in `decision-coprocessor/runs` |
+| V1 all phases (P0–P7) | several GPU hours across a ~12 h execution window; exact per-run numbers in `decision-coprocessor/runs` |
 | V2 stage S (CPU) | E1 452 s · E3 133 s · E4b 174 s + 2.3 s (plus failed attempts) |
 | V2 stage T | V2 total 4.96 h GPU, including E5v3-A ≈ 2.5 h (reader 74 min, direct 46 min, evals ≈ 25 min) |
 | VRAM peak | V2 ≈ 2.1 GiB; V1 1.199 GiB reserved |
