@@ -133,4 +133,4 @@ Costs: reader 74 min + direct 46 min + re-evals/cells/interventions ≈ 25 min G
 
 **Not established:** generalisation of either path beyond this bench (depth 6/8/10 textual, new surfaces, OOD); any confirmatory claim (no test set was opened, dev was used for checkpoint selection — adaptive campaign); the 1.000 direct score is a single run; a product-level recommendation.
 
-Those gaps are exactly what V2.1 was mandated to address — without retraining.
+Those gaps are exactly what V2.1 was mandated to address — without retraining. The full arc (V2.1 depth reversal, then V2.2 interface repair and architectural attribution) is in [doc 06](06-v21-frozen-validation.md) and [doc 07](07-v22-interface-ablations.md).

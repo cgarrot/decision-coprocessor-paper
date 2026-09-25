@@ -24,7 +24,7 @@
 | **Mechanism precedence** | Registered rule: mechanism evidence (causal profile) outranks a positive delta; a grey-zone delta cannot validate a decomposition. |
 | **Discretisation (interface)** | Taking per-edge argmax of reader distributions before execution; a single missing edge breaks the chain. |
 | **Propagation (`p_{t+1} = p_t A`)** | Replacing argmax by distribution propagation through a transition matrix `A`; terminals self-loop; UNKNOWN is an absorbing sink. |
-| **A1 / A1-bis / A2 / A3 / A4** | V2.2 ablations: frozen-reader propagation via the (unsupervised) bilinear head → failed; propagation from supervised fact-level heads → passed with zero training; distributional retraining + UNKNOWN → running; equal auxiliary head for the direct path (conditional); lazy relation reading (conditional). |
+| **A1 / A1-bis / A2 / A3 / A4** | V2.2 ablations: frozen-reader propagation via the (unsupervised) bilinear head → failed; propagation from supervised fact-level heads → passed with zero training (0.85 invariant); distributional retraining + UNKNOWN → **passed total** (0.995–1.000, 8/8); direct with equal auxiliary supervision → direct stays collapsed in depth, proving architectural superiority of propagation; A4 (lazy relation reading) not triggered. |
 | **INCONNU (UNKNOWN)** | Explicit category for “no information”, distinct from terminal: a mention with neither a subject fact nor a terminal fact. |
 | **Environment-bound (env.)** | A number valid under the recorded measurement environment (GPU RTX 3070 Laptop, bf16, batch 8); CPU/GPU can differ by ≈ 6 pts on near ties. |
 | **Experience stop** | A project-level decision to stop investing in a configuration on clearly unfavourable results — distinct from a general scientific claim. |

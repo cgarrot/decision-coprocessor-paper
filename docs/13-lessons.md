@@ -82,11 +82,23 @@
 
 ## 12. The pivot is part of the science
 
-**Episode.** The final V2 state is: stage S demonstrated, stage T refuted under fairness, then V2.1 found the depth reversal, then V2.2 attacked the interface and found that the bottleneck was the discretisation. The “conclusion” moved twice — each time under pre-registered diagnostics, never by reinterpretation of existing numbers.
+**Episode.** The final V2 state is: stage S demonstrated, stage T refuted under fairness, then V2.1 found the depth reversal, then V2.2 attacked the interface, found that the bottleneck was the discretisation, fixed it (A2), proved the fix was architectural rather than a supervision artefact (A3), measured that routing had become unnecessary, and closed with costs. The “conclusion” moved three times — each time under pre-registered diagnostics, never by reinterpretation of existing numbers.
 
 **Lesson.** When a result is overturned by a new *fair* comparison, publish both states: the original verdict, the reason it was incomplete, and the new protocol. The value of the project is not a single claim; it is the chain of constraints that made each claim falsifiable.
 
-## 13. What we would do differently
+## 13. When you claim a benefit, give the baseline the same supervision
+
+**Episode.** A2 (distributionally trained reader + propagation) dominated the frozen direct path on 8/8 benches. The QA immediately identified the obvious audit attack: A2 received extra supervision (relations, states, UNKNOWN augmentation) that the direct path did not. A3 gave the direct path the **same auxiliary heads, targets, losses, augmentation and recipe**. Result: the direct path stayed collapsed in depth (0.2475–0.2825 at depths 8/10 vs A2 0.9975), Δ(A2−A3) rising from +3.25 pts (short chains) to **+75.0 pts** (depth 8), CI low > 0 on all eight benches.
+
+**Lesson.** Fairness F1 does not stop at representations: it applies to every form of extra information, including auxiliary supervision. A superiority claim that has not answered "what if the baseline had exactly the same heads?" is not yet a claim about architecture.
+
+## 14. Measure the oracle ceiling before building the router
+
+**Episode.** V2.1 had found strong complementarity (123/172/163 items where the pipeline is right and the direct path wrong) and flagged a router as a possible next step. The pre-committed rule was to measure the oracle router bound first. It came out at **+0.00 to +0.50 pts** over A2 alone — the propagation pipeline had absorbed the complementarity. No router was built.
+
+**Lesson.** A routing mechanism can only capture the gap between the best single expert and the best possible per-item choice. Measure that bound before designing the router: in this project it saved an entire engineering branch, and it shows that "complementarity exists" is not the same as "complementarity is exploitable after improving the experts."
+
+## 15. What we would do differently
 
 1. Design text compactness and depth coverage from the start (V1 lost 23 % of the depth test to the 512-token limit).
 2. Fix the representation-fairness rule before the first pipeline/direct comparison (it inverted a conclusion).

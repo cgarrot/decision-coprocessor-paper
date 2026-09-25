@@ -210,23 +210,28 @@ def fig04_depth_curves():
     depths = [1, 2, 3, 4, 6, 8, 10]
     direct = [1.00, 0.97, 0.91, 0.87, 0.53, 0.28, 0.31]
     pipeline = [0.92, 0.81, 0.76, 0.71, 0.67, 0.60, 0.56]
-    cprop_note = 0.85
+    cprop = 0.85
+    a2 = 0.9975
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12.4, 4.6))
 
     x = np.arange(len(depths))
     ax1.plot(x, direct, "-o", color=C_ORANGE, lw=2.2, ms=6, label="direct (d), frozen")
     ax1.plot(x, pipeline, "-s", color=C_BLUE, lw=2.2, ms=6, label="pipeline (c), frozen")
-    ax1.axhline(cprop_note, color=C_GREEN, ls="--", lw=1.8, label="A1-bis propagation ≈ 0.85 (invariant)")
+    ax1.plot(x, [a2] * len(depths), "-", color=C_GREEN, lw=2.4,
+             label="A2 distributional (0.995–1.000, invariant)")
+    ax1.axhline(cprop, color=C_GREEN, ls="--", lw=1.6, alpha=0.7,
+                label="A1-bis propagation ≈ 0.85 (zero training)")
+    ax1.axhline(0.95, color=C_GREY, ls=":", lw=1.3, label="deterministic parser ceiling 0.95")
     ax1.axvspan(2.5, 4.0, color="#F6F6F6", zorder=0)
     ax1.text(3.25, 0.42, "crossing\n4→6", ha="center", fontsize=8.5, color=C_GREY)
     ax1.set_xticks(x, [str(d) for d in depths])
     ax1.set_xlabel("chain depth")
     ax1.set_ylabel("accuracy (all-in, n=400/bench)")
     ax1.set_ylim(0, 1.05)
-    ax1.set_title("V2.1 depth reversal on frozen checkpoints")
+    ax1.set_title("V2.1/V2.2 on frozen + repaired checkpoints")
     ax1.grid(alpha=0.25)
-    ax1.legend(fontsize=8.5, loc="lower left")
+    ax1.legend(fontsize=7.8, loc="lower left")
 
     variants = ["B2 direct", "B3 non-rec.", "B4 unshared", "R4 sidecar", "R1 (k=1)"]
     acc = [0.3418, 0.3343, 0.3382, 0.3359, 0.3361]
@@ -315,21 +320,22 @@ def fig06_a1bis():
 # Figure 7 — timeline
 # ---------------------------------------------------------------------------
 def fig07_timeline():
-    fig, ax = new_canvas(12.8, 6.2)
-    title(ax, "Project timeline — 24–25 September 2026 (~29 h of continuous work, 71 commits)")
+    fig, ax = new_canvas(12.8, 6.6)
+    title(ax, "Project timeline — 24–25 September 2026 (~33 h of continuous work, 83 commits)")
 
     # lanes: (name, y, [(x, label), ...], color)
     lanes = [
-        ("V1", 82, [(6, "P0 bootstrap 12:07"), (16, "P1 data 12:41"), (23, "pilot 13:03"),
+        ("V1", 86, [(6, "P0 bootstrap 12:07"), (16, "P1 data 12:41"), (23, "pilot 13:03"),
                     (33, "B2 x3 seeds 15:05"), (50, "R/B3/B4 x3 seeds 20:19"),
                     (60, "gate P5 21:33"), (66, "final report 22:04"), (70, "closed 22:11")], C_ORANGE),
-        ("V2-S", 64, [(72, "E0 23:43"), (77, "E1/E2 23:54"), (83, "E3/E4b 00:26")], C_PURPLE),
-        ("V2-T", 46, [(74, "E5 prep 01:15"), (78, "bench defective"),
+        ("V2-S", 70, [(72, "E0 23:43"), (77, "E1/E2 23:54"), (83, "E3/E4b 00:26")], C_PURPLE),
+        ("V2-T", 54, [(74, "E5 prep 01:15"), (78, "bench defective"),
                       (84, "it1-it3 02:24-06:25"), (91, "E5v3-A LoRA"), (96, "closed 10:34")], C_BLUE),
-        ("V2.1", 28, [(14, "protocol 11:40"), (34, "8 benches seed 2205-2212"), (52, "QA recalc 13:53"),
+        ("V2.1", 38, [(14, "protocol 11:40"), (34, "8 benches seed 2205-2212"), (52, "QA recalc 13:53"),
                       (66, "depth reversal published")], C_GREEN),
-        ("V2.2", 10, [(20, "protocol 14:03"), (36, "A1 FAIL 14:15"), (52, "A1-bis PASS 14:52"),
-                      (72, "A2 run 1 cancelled 15:28"), (88, "A2 running -> snapshot 15:42")], C_RED),
+        ("V2.2", 22, [(20, "protocol 14:03"), (36, "A1 FAIL 14:15"), (50, "A1-bis PASS 14:52"),
+                      (64, "A2 PASS 16:32"), (78, "A3 8/8 architectural"), (90, "costs 18:54")], C_RED),
+        ("QA", 6, [(90, "all V2.2 gates closed — REG-81, 19:06")], "#6A4FA3"),
     ]
     for name, y, events, color in lanes:
         ax.plot([4, 96], [y, y], color=color, lw=2.4, alpha=0.65, zorder=1)
@@ -337,10 +343,10 @@ def fig07_timeline():
         for i, (x, label) in enumerate(events):
             ax.plot([x], [y], "o", color=color, ms=6, zorder=3)
             above = (i % 2 == 0)
-            ax.text(x, y + (2.6 if above else -2.6), label, ha="center",
-                    va="bottom" if above else "top", fontsize=7.4, color="#374151")
+            ax.text(x, y + (2.3 if above else -2.3), label, ha="center",
+                    va="bottom" if above else "top", fontsize=7.2, color="#374151")
 
-    ax.text(50, 2.5, "time, 24/09 12:00 -> 25/09 16:00 (not to scale; V2.1/V2.2 lanes compressed)",
+    ax.text(50, 1.5, "time, 24/09 12:00 -> 25/09 19:06 (not to scale; V2.1/V2.2 lanes compressed)",
             ha="center", fontsize=7.6, color=C_GREY)
     save(fig, "fig07-timeline")
 
@@ -373,6 +379,49 @@ def fig08_reader():
     save(fig, "fig08-reader")
 
 
+# ---------------------------------------------------------------------------
+# Figure 9 — V2.2 final: A2 vs A3 vs direct vs discretisation
+# ---------------------------------------------------------------------------
+def fig09_v22_final():
+    benches = ["B1\nshort", "B2\n6", "B3\n8", "B4\n10", "B5\nsurface", "B6\ndistract", "B7\noptions", "B8\nstart"]
+    c_disc = [0.8000, 0.6675, 0.5975, 0.5600, 0.8100, 0.7725, 0.8000, 0.7650]
+    a1bis = [0.8550, 0.8375, 0.8525, 0.8550, 0.8525, 0.8325, 0.8550, 0.8575]
+    a2 = [0.9950, 0.9975, 0.9975, 0.9975, 1.0000, 1.0000, 0.9950, 0.9975]
+    a3 = [0.9625, 0.4925, 0.2475, 0.2825, 0.9575, 0.9450, 0.9600, 0.8550]
+    direct = [0.9375, 0.5250, 0.2800, 0.3075, 0.9400, 0.9375, 0.9400, 0.8400]
+    d_a2_a3 = [3.25, 50.50, 75.00, 71.50, 4.25, 5.50, 3.50, 14.25]
+    lo = [1.50, 45.50, 70.50, 66.75, 2.25, 3.49, 1.50, 10.75]
+    hi = [5.25, 55.50, 79.01, 75.76, 6.25, 7.75, 5.50, 18.00]
+
+    x = np.arange(len(benches))
+    width = 0.2
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13.2, 5.0), gridspec_kw={"width_ratios": [1.45, 1]})
+
+    ax1.bar(x - 1.5 * width, c_disc, width, label="discretisation", color="#B8C4D0")
+    ax1.bar(x - 0.5 * width, a1bis, width, label="A1-bis (0 training)", color=C_PURPLE, alpha=0.85)
+    ax1.bar(x + 0.5 * width, a2, width, label="A2 (distributional)", color=C_GREEN)
+    ax1.bar(x + 1.5 * width, a3, width, label="A3 (direct + equal aux.)", color=C_ORANGE)
+    ax1.plot(x, direct, "k_", ms=14, mew=2, label="direct V2.1")
+    ax1.set_xticks(x, benches, fontsize=8)
+    ax1.set_ylim(0, 1.08)
+    ax1.set_ylabel("accuracy (n=400/bench)")
+    ax1.set_title("V2.2 final — 8 sealed benches: A2 0.995–1.000, depth-invariant")
+    ax1.legend(fontsize=7.6, ncol=2, loc="lower left")
+    ax1.grid(alpha=0.25, axis="y")
+
+    err = [np.array(d_a2_a3) - np.array(lo), np.array(hi) - np.array(d_a2_a3)]
+    ax2.bar(x, d_a2_a3, yerr=err, color=[C_RED if v > 20 else C_BLUE for v in d_a2_a3], capsize=4)
+    ax2.set_xticks(x, benches, fontsize=8)
+    ax2.set_ylabel("Δ(A2 − A3), pts")
+    ax2.set_title("Architectural superiority: CI low > 0 on 8/8")
+    ax2.grid(alpha=0.25, axis="y")
+    for i, v in enumerate(d_a2_a3):
+        ax2.text(i, hi[i] + 2.0, f"{v:+.2f}".rstrip("0").rstrip("."), ha="center", fontsize=8)
+
+    fig.tight_layout()
+    save(fig, "fig09-v22-final")
+
+
 if __name__ == "__main__":
     fig01_v1_architecture()
     fig02_v2_executor()
@@ -382,4 +431,5 @@ if __name__ == "__main__":
     fig06_a1bis()
     fig07_timeline()
     fig08_reader()
+    fig09_v22_final()
     print("all figures written to", OUT)

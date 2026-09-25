@@ -2,10 +2,12 @@
   "snapshot_date": "2026-09-25",
   "source_repositories": {
     "decision-coprocessor": "V1, 20 commits, closed 2026-09-24",
-    "decision-coprocessor-v2": "V2/V2.1 closed, V2.2 running, 51 commits at snapshot"
+    "decision-coprocessor-v2": "V2/V2.1/V2.2 all closed, 63 commits at final snapshot"
   },
   "note": "Read-only snapshots copied for traceability; the source repositories remain authoritative.",
   "files": {
+    "PROVENANCE.json": "eeb876dc32cf75627c91938893939b7067281a0cc2ca4f2b1d8b82fdefc16a3a",
+    "README.md": "5f98ec495c7f7ae9e0ba39de30292f57a2c5a319204ca3986daadcb1d3a24bdc",
     "v1/configs/controls_main.yaml": "5ef8f38c43f841d5067862603cb8434ebcb98857d5b6628ae850f2096ccb3634",
     "v1/configs/fast_head.yaml": "1561d435a2094d3759284017644040b7db9adf3538091ff1ebe48ca6d7897069",
     "v1/configs/gate.yaml": "2f093086f92543f68fb8abf7776bcd7c7f3a79121a44c59df1417157139784f3",
@@ -23,6 +25,7 @@
     "v2/configs/e5v3a_lora_direct.yaml": "d049daa26b60322e68585d905102903f968adcfea77fdb30ac3b2abc41b7c54f",
     "v2/configs/e5v3a_lora_reader.yaml": "55fe86d72472329f5ca472aa0705fc9ad135b3597036955630511c1fffc93303",
     "v2/configs/v22_a2.yaml": "3ef28a765e1d797c01c7f6c3bedaa75f66177c86b4de0d27b94175e2f6df0cd9",
+    "v2/configs/v22_a3.yaml": "4e8e7fe6f318c14a356cae9d961fd221d5e8ed9aeb6b5eb9d11382befcba1c6d",
     "v2/data/bfamily.py": "eca3554063165ccf69c3a523c563e5c7aeb5660223e046e5afd47409bfde741f",
     "v2/data/det_parser.py": "6076bae51b6328cc4ee46bede9c45d3f6e07e59dba4be4b97ced03e688eb0e54",
     "v2/data/pools.py": "d3be8e6c67b1683cb1a1033dde5b69a972db652d62bd3b296841e2ca9112685d",
@@ -39,11 +42,17 @@
     "v2/protocols/V21_PROTOCOL.md": "293b25c3fa4a058ec7939c7f689af0f1fcc9949e7d1eaf5477733f83af82e1e6",
     "v2/protocols/V22_A1BIS_SPEC.md": "d9337317d3192e48f1a5341a930d74fd0ebf88f32028bf0dae17219a9f9490c5",
     "v2/protocols/V22_A2_ADDENDUM.md": "2334c67b9ae0d18a0b6758bb669661f1f4fa99a8e69f34aac2be9115135b3b9c",
+    "v2/protocols/V22_A3_SPEC.md": "2f58f02ba47354cc9dcaf50387983dc344f1f632b22bbf88953aadec7fffa887",
     "v2/protocols/V22_PROTOCOL.md": "6fc9d7d457f2073f9278054584a120154fb984930a051a08113dee513e18a93e",
     "v2/protocols/data_contract.md": "8141b2b73329314e2836ca41a26a16594783b282c019fc0297b31c713c8bbf94",
-    "v2/protocols/research_register.md": "1ed8ea675defc764ea2170b6388963388ded2f1f61f05bc06582a3435a4fbb48",
+    "v2/protocols/research_register.md": "c351d96a28dcafa51a0b8e341615ff442d70b110bca847d99e067c735375c3d3",
     "v2/reports/final_v2.md": "5dde7e1c2c765fdc18a6ccf02c5bd1d6d350d79635c91c9ca6ff0e6ef5b21bf4",
     "v2/reports/v21_results.md": "c1d5366f8921018aab5264e87ff6534aa272b59dd9e31159e10dbde46837a4bb",
-    "v2/reports/v22_a1_qa_review.md": "f48618b6740cac662a59b39ba34f4fcea9dc9bf8f1addd2b21e660d152026cb8"
+    "v2/reports/v22_a1_qa_review.md": "f48618b6740cac662a59b39ba34f4fcea9dc9bf8f1addd2b21e660d152026cb8",
+    "v2/reports/v22_a2_qa_review.md": "bb21fbcd008434f863b6636bd4d0d7d0798f2a4100978d5df68ada329543c253",
+    "v2/reports/v22_a3_qa_review.md": "7b95985c590914c7105e10284b5f84af8e765783e6365ac372038e38dd0e07c9",
+    "v2/reports/v22_couts_COUT_TABLE.md": "25199d9cd6a4ce33df717bc26928d90ca2c212c8392d6a96f3e6c4923eea0a1b",
+    "v2/reports/v22_final.md": "0298d9308ed61cfd8ab820ce6fedacf859cd18ccb4ca436eea34e6b038ef0826",
+    "v2/reports/v22_final_qa_review.md": "7292480ec2ede6b7c3c1784b5f6e69784aaac88527c70c29dc291b273d8b488d"
   }
 }

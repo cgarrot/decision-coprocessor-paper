@@ -1,4 +1,4 @@
-# 12 — Timeline: 2026-09-24 10:08 → 2026-09-25 (ongoing)
+# 12 — Timeline: 2026-09-24 10:08 → 2026-09-25 19:06 (closed)
 
 *Reconstructed from git histories, registries, run logs and reports. All times are local (CEST).*
 
@@ -82,19 +82,23 @@ Along the way, **two E0 bugs found and fixed** (pointer not reinjected: ~2-hop c
 | 13:50 | Deterministic parser (p) delivered: coverage 1.0, agreement 1.0 (3200/3200) |
 | 13:49 | `det_parser_v21.json`; complementarity (123/172/163) published; Q4 line 2: work on the interface |
 
-## Act VII — V2.2 interface ablations (09-25, 14:03 → ongoing)
+## Act VII — V2.2 interface ablations (09-25, 14:03 → 19:06, closed)
 
 | Time | Event |
 |---|---|
 | 14:03 | **V2.2 protocol pre-registered** (commit `c40a168a`): A1 frozen-reader propagation, A2 distributional retraining, criteria Δ ≥ +5 pts B3 IC > 0; stable eps tie-break |
 | 14:11–14:14 | A1 run |
 | 14:15 | A1 documented FAIL (Δ B3 = −38.25 pts) |
-| 14:22 | Root cause found and registered: `successor_bilinear` head never supervised in fact mode (top-1 0.054); A1-bis spec pre-registered |
-| 14:35–14:40 | **A1-bis executed** (fact-level transition matrix, zero training) |
-| 14:52 | QA addendum D: **A1-bis PASS validated**, c_prop 0.83–0.86 invariant in depth, Δ vs direct +57.25 pts at depth 8 |
-| 14:55 | A1 archive regenerated on GPU bit-identical; `__main__` guards added to all runners (QA incident resolution) |
-| 15:04–15:28 | **A2 run 1** — cancelled (gradient checkpointing inactive → OOM; selection eval gold/predicted mismatch) |
-| 15:25–15:31 | Fixes committed; **A2 relaunched with frozen config unchanged** |
-| 15:42 | Snapshot: A2 at step 300/1200 — selection c_prop **0.99**, b_discret 0.9125–0.9675 |
+| 14:22:44 | Root cause found and registered (bilinear head never supervised in fact mode, top-1 0.054); **A1-bis pre-registered** (`f6460e29`) |
+| 14:37:44 | **A1-bis executed** (fact-level transition matrix, zero training) |
+| 14:52 | QA addendum D: **A1-bis PASS validated**, c_prop 0.83–0.86 invariant in depth, +57.25 pts vs direct at depth 8 |
+| 14:55–14:56 | A1 archive regenerated on GPU (8/8 aggregates bit-identical); `__main__` guards added; A1-bis spec doc deposited |
+| 15:29–16:32 | **A2 training** (relaunched after run-1 cancellation: GC/OOM + selection-eval anchoring; loader `.default` bug exposed: 28/224 → fixed with assertions): selection best = step 1200, c_prop 1.0 on bench 2213; 4054.64 s GPU |
+| ≈16:45–17:04 | **A2 evaluation on the 8 sealed benches + QA** (REG-76): PASS TOTAL, c_prop 0.995–1.000, Δ vs direct positive 8/8 (+5.75 short → +71.75 at depth 8), NLL 0.0044–0.0294; QA requires **A3** (equal auxiliary supervision) before any superiority claim |
+| 17:05 | **A3 spec pre-registered** (`V22_A3_SPEC.md`, sha 2f58f02b; QA REG-77) |
+| 17:20–18:30 | **A3 training + evaluation**: direct + equal auxiliary heads stays collapsed in depth (0.2475–0.2825); **Δ(A2−A3) +3.25 → +75.0 pts, CI low > 0 on 8/8** → architectural superiority of propagation (QA REG-78) |
+| ≈18:30 | **Router oracle bound measured**: +0.00 to +0.50 pts over A2 alone → router useless, none built (REG-79) |
+| 18:48–18:54 | **End-to-end costs**: A2 ×1.235–1.273 vs A3 (p50), throughput ×0.78–0.79, propagation 0.59–0.66 ms ≈ 1.3–1.5 % of A2 p50, VRAM parity |
+| 19:05–19:06 | **V2.2 final report** (`v22_final.md`, nine QA requirements, M1–M4 applied) + **QA closure REG-81: all gates closed** |
 
-**At snapshot:** 20 commits in V1, 51 in V2 (71 total), ≈29 h of continuous work, V2 compute ≈ 4.96 h (stage S included), V2.2/A2 running.
+**Final state:** 20 commits in V1, 63 in V2 (83 total), ≈33 h of continuous work, registered V2 compute ≈ 4.96 h + V2.2 runs; every gate of every program closed by independent QA. Remaining declared milestones (out of scope): UNKNOWN/partially observed worlds, harder benches than the B5/B6 saturation, multi-seed confirmation, OOD generalisation.

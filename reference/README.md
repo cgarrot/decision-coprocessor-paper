@@ -17,10 +17,13 @@ reference/
     │                extraction_data.py · train.py · solver.py
     ├── data/        bfamily.py · textfamily.py · pools.py · v21benches.py · det_parser.py
     ├── configs/     e1.yaml · e3bis.yaml · e4b_train.yaml · e5v2_reader_it3.yaml ·
-    │                e5v3a_lora_reader.yaml · e5v3a_lora_direct.yaml · v22_a2.yaml
-    ├── protocols/   data_contract.md · V2*_PROTOCOL.md · addenda · MODEL_NOTES.md ·
-    │                research_register.md (REG-01…REG-75)
-    └── reports/     final_v2.md · v21_results.md · v22_a1_qa_review.md
+    │                e5v3a_lora_reader.yaml · e5v3a_lora_direct.yaml ·
+    │                v22_a2.yaml · v22_a3.yaml
+    ├── protocols/   data_contract.md · V2*_PROTOCOL.md · V22_A1BIS_SPEC.md ·
+    │                V22_A3_SPEC.md · V22_A2_ADDENDUM.md · MODEL_NOTES.md ·
+    │                research_register.md (REG-01…REG-81)
+    └── reports/     final_v2.md · v21_results.md · v22_a{1,2,3}_qa_review.md ·
+                     v22_final.md · v22_final_qa_review.md · v22_couts_COUT_TABLE.md
 ```
 
 Some source documents are in French (the project working language); this compendium's paper and documentation are in English and summarise them with exact numbers.

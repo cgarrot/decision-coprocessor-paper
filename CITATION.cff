@@ -5,7 +5,9 @@ abstract: >-
   A two-part empirical study of multi-step decision making with small frozen backbones:
   V1 (latent recurrent sidecar, documented negative), V2 (supervised transition executor,
   mechanism demonstrated; text decomposition refuted under fair representation budgets),
-  V2.1 (frozen-checkpoint validation, depth reversal), V2.2 (interface ablations, ongoing).
+  V2.1 (frozen-checkpoint validation, depth reversal), V2.2 (interface ablations: A1 failure,
+  A1-bis zero-training pass, A2 distributional pass, A3 architectural attribution, router bound,
+  end-to-end costs).
 authors:
   - family-names: Garrot
     given-names: C.

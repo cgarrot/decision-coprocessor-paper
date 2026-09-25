@@ -5,7 +5,7 @@
 | Repo | Commits | Status | Contents |
 |---|---:|---|---|
 | `decision-coprocessor/` | 20 | closed | V1 code, data generators, 53,500-example corpus, runs, 66 prediction files, final report, bundle |
-| `decision-coprocessor-v2/` | 51 (at snapshot) | V2/V2.1 closed, V2.2 running | executor, extractor, data pools, gates, reports, registry, bundles |
+| `decision-coprocessor-v2/` | 63 | **closed** (V2, V2.1, V2.2) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, V2.2 archives |
 
 Both are local Git repositories (no remote at snapshot). This compendium is the public-facing entry point; core code is snapshotted under [`reference/`](../reference/) with provenance.
 
@@ -37,12 +37,25 @@ bundle_manifest.json        # 14/14 hashes conform (QA)
 ```
 Fresh-process reload verified **8/8 + 8/8 PASS** (both adapter paths, QA-validated).
 
+### V2.2 archives (`decision-coprocessor-v2/runs/`)
+```
+v22_a1/      A1 FAIL predictions (aggregate regenerated bit-identically on GPU)
+v22_a1bis/   zero-training propagation metrics + verdict
+v22_a2/      A2 checkpoint (best.pt), metrics.json, train_log.txt (selection per step)
+v22_a2_eval/ 8×pred_prop + a2_eval_metrics.json + a2_eval_verdict.json
+v22_a2_probs/ probabilistic capture (NLL/Brier), prediction identity assertions 400/400×8
+v22_a3/      A3 checkpoint, metrics.json, train_log.txt (selection best@800)
+v22_a3_eval/ 8×pred_a3 + a3_eval_verdict.json
+v22_couts/   end-to-end cost harness outputs (couts_metrics.json, COUT_TABLE.md)
+```
+Pre-registrations: `V22_PROTOCOL.md` (6fc9d7d4), A2 amendment (2334c67b), A1-bis spec (d9337317), A3 spec (2f58f02b); selection bench `S-selection.jsonl` sha `7089876d…`. All hashes are mirrored in the registry entries.
+
 ## 4. Registry and provenance
 
-- `experiment_registry.jsonl` — append-only: `id`, stage, config sha256, start/finish, status (`registered` / `running` / `pass` / `fail` / `blocked` / annotations), 90+ entries.
+- `experiment_registry.jsonl` — append-only: `id`, stage, config sha256, start/finish, status (`registered` / `running` / `pass` / `fail` / `blocked` / annotations), 141 entries.
 - `registry/costs.jsonl` — measured seconds, examples seen, updates, FLOPs estimates (29 lines for V2).
-- `research_register.md` — REG-01…REG-75 observations/hypotheses/tests, never rewritten, always appended.
-- `reports/` — every gate has a report and a QA review; reports state denominators, thresholds and verdicts.
+- `research_register.md` — REG-01…REG-81 observations/hypotheses/tests, never rewritten, always appended.
+- `reports/` — every gate has a report and a QA review; reports state denominators, thresholds and verdicts. V2.2 closure: `v22_final.md` + `v22_final_qa_review.md` (nine QA requirements, four formulation micro-corrections M1–M4 applied, cost section validated as the last gate, REG-81).
 - `predictions/` — per-item predictions with raw logits where required, so QA can recompute every metric.
 
 ## 5. Reproduce one experiment
@@ -78,7 +91,7 @@ Ground rules: scripts committed **before** use; config hashed and registered **b
 - **sealed sets are absent by design**: `E5_eval` (1007) and `E5v2_eval` (1107) were never generated/archived; no reproduction can open them (this is a feature);
 - **adaptive campaigns**: V2-T and V2.1 used dev/selection data for checkpoint choices; reproducing the exact best checkpoints requires the same data and selection code, which is versioned;
 - **thermal/laptop**: V1 latency figures come from a warm second pass on a laptop; they are not transposable to server hardware;
-- **V2.2/A2** is running at snapshot; its registry entries are the only authoritative status.
+- **V2.2 archives** are the authoritative status for A1/A1-bis/A2/A3, the router bound and the cost measurements; all registry entries carry `done` / `qa_validated` annotations.
 
 ## 7. What a reviewer can verify in under an hour
 
@@ -86,7 +99,8 @@ Ground rules: scripts committed **before** use; config hashed and registered **b
 2. `reports/final_v2.md` + `reports/e5v3a_dev.md` + QA addendum v1.9 → stage T verdict and fairness reversal.
 3. `reports/v21_results.md` + `qa_v21_q1_metrics.json` → depth reversal table.
 4. `reports/v22_a1_qa_review.md` addendum D → A1-bis PASS with zero training.
-5. `experiment_registry.jsonl` + `research_register.md` → chronology and pre-registration order (hashes, dates, commit ids).
-6. `figures/make_figures.py` (this repo) → every plot in the paper regenerated from the numbers published here.
+5. `reports/v22_a1_qa_review.md` + `v22_a2_qa_review.md`, `v22_a3_qa_review.md`, `v22_final.md`, `v22_final_qa_review.md` → A2 PASS, architectural superiority of propagation 8/8, router useless, costs, closure.
+6. `experiment_registry.jsonl` + `research_register.md` (REG-01…REG-81) → chronology and pre-registration order (hashes, dates, commit ids).
+7. `figures/make_figures.py` (this repo) → every plot in the paper regenerated from the numbers published here.
 
 A “where to check each claim” mapping exists in the original compaction dossiers (files 05 and 11 of the V2 review corpus).

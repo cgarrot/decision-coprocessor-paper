@@ -97,23 +97,28 @@ Sources: `reports/v21_results.md`, `reports/qa_v21_q1_metrics.json`, `runs/v21_e
 | GPU batch1 vs batch8 (B1) | b/c 0.805/0.800 · cn 0.8575/0.8525 · d 0.935/0.9375 | ≤ 0.5 pt |
 | CPU↔GPU variance (dev) | ≈ 6 pts (b 0.82 CPU vs 0.7616 GPU) | env.-bound labels |
 
-## V2.2 — interface ablations
+## V2.2 — interface ablations (closed)
 
-Sources: `reports/v22_a1_qa_review.md` (addendum D), `V22_A1BIS_SPEC.md`, `V22_A2_ADDENDUM.md`, `runs/v22_*`.
+Sources: `reports/v22_a1_qa_review.md`, `v22_a2_qa_review.md`, `v22_a3_qa_review.md`, `v22_final.md`, `v22_final_qa_review.md`, specs `V22_A1BIS_SPEC.md` / `V22_A3_SPEC.md`, `runs/v22_*`. All numbers QA-recalculated.
 
 | Quantity | Value |
 |---|---|
 | A1 (bilinear head) c_prop by bench | 0.3225 / 0.2125 / 0.2150 / 0.1850 / 0.2775 / 0.2375 / 0.2650 / 0.2575 |
-| A1 Δ vs discret on B3 | **−38.25 pts [−44.75; −31.75]** FAIL |
-| A1 root cause | `successor_bilinear` never supervised in fact mode (top-1 0.054) |
-| A1-bis c_prop range | **0.8325 – 0.8575, invariant in depth** |
-| A1-bis Δ vs discret | B1 +5.50 [1.50,9.25] · B2 +17.00 · **B3 +25.50 [20.75,30.00]** · B4 +29.50 · B5 +4.25 [0.25,8.25] · B6 +6.00 · B7 +5.50 · B8 +9.25 |
-| A1-bis Δ vs direct | B3 **+57.25** · B4 +54.75 · B2 +31.25 · B8 +1.75 · (B1 −8.25, short chains) |
-| A1-bis training | **zero** |
-| Gap to (p) ceiling 0.95 | ≈ 9–12 pts |
-| A2 design | distributional supervision + propagation in the loop + INCONNU sink; β 0→1 on [200,600); γ=1; augmentation 25 % masked; init reader_lora_best |
-| A2 selection bench | seed 2213, n = 400 (selection only) |
-| A2 status at snapshot | step 300: c_prop 0.990–0.995, b_discret 0.9125–0.9675 (best step 200: 0.99/0.9675); 1200 steps planned |
+| A1 Δ vs discret on B3 | **−38.25 pts [−44.75; −31.75]** FAIL (unsupervised head, top-1 0.054) |
+| A1-bis c_prop | **0.8325–0.8575, invariant in depth**; Δ vs discret +4.25…+29.50, IC>0 8/8; zero training |
+| **A2 c_prop** | **0.9950 / 0.9975 / 0.9975 / 0.9975 / 1.0000\* / 1.0000\* / 0.9950 / 0.9975** (B1→B8) |
+| A2 Δ vs discret [QA CI] | +19.50 / +33.00 / **+40.00** / +43.75 / +19.00 / +22.75 / +19.50 / +23.25, all IC low > 0 |
+| A2 Δ vs direct V2.1 [QA CI] | **+5.75** [+3.25,+8.25] / +47.25 / **+71.75** [+67.00,+76.25] / +69.00 / +6.00 / +6.25 / +5.50 / +15.75, **8/8 IC>0** |
+| A2 probabilistic quality | NLL 0.0044–0.0294; Brier gold-class 0.0007–0.0061 (vs direct V2.1 NLL 0.59→8.85) |
+| A2 selection | bench 2213, best = step 1200 (c_prop 1.0, discret 0.7975); training 4054.64 s |
+| **A3 (direct + equal aux.)** | 0.9625 / 0.4925 / 0.2475 / 0.2825 / 0.9575 / 0.9450 / 0.9600 / 0.8550 |
+| **Δ(A2−A3)** | **+3.25 / +50.50 / +75.00 / +71.50 / +4.25 / +5.50 / +3.50 / +14.25**, CI low > 0 on 8/8 → **architectural superiority of propagation** |
+| A3 vs direct V2.1 | only B1 significant (+2.50 [0.25,4.75]); depth −2.50/−3.25/−3.25 with IC ∋ 0 → auxiliary supervision alone does not repair depth |
+| Router oracle bound | A2∪A3 = 0.9975–1.0000 → **+0.00 to +0.50 pts** over A2 alone; A3-only 0–2 items/bench → **router useless, none built** |
+| Costs (batch 8) | B1 p50 A2 40.32 ms vs A3 32.65 (×1.235); B3 51.59 vs 40.52 (×1.273); throughput ×0.78–0.79; **propagation 0.59–0.66 ms ≈ 1.3–1.5 % of A2 p50**; VRAM 1472–1512 MiB parity |
+| Declared saturation | B5/B6 = 1.000 (benches no longer separate systems above 0.995) |
+| Remaining milestones (out of V2.2) | UNKNOWN / partially observed worlds; harder benches; multi-seed; OOD |
+| QA closure | REG-76→81, all V2.2 gates closed (protocol, A1, A1-bis, A2, A3, router bound, report, costs) |
 
 ## Cost ledger
 
@@ -122,7 +127,8 @@ Sources: `reports/v22_a1_qa_review.md` (addendum D), `V22_A1BIS_SPEC.md`, `V22_A
 | V1 all phases (P0–P7) | several GPU hours across a ~12 h execution window; exact per-run numbers in `decision-coprocessor/runs` |
 | V2 stage S (CPU) | E1 452 s · E3 133 s · E4b 174 s + 2.3 s (plus failed attempts) |
 | V2 stage T | V2 total 4.96 h GPU, including E5v3-A ≈ 2.5 h (reader 74 min, direct 46 min, evals ≈ 25 min) |
-| VRAM peak | V2 ≈ 2.1 GiB; V1 1.199 GiB reserved |
+| V2.2 | A2 training 4054.64 s (≈68 min); A3 run under lock; end-to-end cost harness 137.9 s; propagation alone 0.59–0.66 ms/item measured |
+| VRAM peak | V2 ≈ 2.1 GiB; V2.2 batch 8: 1472–1512 MiB allocated (parity A2/A3); V1 1.199 GiB reserved |
 | Hardware | RTX 3070 Laptop 8 GiB, i7-11800H, 29.34 GiB RAM |
 
 No experiment in the project ever required more than ~2 GB of the 8 GB available, and no paid API was used.

@@ -89,4 +89,4 @@ Before V2.1, the published conclusion was "the decomposed path is dominated" (de
 
 > On frozen checkpoints and new benches: the direct path is superior for short chains (depth ≤ 4) and **collapses beyond depth 6**, where the decomposed pipeline takes over. The bottleneck of the pipeline is the **discretisation of the extracted graph**, not the executor (a = 1.000 at depth 10) nor the availability of information (parser = 1.000).
 
-This is the finding that V2.2's interface ablations attack.
+This is the finding that V2.2's interface ablations attack — and resolve: see [doc 07](07-v22-interface-ablations.md) for the final outcome (A2 0.995–1.000 on all eight benches, architectural superiority over an equal-supervision direct control, router unnecessary, costs measured).
