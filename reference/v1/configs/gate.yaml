@@ -1,0 +1,27 @@
+project: decision-coprocessor
+spec_version: "1.0"
+phase: gate                  # SPEC §9.2 — uniquement si gain fixe démontré (P5)
+
+policy:
+  first_policy: choose_0_or_4
+  features_use_uncalibrated_logits: true   # température 1 pour le gate (SPEC §9.4)
+  features:
+    - global_representation
+    - top2_logit_margin
+    - entropy_t1
+    - num_candidates
+    - input_length
+
+models:                      # chemins figés après P3/P4
+  direct_checkpoint: null
+  sidecar_checkpoint: null
+
+routing:
+  enabled: true
+  decision_rule: "utilite_estimee > lambda * cout_supplementaire_estime"
+  lambda: 1.0                # compromis à explorer sur Router-dev
+
+training:
+  data_train: data/generated/router_train.jsonl
+  data_dev: data/generated/router_dev.jsonl
+  seeds: [17]

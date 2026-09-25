@@ -1,0 +1,40 @@
+# Config E3bis — BRANCHE A corrigée (lr 1e-3) — correction documentée post-échec.
+# E3-official-concat-s0 (lr 3e-3, 2000 steps) est terminé FAIL : effondrement
+# d'optimisation (pointeur non appris, per_step[1]≈chance) ; diagnostic :
+# sur le même pool, lr=1e-3 atteint 100 % de trajectoire en 500 steps.
+# Même architecture, mêmes données, mêmes métriques ; seul le lr change.
+project: decision-coprocessor-v2
+stage: E3
+seed: 0
+data:
+  train: data/E3_train.jsonl
+  eval: data/E3_eval.jsonl
+  n_train: 855
+  n_eval: 255
+model:
+  d_model: 64
+  hidden: 128
+  max_steps: 16
+  pad_nodes: 16
+  readout_kind: concat
+training:
+  optimizer_steps: 800
+  lr: 0.001
+  batch_size: 32
+  alpha: 0.5
+  grad_clip: 1.0
+baseline_direct:
+  enabled: true
+  optimizer_steps: 800
+  lr: 0.001
+  batch_size: 32
+protocol:
+  fixed_budget: 16
+  absorbing_terminal: true
+  modes: [autonomous, teacher_forced]
+  criteria:
+    autonomous_full_trajectory_min: 0.90
+    conditional_transition_min: 0.98
+outputs:
+  run_dir: runs/e3bis
+  predictions_dir: predictions/e3bis

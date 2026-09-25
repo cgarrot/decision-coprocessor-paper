@@ -1,0 +1,29 @@
+# Config E1 officielle (hashée au register — toute modification = nouvel id).
+# Gate E1 : surapprentissage de 128 problèmes courts (E0_E2_GATE_CRITERIA.md §3).
+project: decision-coprocessor-v2
+stage: E1
+seed: 0
+data:
+  pool: data/E1.jsonl
+  n_problems: 128
+model:
+  d_model: 64
+  hidden: 128
+  max_steps: 16
+  pad_nodes: 16            # dimension commune E1/E2/E3 (E2 a 13 nœuds)
+training:
+  optimizer_steps: 700
+  lr: 0.003
+  batch_size: 32
+  alpha: 0.5               # pilote, consigné (E0-6)
+  grad_clip: 1.0
+protocol:
+  fixed_budget: 16
+  absorbing_terminal: true
+  modes: [autonomous, teacher_forced]
+  criteria:
+    full_trajectory_min: 0.99
+    final_accuracy_min: 0.99
+outputs:
+  run_dir: runs/e1
+  predictions_dir: predictions/e1

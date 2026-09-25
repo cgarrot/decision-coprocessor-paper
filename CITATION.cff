@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this compendium or the Decision Coprocessor results, please cite the snapshot you used."
+title: "Decision Coprocessor: From a Latent Recurrent Sidecar to a Supervised Transition Executor"
+abstract: >-
+  A two-part empirical study of multi-step decision making with small frozen backbones:
+  V1 (latent recurrent sidecar, documented negative), V2 (supervised transition executor,
+  mechanism demonstrated; text decomposition refuted under fair representation budgets),
+  V2.1 (frozen-checkpoint validation, depth reversal), V2.2 (interface ablations, ongoing).
+authors:
+  - family-names: Garrot
+    given-names: C.
+  - name: "The agent mesh (@ag-1..@ag-5)"
+version: "2026-09-25"
+date-released: "2026-09-25"
+license: CC-BY-4.0
+repository-code: "https://github.com/cgarrot/decision-coprocessor-paper"
+keywords:
+  - multi-step reasoning
+  - latent computation
+  - transition executor
+  - frozen backbones
+  - LoRA
+  - pre-registration
+  - negative results

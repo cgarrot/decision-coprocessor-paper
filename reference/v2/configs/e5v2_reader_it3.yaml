@@ -1,0 +1,69 @@
+# E5-v2 — itération 3 (DERNIÈRE) : UNE SEULE VARIABLE = lecture multi-couches.
+# COUCHES FIGÉES train-only (v1.7bis, addendum E5_GATE_CRITERIA.md) :
+#   split train_fit/train_sel par group_id, seed 17, 1435/614 items
+#   (hash 1b654a5488f7132083dd497ff59ba9abc5b2fe8605d802e8ea42eea80f4b9814) ;
+#   probe entraîné sur train_fit, sélection sur train_sel UNIQUEMENT :
+#     finale (L28) joint 0.664 (sujet 0.843 / objet 0.758)
+#     mean L14+L21 joint 0.893 (0.965 / 0.922)  ← retenu
+#     concat L14+L21 joint 0.889 (0.964 / 0.918)
+#   marge +0.229 vs finale ; mean vs concat = 0.004 ≤ 0.01 → tie-break v1.7bis
+#   (jeu le plus simple/moins coûteux) = MEAN, dim 1024 (concat = 2048).
+#   (JSON par split : runs/e5v2_probe_layers_trainsel.json ; cache régénéré.)
+# Tout le reste = référence it2 (départ déterministe inclus, recette @ag-3, seuils reconduits).
+project: decision-coprocessor-v2
+stage: E5v2-it3
+seed: 17
+
+backbone:
+  model_id: Qwen/Qwen3-0.6B
+  revision: c1899de289a04d12100db370d81485cdf75e47ca
+  hf_cache: /home/cgarrot/zob/multi-step-jev/decision-coprocessor/hf_cache
+  dtype: bfloat16
+  max_length: 512
+  readout_layers: [14, 21]   # figées train_sel (v1.7bis)
+  readout_mode: mean         # moyenne L14+L21 → dim 1024 (tie-break)
+
+data:
+  train: data/E5v2_train.jsonl
+  dev: data/E5v2_dev.jsonl
+  # eval: SCELLÉ.
+
+extract:
+  microbatch: 8
+  deterministic_start: true      # it2 (référence, conservé)
+  hidden_size: 1024              # mean → même dim que la lecture finale
+  readout_layers: [14, 21]       # traçabilité
+  readout_mode: mean
+
+cache:                           # cache mean L14+L21 prêt (2460 items, sérialiseur L1421M)
+  directory: data_cache/h_e5_l1421m
+  serializer: e5-collate-v1-L1421M   # @ag-5 : SER_ID du runner à mettre à jour
+  ram_cap_gib: 2
+
+training:                        # recette @ag-3 INCHANGÉE
+  optimizer: AdamW
+  lr: 0.0003
+  weight_decay: 0.01
+  warmup_ratio: 0.05
+  clip: 1.0
+  batch_size: 8
+  accum: 4
+  max_steps: 1200
+  eval_every: 100
+  selection: edge_f1_stripped_dev   # + départage start_acc desc, step asc
+  mapping: texte
+  mentions_archived: true
+
+thresholds_dev:                  # reconduits (QA v1.1)
+  start_acc_min: 0.50
+  edge_f1_stripped_min: 0.65
+  solve_acc_min: 0.35
+  entity_f1_stripped_min: 0.85
+
+executor_cell_c:
+  checkpoint: runs/e4b_train/model.pt
+  pad_nodes: 20
+  cap_policy: NONE_sauf_documente
+
+# CONTRÔLE ÉQUITABLE (v1.7 F1) : direct = MÊME jeu gelé (mean L14+L21), cf.
+# configs/e5v2_direct_L1421.yaml (cache mean dédié, même recette/budget).

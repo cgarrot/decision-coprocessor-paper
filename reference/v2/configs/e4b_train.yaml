@@ -1,0 +1,25 @@
+# Config E4b — entraînement pad20 (stress 16) sur E3_train UNIQUEMENT.
+# Aucune donnée E4. index_space=20 : ré-indexation aléatoire des entités à chaque
+# step (mêmes graphes/cibles/ids ; les indices sont des positions arbitraires par
+# contrat), pour couvrir les colonnes d'identité 16-19 qu'E3_train n'utilise pas.
+project: decision-coprocessor-v2
+stage: E4b
+seed: 0
+data:
+  pool: data/E3_train.jsonl
+  n_problems: 855
+model:
+  d_model: 64
+  hidden: 128
+  max_steps: 16
+  pad_nodes: 20
+  readout_kind: concat
+training:
+  optimizer_steps: 800
+  lr: 0.001
+  batch_size: 32
+  alpha: 0.5
+  grad_clip: 1.0
+  index_space: 20
+outputs:
+  run_dir: runs/e4b_train
