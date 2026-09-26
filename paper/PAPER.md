@@ -2,13 +2,13 @@
 
 **C. Garrot** and the agent mesh (@ag-1…@ag-5)
 
-*Research compendium — final snapshot 2026-09-25. All programs closed: V1, V2, V2.1 and V2.2 (A1, A1-bis, A2, A3, router bound, end-to-end costs), every gate validated by independent QA.*
+*Research compendium — final snapshot 2026-09-26. All programmes closed: V1, V2, V2.1, V2.2 (A1, A1-bis, A2, A3, router bound, costs) and the confirmation programme C0/C1/C2 (third-audit errata, same-reader attribution, three-seed confirmation, blind extrapolation), every gate and every QA reserve closed.*
 
 ---
 
 ## Abstract
 
-Can a small, explicitly computational module improve multi-step decisions made by a small language model without generating intermediate text, on a single 8 GB consumer GPU? We report a two-part empirical study. **V1** attached a latent recurrent *sidecar* (2.11 M parameters) to a frozen Qwen3-0.6B backbone and evaluated it on 53,500 oracle-generated problems with a reserved test opened once after pre-registration. The sidecar did not improve depth decisions: Δ(R4−B2) = −0.59 pt [−1.25; +0.07]; non-recurrent and unshared-stack controls matched it; recurrence saturated at k = 1; a diagnostic showed the latent memory was barely read. An external audit established that the targeted mechanism had never been demonstrated in that assembly — the correction head had direct access to the query and candidate representations, and a final cross-entropy imposed no state progression. **V2** rebuilt the idea from first principles as a *supervised transition executor* on an explicit graph state (92,802 parameters, CPU stage): one shared transition, exact state traces as supervision, and an anti-shortcut readout. Stage S established a learned, composed, causally verified transition: trajectory accuracy 1.000 on all gates, zero-shot depths 6/8/10/16 at 1.000, 399/399 under a 20-node stress, and a causal k-sweep rising from 0.188 to 1.000. Stage T reconnected language with a LoRA-adapted reader. Under a fairness rule requiring identical adaptation for both paths, the direct text→answer path reached 1.000 dev (causal profile 0.996/0.996/0.988) while the text→graph→executor pipeline plateaued at 0.762 — Δ = −23.84 pts [−28.33; −19.60] — an experience stop for decomposition *on that protocol*. A post-closure validation on eight fresh frozen-checkpoint benches then found a **depth reversal**: the direct path collapses beyond depth 6 (0.28 at depth 8) while the pipeline holds (0.60), with 123–172/400 complementary items. Pre-registered interface ablations localised the pipeline's bottleneck to **discretisation**: propagating successor *distributions* from the frozen reader, at zero training cost, restores a depth-invariant accuracy of 0.83–0.86 (depth 1→10), +25.5 pts over discretisation at depth 8 and +57.25 pts over the direct path, with confidence intervals excluding zero on all eight benches. The final step closed the loop: retraining the reader with **distributional supervision** (A2) reaches **0.995–1.000 on all eight sealed benches**, above the deterministic parser ceiling, with Δ versus the adapted direct path positive on 8/8 (+5.75 pts on short chains, **+71.75 pts at depth 8**) and NLL 0.0044–0.0294. An equal-supervision direct control (A3) — same auxiliary heads, targets, augmentation and recipe — remains collapsed in depth (0.2475–0.2825 at depths 8/10), so Δ(A2−A3) runs from +3.25 to **+75.0 pts** with CIs excluding zero on 8/8: the gain is **architectural**, not a supervision artefact. A pre-committed router oracle bound measured +0.00 to +0.50 pts, so no router was built; end-to-end costs show A2 at ×1.23–1.27 latency over A3 with the propagation step itself at **≈1.3–1.5 %**. We document the entire evidence chain — pre-registration, independent QA recomputation, sealed sets, incidents and reserves — and distil fourteen transferable lessons.
+Can a small, explicitly computational module improve multi-step decisions made by a small language model without generating intermediate text, on a single 8 GB consumer GPU? We report a two-part empirical study. **V1** attached a latent recurrent *sidecar* (2.11 M parameters) to a frozen Qwen3-0.6B backbone and evaluated it on 53,500 oracle-generated problems with a reserved test opened once after pre-registration. The sidecar did not improve depth decisions: Δ(R4−B2) = −0.59 pt [−1.25; +0.07]; non-recurrent and unshared-stack controls matched it; recurrence saturated at k = 1; a diagnostic showed the latent memory was barely read. An external audit established that the targeted mechanism had never been demonstrated in that assembly — the correction head had direct access to the query and candidate representations, and a final cross-entropy imposed no state progression. **V2** rebuilt the idea from first principles as a *supervised transition executor* on an explicit graph state (92,802 parameters, CPU stage): one shared transition, exact state traces as supervision, and an anti-shortcut readout. Stage S established a learned, composed, causally verified transition: trajectory accuracy 1.000 on all gates, zero-shot depths 6/8/10/16 at 1.000, 399/399 under a 20-node stress, and a causal k-sweep rising from 0.188 to 1.000. Stage T reconnected language with a LoRA-adapted reader. Under a fairness rule requiring identical adaptation for both paths, the direct text→answer path reached 1.000 dev (causal profile 0.996/0.996/0.988) while the text→graph→executor pipeline plateaued at 0.762 — Δ = −23.84 pts [−28.33; −19.60] — an experience stop for decomposition *on that protocol*. A post-closure validation on eight fresh frozen-checkpoint benches then found a **depth reversal**: the direct path collapses beyond depth 6 (0.28 at depth 8) while the pipeline holds (0.60), with 123–172/400 complementary items. Pre-registered interface ablations localised the pipeline's bottleneck to **discretisation**: propagating successor *distributions* from the frozen reader, at zero training cost, restores a depth-invariant accuracy of 0.83–0.86 (depth 1→10), +25.5 pts over discretisation at depth 8 and +57.25 pts over the direct path, with confidence intervals excluding zero on all eight benches. The final step closed the loop: retraining the reader with **distributional supervision** (A2) reaches **0.995–1.000 on all eight held-out benches**, with Δ versus the adapted direct path positive on 8/8 (+5.75 pts on short chains, **+71.75 pts at depth 8**) and NLL 0.0044–0.0294. An equal-supervision direct control (A3) — same auxiliary heads, targets, augmentation and recipe — remains collapsed in depth (0.2475–0.2825 at depths 8/10), so Δ(A2−A3) runs from +3.25 to **+75.0 pts** with CIs excluding zero on 8/8: the gain is **architectural**, not a supervision artefact. A pre-committed router oracle bound measured +0.00 to +0.50 pts, so no router was built for accuracy; the propagation step is **low in this profile** (≈1.3–1.5 % of end-to-end latency, batch 8). A third external audit then drove a confirmation programme that closed the remaining scope gaps: seven formulation errata (including the reconciliation that the deterministic template parser scores **1.000/1.000**, so A2 *joins* rather than exceeds the bounded symbolic solution; and that a high NLL does not demonstrate error awareness); a **same-reader 2×2 ablation** (readers R0/R1 × discretisation/propagation) showing that **both** better local reading and distribution conservation contribute, with complete multiclass Brier 0.0016–0.0119 vs 0.30–0.58; a three-layer anti-leak verification; and **independent confirmation** on fresh benches and seeds — Δ(A2−A3) pooled deep **+65.83 pts mean** over three seeds (dispersion ≤0.33 pt), plus a **blind extrapolation** in which training *and checkpoint selection* never see depth > 4: 0.9867 pooled deep versus 0.2710 for the equal-supervision control. We document the entire evidence chain — pre-registration, independent QA recomputation, sealed sets, incidents, errata and reserves — and distil fourteen transferable lessons.
 
 **Keywords:** multi-step reasoning, latent computation, transition executor, frozen backbones, LoRA, pre-registration, negative results, small-scale evaluation.
 
@@ -31,7 +31,8 @@ The results form a chain in which every claim is scoped and falsifiable:
 2. **T refuted under fairness (V2).** With identical LoRA adaptation for both paths, the decomposed pipeline is clearly dominated by the direct path on short chains: −23.8 pts.
 3. **The refutation is depth-scoped (V2.1).** On fresh frozen-checkpoint benches, the direct path collapses beyond depth 6 while the pipeline degrades gracefully: +14 to +32 pts for the pipeline at depths 6/8/10.
 4. **The remaining gap is the interface (V2.2).** Propagating successor distributions instead of per-edge argmax, at zero training, removes the depth decay entirely (0.83–0.86 invariant), beating the direct path by up to +57 pts in depth — while still leaving ≈ 9–12 pts to the deterministic ceiling.
-5. **The interface was the whole deficit (V2.2, final).** Distributionally trained propagation (A2) reaches 0.995–1.000 on all eight sealed benches, beats the parser ceiling, and dominates the direct path on 8/8 benches even when the direct path receives *identical auxiliary supervision* (A3): the gain is architectural. The router oracle bound (+0.00 to +0.50 pts) makes a router unnecessary, and the propagation core costs ≈1.3–1.5 % of end-to-end latency.
+5. **The interface was the whole deficit (V2.2, final).** Distributionally trained propagation (A2) reaches 0.995–1.000 on all eight held-out benches, matching (not exceeding) the deterministic parser bound (1.000/1.000), and dominates the direct path on 8/8 benches even when the direct path receives *identical auxiliary supervision* (A3): the gain is architectural. The router oracle bound (+0.00 to +0.50 pts) makes a router unnecessary for accuracy, and the propagation core is low-cost in this profile (≈1.3–1.5 % of latency).
+6. **The attribution and the confirmation closed the scope (C0/C1/C2).** A third audit produced seven errata, a same-reader 2×2 ablation showing that both better reading and distribution conservation contribute (complete Brier 0.0016–0.0119 vs 0.30–0.58), a three-seed confirmation (Δ +65.83 pts mean, dispersion ≤0.33 pt) and a blind extrapolation (0.9867 pooled deep with training and selection restricted to short chains).
 
 The methodological spine of the project is stated in Section 3 and bears repeating: pre-registration with hashed configs, an independent QA agent that recomputes every metric from archived per-item predictions, sealed evaluation sets, causal interventions as the only admissible mechanistic evidence, and a registered **fairness rule** (identical representation budgets for pipeline and control) that overturned a conclusion when applied.
 
@@ -41,7 +42,8 @@ The methodological spine of the project is stated in Section 3 and bears repeati
 - A **supervised transition executor** that demonstrates learned, composed, causal, depth-generalising execution on a controlled relational task with 92,802 parameters on CPU (§5).
 - A **fairness study** showing that the apparent benefit of text decomposition (+5.1 pts, inconclusive) becomes a decisive deficit (−23.8 pts) once the direct path receives the same adaptation — and that this deficit is depth-scoped (§6–§7).
 - A **zero-training interface repair**: propagating distributions rather than argmax restores depth invariance of a frozen reader, with CIs excluding zero on 8/8 benches (§8).
-- A **supervised interface fix with an architectural attribution**: A2 (distributional training) reaches 0.995–1.000 on 8/8 sealed benches and dominates an equal-supervision direct control by up to +75 pts in depth — passing the project's own fairness rule a second time — while the router oracle bound shows routing is unnecessary and the propagation core costs ≈1.3–1.5 % of latency (§8).
+- A **supervised interface fix with an architectural attribution**: A2 (distributional training) reaches 0.995–1.000 on 8/8 held-out benches and dominates an equal-supervision direct control by up to +75 pts in depth — passing the project's own fairness rule a second time — while the router oracle bound shows routing is unnecessary for accuracy and the propagation core is low-cost in this profile (§8).
+- A **confirmation programme** (C0/C1/C2) that isolates the contribution on identical reader outputs (both factors contribute), verifies public-only inference with a three-layer anti-leak test, computes the complete multiclass Brier, confirms the system on three fresh seeds (+65.83 pts mean, dispersion ≤0.33 pt) and demonstrates a **blind extrapolation** to depths never used in training or selection (0.9867 vs 0.2710), with seven audit-driven formulation errata applied without touching a number (§8).
 - A **methodology** (pre-registration, seals, paired causal interventions, mechanism-before-benefit precedence, equal-budget fairness, incident invariants) with measurable effects on the conclusions (§3, §9).
 
 ---
@@ -233,7 +235,7 @@ The accuracy-vs-depth curves cross between depth 4 and 6: direct 1.00/0.97/0.91/
 
 - **(a) = 1.000 everywhere, including depth 10:** the executor composes; the deficit is entirely in reading.
 - **Path-only oracle corrector:** 0.950/0.965/0.9825/0.9825 (B1→B4) vs baseline 0.800/0.667/0.598/0.560. Fixing **only the useful-path edges** recovers almost everything; fixing the start or off-path edges changes nothing.
-- **Complementarity:** 123/172/163 of 400 items (depths 6/8/10) where the pipeline is right and the direct path wrong; the direct path's NLL grows 0.59 → 8.85 nats with depth (it “knows” it is lost), giving a routing signal to exploit after measuring the oracle router bound.
+- **Complementarity:** 123/172/163 of 400 items (depths 6/8/10) where the pipeline is right and the direct path wrong; the direct path's NLL grows 0.59 → 8.85 nats with depth (degraded probabilistic quality — a high NLL does **not** demonstrate error awareness), and V2.2 later measured the router oracle bound at +0.00 to +0.50 pts once the interface was repaired.
 - **Deterministic parser control:** coverage 1.0000, agreement 1.0000 on 3,200/3,200 items bounded to the templates — the information **is** in the public text; the deficit is in learned extraction and, crucially, in the interface.
 - **Environment caveat:** CPU vs GPU can differ by ≈ 6 pts on this near-tie reader; published numbers are labelled with their measurement environment, and a stable `eps` tie-break was introduced for later runs.
 
@@ -241,7 +243,7 @@ The accuracy-vs-depth curves cross between depth 4 and 6: direct 1.00/0.97/0.91/
 
 ## 8. V2.2: interface ablations — closed
 
-**Hypothesis (pre-registered):** the depth deficit comes from discretisation at the interface — per-edge argmax kills a chain on a single missing edge — not from the reader's information (edge F1 0.93; parser ceiling 0.95). Propagating distributions `p_{t+1} = p_t A` should recover a measurable part of the gap. The hypothesis was validated **twice**: with zero training (A1-bis) and with supervised distributional training (A2).
+**Hypothesis (pre-registered):** the depth deficit comes from discretisation at the interface — per-edge argmax kills a chain on a single missing edge — not from the reader's information (edge F1 0.93; the deterministic parser extracts the public text at coverage/agreement 1.000/1.000). Propagating distributions `p_{t+1} = p_t A` should recover a measurable part of the gap. The hypothesis was validated **twice**: with zero training (A1-bis) and with supervised distributional training (A2).
 
 ### 8.1 A1: failure with a real cause
 
@@ -268,7 +270,7 @@ with a self-loop for terminals, an absorbing UNKNOWN sink for missing subject ma
 
 ![A1-bis](figures/fig06-a1bis.svg)
 
-**c_prop ≈ 0.83–0.86, invariant from depth 1 to depth 10**, versus the discretisation decay 0.80 → 0.56. All eight CIs exclude zero; the main criterion (B3 ≥ +5 pts) is cleared fivefold. Remaining gap to the 0.95 template-parser ceiling: ≈ 9–12 pts.
+**c_prop ≈ 0.83–0.86, invariant from depth 1 to depth 10**, versus the discretisation decay 0.80 → 0.56. All eight CIs exclude zero; the main criterion (B3 ≥ +5 pts) is cleared fivefold. *(The “0.95 template-parser ceiling” quoted at the time was a framing error — the parser itself scores 1.000/1.000 coverage/agreement; 0.95–0.98 described the path-only oracle correctors. See §8.8.)*
 
 ### 8.3 A2: distributionally trained propagation (PASS TOTAL)
 
@@ -289,7 +291,7 @@ Run 1 was cancelled (gradient checkpointing inactive → OOM; a gold/predicted m
 
 \* Declared saturation: B5/B6 no longer separate systems above 0.995.
 
-The pre-registered grid passes (B3 Δ = +40.0 pts ≥ +5, CI low +34.75 > 0; baseline control c_prop B3 ≥ A1-bis; short-chain non-regression +19.5). **A2 beats the direct path on 8/8 benches with CI > 0**, and exceeds the parser ceiling everywhere. Its probabilistic quality is strong where the direct path is lost: **NLL 0.0044–0.0294** and Brier gold-class 0.0007–0.0061, versus direct NLL rising 0.59 → 8.85 nats with depth (prediction identity asserted 400/400 × 8).
+The pre-registered grid passes (B3 Δ = +40.0 pts ≥ +5, CI low +34.75 > 0; baseline control c_prop B3 ≥ A1-bis; short-chain non-regression +19.5). **A2 beats the direct path on 8/8 benches with CI > 0.** Its probabilistic quality is strong on this near-solved domain: **NLL 0.0044–0.0294** and `gold_class_squared_error` = mean((1−p_gold)²) 0.0007–0.0061, while the direct path's NLL rises 0.59 → 8.85 nats with depth (degraded probabilistic quality; error awareness not demonstrated). Prediction identity asserted 400/400 × 8.
 
 ### 8.4 A3: equal auxiliary supervision for the direct path — architectural attribution
 
@@ -326,13 +328,77 @@ Measured on both paths with equal batches, same order, warmup 2, CUDA sync, LoRA
 | **Propagation step alone** | **0.59–0.66 ms/item ≈ 1.3–1.5 % of A2 p50** | — | negligible |
 | Peak allocated VRAM | 1472–1512 MiB | parity | — |
 
-A2 pays +23–27 % latency for +5.75 pts (short chains) and +50–75 pts (depth); the architectural core is free. The cost is carried by extraction, not by the transition math.
+A2 pays +23–27 % latency for +5.75 pts (short chains) and +50–75 pts (depth); the propagation core is **low in this profile** (≈1.3–1.5 % of p50). The cost is carried by extraction, not by the transition math.
 
 ### 8.7 What V2.2 changed
 
 Before V2.2: *“decomposition is dominated on short chains; beyond depth 6 the frozen pipeline wins; the remaining gap is the interface.”* After V2.2:
 
-> **The interface was the whole deficit.** Propagating successor distributions from supervised fact-level heads makes the pipeline accurate (0.995–1.000) and depth-invariant, beating the direct path on all eight sealed benches with CIs excluding zero, beating its own parser ceiling, and dominating even when the direct path receives identical auxiliary supervision (+50 to +75 pts in depth). The gain is architectural, the router is unnecessary, and the core costs ≈1.3–1.5 % of latency.
+> **The interface was the whole deficit.** Propagating successor distributions from supervised fact-level heads makes the pipeline accurate (0.995–1.000) and depth-invariant, beating the direct path on all eight held-out benches with CIs excluding zero, and dominating even when the direct path receives identical auxiliary supervision (+50 to +75 pts in depth). The gain is architectural, no router is needed for accuracy, and the core is low-cost in this profile (≈1.3–1.5 % of latency).
+
+### 8.8 Audit #3 (C0): scope corrections without touching numbers
+
+A third external audit (sha `d47186ec`, 596 lines) acknowledged the positive result but demanded precision. C0 applied seven corrections, all documentary:
+
+1. **“The direct path knows it fails” withdrawn** — a high NLL means the gold answer receives little probability, not error awareness.
+2. **“A2 calibrated” nuanced** — good probabilistic quality on a near-solved domain; the score renamed `gold_class_squared_error`, the complete multiclass Brier computed in C1.
+3. **Parser reconciliation** — the deterministic parser measures **1.000/1.000 (3200/3200)**; the “0.95 ceiling” described path-only diagnostics, not the parser. A2 **joins but does not exceed** the bounded symbolic solution, which was added to the product table (1.0000 on 8/8).
+4. **Bench status requalified** — B1–B8 are held out from gradients and selection but were observed during an adaptive development campaign: *development evaluation*, not independent confirmation; bench 2213 contains 50 % depths 6/8, so A2's depth result was not blind (C2-b tests that).
+5. **Costs reworded** — “free” → “low in this profile” (1.3–1.5 % of p50, batch 8), units clarified.
+6. **Canonical CIs** — `a3_eval_verdict.json`; QA bounds differ only by bootstrap seed.
+7. **“Direct dominant on short” is V2.1-only** — in V2.2, A2 > direct on all 8 benches.
+
+The same audit requested the exact public inference path, verified by code: A2 is
+
+```text
+MemoryExtractor.extract → mention/fact representations → fact_logits
+→ transition_matrix_from_facts → start_distribution
+→ propagate(T = 20) → answer_index.
+```
+
+**The 92,802-parameter neural executor S is not invoked in A2**; only LoRA + fact-level heads + explicit propagation. A three-layer anti-leak test passes (structural: inputs identical under private randomisation 3200/3200; public-only 64/64; behavioural 64/64 ×2).
+
+### 8.9 C1: attribution on identical reader outputs
+
+Pre-registered 2×2 on frozen reader outputs — readers {R0 = E5v3-A, R1 = A2} × decoding {hard = discretisation, soft = propagation} — with item identities R0-soft ≡ A1-bis and R1-soft ≡ A2 (400/400 × 8):
+
+| | hard (aligned) | soft (propagation) |
+|---|---:|---:|
+| R0 (E5v3-A reader) | 0.55–0.82 | 0.83–0.86 |
+| R1 (A2 reader) | 0.785–0.875 | **0.995–1.000** |
+
+**Both factors contribute**: soft > hard at fixed reader (+14 to +22 pts for R1), and the better reader wins under the same discretisation. The result is *not* reducible to uncertainty conservation alone, nor to better local reading alone. Additional C1 findings:
+
+- **Budget sweep 0–20 (same weights, same problems):** R0 converges at ≈ depth+1 then **decays** (B5 0.910@4 → 0.853@20 — the frozen reader's UNKNOWN mass leaks); R1 converges earlier and **plateaus at 0.998–1.0**.
+- **Complete multiclass Brier** (classes = candidates ∪ {AUTRE}, UNKNOWN and off-candidate mass split): R1 **0.0016–0.0119** vs R0 **0.2998–0.5826** (R0's UNKNOWN mass ≈0.20 at depth 8 is the measured leak).
+- **Toolchain and CPU/GPU divergence are localised to the backbone forward** (h14; ≈0.49 % relative bf16 drift; downstream decisions stable 0/16 on the sample), not to any logic stage.
+- **Tie-break semantics**: real and near-ties (≤ eps = 1e-3) resolve by alphabetical key; renaming is equivariance, not invariance.
+
+### 8.10 C2: independent confirmation and blind extrapolation
+
+Protocol frozen before generation (`V22_C2_PROTOCOL.md`): fresh benches seeds 2214–2216 with total anti-duplicate constraints. Decisive structural fact: `E5v2_train` contains **only depths 1–4**, so depth performance was already blind at the gradient level; the only non-blind element was bench 2213 (50 % depths 6/8).
+
+**C2-a (system confirmation, 3 seeds): PASS.** Δ(A2−A3) pooled deep (6+8+10, n = 1,200/pair):
+
+| seed | Δ pooled deep | CI95 |
+|---|---:|---|
+| s17 | **+65.30** | [+62.6, +68.1] |
+| s18 | **+64.05** | [+61.3, +66.8] |
+| s19 | **+68.14** | [+65.6, +70.9] |
+| **mean** | **+65.83** | CI low > 0 on all three |
+
+A2 dispersion across seeds: 0.9950 / 0.9983 / 0.9983 → **≤0.33 pt**; A3 stays collapsed (0.342 / 0.358 / 0.317); A2 short mean 0.9992.
+
+**C2-b (blind extrapolation): largely successful.** With checkpoint selection restricted to short chains (bench 2216) — and gradients never seeing depth > 4:
+
+| | short | prof6 | prof8 | prof10 | **pooled deep** |
+|---|---:|---:|---:|---:|---:|
+| **A2 s20-blind** | 0.9950 | 0.9825 | 0.9950 | 0.9825 | **0.9867** |
+| A3 s21-blind | 0.9475 | 0.3225 | 0.2625 | 0.2281 | 0.2710 |
+
+Criterion ≥0.90. **Depth invariance is acquired without ever selecting on depth.** One incident (published): a single C2 item exceeded 512 tokens *in the consumer's rendering* (generator measured a different rendering, +7 tokens); it was excluded identically for all paths (1/2,000) and the evaluations replayed on the common population.
+
+![C1 and C2](figures/fig10-confirmation.svg)
 
 ---
 
@@ -344,7 +410,9 @@ Before V2.2: *“decomposition is dominated on short chains; beyond depth 6 the 
 2. **The benchmark can dominate the conclusion.** A defective text bench produced a 0.78 “strong direct baseline”; the corrected bench produced 0.33. Benchmark validation is not a formality.
 3. **Fairness can invert an architectural verdict — twice.** +5.1 pts (frozen) → −23.8 pts (adapted) when representations were equalised; and A2's apparent dominance survived the second fairness test (A3 with identical auxiliary supervision), where direct stays collapsed in depth while propagation holds: +3.25 to +75 pts.
 4. **The direct path is not depth-robust.** Beyond depth 6 it collapses (0.28 at depth 8) while the decomposed pipeline holds — its failure is silent (low confidence: NLL 8.85 nats) but detectable.
-5. **The pipeline's deficit was the interface, and it is now repaired.** Distribution propagation restores depth invariance without training; distributional training (A2) reaches 0.995–1.000, above the template-parser ceiling, on every sealed bench. The repair is cheap (propagation ≈1.3–1.5 % of end-to-end latency) and the benefit is architectural, not a supervision artefact.
+5. **The pipeline's deficit was the interface, and it is now repaired.** Distribution propagation restores depth invariance without training; distributional training (A2) reaches 0.995–1.000 on every held-out bench, matching the bounded deterministic parser (1.000/1.000) rather than exceeding it. The repair is low-cost in this profile (propagation ≈1.3–1.5 % of end-to-end latency) and the benefit is architectural, not a supervision artefact.
+6. **Both mechanisms contribute** (C1): distribution conservation *and* better local reading; the result is not explained by either alone. The complete multiclass Brier (0.0016–0.0119 vs 0.30–0.58 for the frozen reader) also exposes the frozen reader's accumulating UNKNOWN leak.
+7. **The result survives independent confirmation** (C2): three seeds (+65.83 pts mean, dispersion ≤0.33 pt) and a blind extrapolation in which neither gradients nor checkpoint selection ever see depth > 4 (0.9867 pooled deep vs 0.2710).
 6. **Routing is unnecessary once the expert improves.** The oracle router bound is +0.00 to +0.50 pts: the propagation pipeline absorbed the complementarity that V2.1 had identified.
 
 ### 9.2 The pattern that emerges
@@ -354,28 +422,29 @@ The two “turns” of the study mirror each other. V1 failed because the mechan
 ### 9.3 Scope of the conclusions
 
 - Stage S is a local scientific conclusion about a controlled relational task, not about language or general reasoning.
-- The T refutation is depth-scoped and protocol-scoped: it holds for short chains under adapted representations on the E5v2 bench; the depth ordering reversed on frozen checkpoints (V2.1), and under interface repair (V2.2/A2) the pipeline dominates on all eight sealed benches.
-- **The architectural claim is scoped to these benches**: synthetic French templated task, one seed, checkpoints selected on a dedicated selection bench (2213). No OOD generalisation is claimed; harder benches would be required to separate systems above the 0.995 saturation (B5/B6).
+- The T refutation is depth- and protocol-scoped: it holds for short chains under adapted representations on the E5v2 bench; the depth ordering reversed on frozen checkpoints (V2.1), and under interface repair (V2.2/A2) the pipeline dominates on all eight benches.
+- **The architectural claim is scoped to this synthetic French, template-bounded domain.** A deterministic parser + exact solver resolves 100 % of it: the learned system matches, but does not exceed, the symbolic bound. No OOD generalisation is claimed; B5/B6 saturate at 1.000.
+- **Confirmation status:** V2.1's depth reversal was frozen-checkpoint evidence; V2.2's comparisons were a development campaign on benches observed during it. C2 provides fresh-bench/fresh-seed confirmation (3 seeds) and a blind-selection extrapolation to depths never used in gradients or selection. Bench 2213's mixed-depth selection was the non-blind element and is now explicitly named.
 - The 1.000 direct-path number is a single run on dev with selection on the same dev (adaptive campaign): a *best reference*, not a validated result.
-- UNKNOWN semantics are defined and used in training but **not evaluated**: partially observed worlds remain a declared milestone.
+- UNKNOWN semantics are defined and trained for but **not evaluated**: partially observed worlds remain a declared milestone (Lot C3).
 
 ---
 
 ## 10. Limitations and threats to validity
 
-1. **Scale.** One backbone (0.6 B), one GPU (8 GB), synthetic French tasks; no external benchmark (Eos was never run). No transfer to other models or domains was measured.
-2. **Seeds and confirmation.** V2-T/V2.1/V2.2 use one training seed per path; CIs are conditional on measured checkpoints, not on training variability. No confirmatory test was opened for T; V2.2 exceeds its own parser ceiling, which makes the bench the limiting factor — **B5/B6 saturation at 1.000 is declared**, and harder benches are required to separate systems above 0.995.
-3. **Adaptive campaigns.** Dev was used for checkpoint selection; the direct 1.000 and reader 0.928 are exploratory best-of-run values. V2.2 respected a dedicated selection bench (seed 2213); sealed V2.1 benches were never used for selection.
-4. **Data coverage.** V1's depth test lost 23 % of examples to the 512-token limit; V2 benches are compact by construction. Broken-chain “det” is structurally absent from all pools (0/411): UNKNOWN is defined, trained for, and **not evaluated** — partially observed worlds need new benches (declared milestone).
-5. **Environment sensitivity.** CPU/GPU reader inference differs by ≈ 6 pts on near ties; V2.2 uses a declared `eps` tie-break, V2.1 carries the caveat. All V2.2 numbers are environment-bound (RTX 3070 Laptop, bf16, batch 8).
-6. **Synthetic-bench ceiling.** The deterministic template parser reaches 0.95; A2 surpasses it, which is an existence proof for this templated domain, not a licence to extrapolate.
-7. **No product claim.** A2's +23–27 % latency over A3 is measured for two benches only (B1/B3); no cross-question cache amortisation, no batching beyond 8, no safety or OOD study. The pipeline is the strongest research reference on this bench, not a deployment recommendation.
+1. **Scale.** One backbone (0.6 B), one GPU (8 GB), synthetic French tasks bounded to templates; no external benchmark (Eos was never run). A deterministic parser resolves 100 % of the domain: the learned system matches, does not exceed, the symbolic bound; transfer to open text is untested.
+2. **Seeds and confirmation.** V2-T/V2.1/V2.2 comparisons use one training seed per path (development campaign, CIs conditional on measured checkpoints). **C2 provides 3-seed confirmation** (Δ +65.83 pts mean, dispersion ≤0.33 pt) and a blind-selection extrapolation; the inter-run uncertainty over three seeds remains imperfectly estimated, and no confirmatory test was opened for T.
+3. **Adaptive campaigns.** Dev was used for checkpoint selection; the direct 1.000 and reader 0.928 are exploratory best-of-run values. V2.2 respected a dedicated selection bench (2213 — mixed depth, explicitly named as the non-blind element); C2-b restricted selection to short chains.
+4. **Data coverage.** V1's depth test lost 23 % of examples to the 512-token limit; V2 benches are compact by construction. Broken-chain “det” is structurally absent from all pools (0/411): UNKNOWN is defined, trained for, and **not evaluated** — partially observed worlds need new benches (declared milestone, Lot C3).
+5. **Environment sensitivity.** CPU/GPU reader inference differs by ≈ 6 pts on the old reader (narrow margins); the first divergent stage is the backbone forward (bf16, ≈0.49 % relative drift), decisions stable on the sampled items. V2.2 uses a declared `eps` tie-break; all numbers are environment-bound (RTX 3070 Laptop, bf16, batch 8).
+6. **Synthetic-bench ceiling and saturation.** The parser's 1.000 and the B5/B6 saturation mean the bench can no longer separate systems above ≈0.995; harder benches are required for any further claim.
+7. **No product claim.** A2's ×1.23–1.27 latency over A3 is measured on two benches (B1/B3) at batch 8; no cross-question cache amortisation, no batching beyond 8, no safety or OOD study. The pipeline is the strongest research reference on this bench, not a deployment recommendation.
 
 ---
 
 ## 11. Conclusion
 
-We asked whether a small explicit computation improves multi-step decisions of a small model, and ended up answering a sharper question. Stage S shows the mechanism is learnable and verifiable at 93 K parameters. Stage T shows that, under equal representation budgets, explicit decomposition loses to a direct path on short chains. V2.1 shows the direct path itself collapsing with depth. V2.2 shows the decomposition's deficit was discretisation at the interface: propagating successor distributions — first for free, then with distributional training — makes the pipeline accurate (0.995–1.000), depth-invariant, superior to the direct path on all eight sealed benches and to an equal-supervision direct control by up to +75 pts in depth, at ≈1.3–1.5 % latency for the architectural core. The through-line is methodological: hashed pre-registration, independent recomputation, sealed sets, paired causal interventions, mechanism-before-benefit precedence, and a fairness rule — applied to representations and then to supervision — that three times forced the conclusion to be restated precisely. The project's negative and positive results are, we believe, equally durable: each is cheap to obtain on consumer hardware and unusually specific about *why* the assemblies it judges did or did not work here.
+We asked whether a small explicit computation improves multi-step decisions of a small model, and ended up answering a sharper question. Stage S shows the mechanism is learnable and verifiable at 93 K parameters. Stage T shows that, under equal representation budgets, explicit decomposition loses to a direct path on short chains. V2.1 shows the direct path itself collapsing with depth. V2.2 shows the decomposition's deficit was discretisation at the interface: propagating successor distributions — first without training, then with distributional training — makes the pipeline accurate (0.995–1.000), depth-invariant, superior to the direct path on all eight benches and to an equal-supervision direct control by up to +75 pts in depth, at ≈1.3–1.5 % latency for the propagation core. The confirmation programme then did what audits are for: it showed that both better reading and distribution conservation contribute (not one alone), verified public-only inference, confirmed the result on three seeds and a blind-selection protocol, and reduced the “0.95 parser ceiling” to what it always was — a framing error next to a parser that already resolves 100 % of the synthetic domain. The through-line is methodological: hashed pre-registration, independent recomputation, sealed sets, paired causal interventions, mechanism-before-benefit precedence, and a fairness rule — applied to representations, then supervision, then selection exposure — that four times forced the conclusion to be restated precisely. The project's negative and positive results are, we believe, equally durable: each is cheap to obtain on consumer hardware and unusually specific about *why* the assemblies it judges did or did not work here.
 
 ---
 
@@ -386,7 +455,7 @@ We asked whether a small explicit computation improves multi-step decisions of a
 - **V2-S:** unique successor, acyclic, ≥3 terminals, unreachable distractors, opaque entities, shuffled order; trace weights summing to 1 with absorbing-mass spreading.
 - **V2-T:** deterministic French rendering; 8/6/5/7 formulation decks; recall (p = 0.30) and second-declaration (p = 0.25) noise; no lexical shortcut (probe at chance); decisive-edge and paraphrase pairs.
 - **V2.1:** 8 benches × 400, seeds 2205–2212, matched variants by `base_group_id`, strict disjunction, `token_len` ≤ 512 by construction.
-- **V2.2:** selection bench seed 2213 (selection only); UNKNOWN semantics fixed before use; training-only augmentation with masked answer/state losses.
+- **V2.2:** selection bench seed 2213 (selection only, mixed depth — the named non-blind element); UNKNOWN semantics fixed before use; training-only augmentation with masked answer/state losses. **C2:** fresh benches seeds 2214–2216 with total anti-duplicate constraints; C2-b restricts checkpoint selection to short chains (blind extrapolation).
 
 ## Appendix B — Gate criteria (summary)
 
@@ -394,11 +463,11 @@ We asked whether a small explicit computation improves multi-step decisions of a
 - **V2 E3–E4:** autonomous ≥ 0.90 (achieved 1.000), conditional ≥ 0.98 (achieved 1.000), zero-shot 6/8/10/16 (achieved 1.000).
 - **V2-T E5:** entities ≥ 0.85; edges ≥ 0.65; start ≥ 0.50; solve ≥ 0.35; conclusion grid (i)/(ii)/(iii) with mechanism precedence.
 - **V2.1:** all-in primary; coverage/risk separate; Δ thresholds per Q4 matrix; diagnostics excluded from scoring.
-- **V2.2:** Δ(c_prop − c_discret) ≥ +5.0 pts on B3 with lower CI > 0; B1 non-regression ≥ −2.0 pts; tie-break eps = 1e-3. Final results: A2 grid PASS (B3 +40.0, CI low +34.75), 8/8 vs direct with CI > 0; A3 rule (architectural superiority if Δ(A2−A3) > 0 with CI low > 0 per bench): **8/8 validated**, +3.25…+75.0 pts; router oracle bound +0.00…+0.50 pts → no router; costs validated (×1.23–1.27, propagation ≈1.3–1.5 %).
+- **V2.2:** Δ(c_prop − c_discret) ≥ +5.0 pts on B3 with lower CI > 0; B1 non-regression ≥ −2.0 pts; tie-break eps = 1e-3. Final results: A2 grid PASS (B3 +40.0, CI low +34.75), 8/8 vs direct with CI > 0; A3 rule (architectural superiority if Δ(A2−A3) > 0 with CI low > 0 per bench): **8/8 validated**, +3.25…+75.0 pts; router oracle bound +0.00…+0.50 pts → no router for accuracy; costs (×1.23–1.27, propagation ≈1.3–1.5 % “low in this profile”). **C0:** seven scope errata applied without touching numbers; public inference path verified (S executor not invoked). **C1:** identities R0-soft ≡ A1-bis, R1-soft ≡ A2; both factors contribute; complete Brier computed. **C2:** C2-a primary Δ pooled deep > 0 with CI low > 0 (mean +65.83 over 3 seeds); C2-b pooled deep ≥ 0.90 (achieved 0.9867) → largely successful.
 
 ## Appendix C — Artefacts and reproduction
 
-Source repositories: `decision-coprocessor/` (20 commits) and `decision-coprocessor-v2/` (63 commits, all programs closed). Frozen bundles: V1 `bundle_final/` (reload 0.0); V2 `bundle_final_v2/` (8/8 + 8/8 reload, 14/14 hashes); V2.2 archives in `runs/v22_{a1,a1bis,a2,a2_eval,a2_probs,a3,a3_eval,couts}/`. Registries: `experiment_registry.jsonl`, `costs.jsonl`, `research_register.md` (REG-01…REG-81). Pre-registrations: V2.2 protocol `6fc9d7d4`, A2 amendment `2334c67b`, A1-bis spec `d9337317`, A3 spec `2f58f02b`; selection bench sha `7089876d…`. Every figure in this paper is regenerated by [`figures/make_figures.py`](../figures/make_figures.py) from the numbers in [`docs/10-results-reference.md`](../docs/10-results-reference.md). Full documentation: [`docs/`](../docs/).
+Source repositories: `decision-coprocessor/` (20 commits) and `decision-coprocessor-v2/` (85 commits, all programmes closed). Frozen bundles: V1 `bundle_final/` (reload 0.0); V2 `bundle_final_v2/` (8/8 + 8/8 reload, 14/14 hashes); V2.2 and confirmation archives in `runs/v22_{a1,a1bis,a2,a2_eval,a2_probs,a3,a3_eval,couts,couts_c0}` and `runs/{c1_ablation,c2*,c2_eval}`; release manifest `v22_release_manifest.json`. Registries: `experiment_registry.jsonl` (160+ entries), `costs.jsonl`, `research_register.md` (REG-01…REG-86). Pre-registrations: V2.2 protocol `6fc9d7d4`, A2 amendment `2334c67b`, A1-bis spec `d9337317`, A3 spec `2f58f02b`, C2 protocol `6dd53719`; selection benches sha `7089876d` (2213) and seeds 2214–2216 (C2). Every figure in this paper is regenerated by [`figures/make_figures.py`](../figures/make_figures.py) from the numbers in [`docs/10-results-reference.md`](../docs/10-results-reference.md). Full documentation: [`docs/`](../docs/).
 
 ## References
 

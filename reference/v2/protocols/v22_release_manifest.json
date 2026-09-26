@@ -1,0 +1,161 @@
+{
+  "release": "v22-C0",
+  "audit": "DECISION-COPROCESSOR-AUDIT-V22-CONFIRMATION.md d47186ec",
+  "backbone": {
+    "model_id": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "dtype": "bf16",
+    "attn": "sdpa",
+    "use_cache": false,
+    "couches_lues": [
+      14,
+      21
+    ],
+    "mode": "mean"
+  },
+  "bancs": {
+    "B1-court": {
+      "fichier": "data/v21/B1-court.jsonl",
+      "sha256": "a5ad45fac73fdc616676e3e6c6902096f90e2497fac07315d4a07aa095a09479",
+      "n": 400
+    },
+    "B3-prof8": {
+      "fichier": "data/v21/B3-prof8.jsonl",
+      "sha256": "4c5858cfa659a62aa43005461b6e7ef6ebe6b467a04b596d1f8c16e7985abbc9",
+      "n": 400
+    }
+  },
+  "voies": {
+    "A2": {
+      "checkpoint": "runs/v22_a2/best.pt",
+      "checkpoint_sha256": "45308c56ee622f26a7d5ebec5a06e58038f4d616b1afe8e74cd4f458b9e645ba",
+      "checkpoint_step": 1200,
+      "checkpoint_selection": {
+        "c_prop": 1.0,
+        "b_discret": 0.7975,
+        "n": 400
+      },
+      "init": "artifacts/bundle_final_v2/reader_lora_best.pt",
+      "init_sha256": "1c2ee39ab6810a13b3183ba268971655bb5f67d2f11dfc25a5b73acf240ed117",
+      "loader": "scripts/run_v22_a2_eval.py",
+      "loader_sha256": "ecce65e707198ee6b9c7dae24df1bd1294cbd9b22e40b0474e30c678d0485a78",
+      "lora": {
+        "cles_checkpoint": 224,
+        "valeurs_egales": 224,
+        "valeurs_differentes": [],
+        "inattendues": [],
+        "manquantes_note": "base_model.* uniquement (backbone HF rev c1899de2, par construction LoRA-only)",
+        "manquantes_n": 310,
+        "tete": {
+          "type": "MemoryExtractor(fact)",
+          "strict": true,
+          "manquantes": [],
+          "inattendues": []
+        }
+      },
+      "chemin_inference_public": "MemoryExtractor.extract > mention_reps/fact_reps/fact_logits > transition_matrix_from_facts > start_distribution > propagate(T=20) > answer_index",
+      "resultats": {
+        "B1-court": {
+          "preds": "runs/v22_a2_eval/B1-court_pred_prop.jsonl",
+          "sha256": "d06a1912bd4c0b0c20c3a91505232575fa8bdfb705cf00ea83d9985e6ea782dd",
+          "exactitude_publiee": 0.995,
+          "exactitude_C0_meme_mode_batch8": 0.995,
+          "exactitude_C0_meme_mode_batch1": 0.995,
+          "accord_C0_vs_publie_batch8": 1.0,
+          "accord_C0_vs_publie_batch1": 1.0
+        },
+        "B3-prof8": {
+          "preds": "runs/v22_a2_eval/B3-prof8_pred_prop.jsonl",
+          "sha256": "093b5c224fa83288c1e9e1a6681fcea72f323aeb1c4b9cfb9181186f9050c222",
+          "exactitude_publiee": 0.9975,
+          "exactitude_C0_meme_mode_batch8": 0.9975,
+          "exactitude_C0_meme_mode_batch1": 0.9975,
+          "accord_C0_vs_publie_batch8": 1.0,
+          "accord_C0_vs_publie_batch1": 1.0
+        }
+      },
+      "script_metriques": "scripts/run_v22_a2_eval.py (bootstrap groupe seed 17, 2000 tirages, verdict inline)"
+    },
+    "A3": {
+      "checkpoint": "runs/v22_a3/best.pt",
+      "checkpoint_sha256": "288d1bc5ffc4cc48263b753164596d0fcb9a8e46e523ad6ed6112e8287308b43",
+      "checkpoint_step": 800,
+      "checkpoint_selection": {
+        "answer_accuracy": 0.6775,
+        "nll_answer": 2.16839809610594,
+        "n": 400
+      },
+      "init": "artifacts/bundle_final_v2/direct_lora_best.pt",
+      "init_sha256": "dcd1c9dd91809d727730aae86c3aa04d9f380671d0c8caa3f50195e6153d4019",
+      "loader": "scripts/run_v22_a3_eval.py",
+      "loader_sha256": "5c64e3e9dba8ca75099cb5275b52878c59506b9edfffef05251ae539a80e2531",
+      "lora": {
+        "cles_checkpoint": 224,
+        "valeurs_egales": 224,
+        "valeurs_differentes": [],
+        "inattendues": [],
+        "manquantes_note": "base_model.* uniquement (backbone HF rev c1899de2, par construction LoRA-only)",
+        "manquantes_n": 310,
+        "tete": {
+          "type": "DirectTextHead(64/128)",
+          "strict": true,
+          "manquantes": [],
+          "inattendues": []
+        }
+      },
+      "chemin_inference_public": "collate_direct_text > backbone mean(L14,L21) > DirectTextHead > argmax",
+      "resultats": {
+        "B1-court": {
+          "preds": "runs/v22_a3_eval/B1-court_pred_a3.jsonl",
+          "sha256": "edef49b142c8eb05d178b4e36e041fb86a747af7c7b09eed3f33732a736c07ad",
+          "exactitude_publiee": 0.9625,
+          "exactitude_C0_meme_mode_batch8": 0.9625,
+          "exactitude_C0_meme_mode_batch1": 0.9625,
+          "accord_C0_vs_publie_batch8": 1.0,
+          "accord_C0_vs_publie_batch1": 1.0
+        },
+        "B3-prof8": {
+          "preds": "runs/v22_a3_eval/B3-prof8_pred_a3.jsonl",
+          "sha256": "75e76dcc9ee33799ff07f980a71c5142b09f2d14f9aebfdc8a31ee8bcbce061a",
+          "exactitude_publiee": 0.2475,
+          "exactitude_C0_meme_mode_batch8": 0.2475,
+          "exactitude_C0_meme_mode_batch1": 0.255,
+          "accord_C0_vs_publie_batch8": 1.0,
+          "accord_C0_vs_publie_batch1": 0.975
+        }
+      },
+      "script_metriques": "scripts/run_v22_a3_eval.py (bootstrap groupe seed 17, 2000 tirages, verdict inline)"
+    }
+  },
+  "couts_C0": {
+    "harnais": "scripts/run_v22_couts_c0.py",
+    "harnais_sha256": "4d4b0e5800ad364fa7e0acebb19e42b32890c55fc0326d41969b40ca026a482a",
+    "metrics": "runs/v22_couts_c0/couts_c0_metrics.json",
+    "table": "runs/v22_couts_c0/COUT_C0_TABLE.md"
+  },
+  "limites": "Matrice loader run->correctif->replay des runs ANTERIEURS (dont bug 28/224) : non couverte ici (cf. v22_loader_impact_matrix, autre lot). Brier/NLL/parser/IC : autres lots. Lignes de croisement correctifs ci-dessus (correctifs_croisement_QA) pour la matrice @ag-4, sans double saisie.",
+  "correctifs_croisement_QA": [
+    {
+      "correctif": "loader LoRA `.default` 224/224 (noms+valeurs verifiees, tetes strict 0/0)",
+      "artefacts_couverts": [
+        "runs/v22_a2_eval/* (loader scripts/run_v22_a2_eval.py ecce65e7)",
+        "runs/v22_a3_eval/* (loader scripts/run_v22_a3_eval.py 5c64e3e9)",
+        "runs/v22_couts/* (loader scripts/run_v22_couts.py 0c708b42)",
+        "runs/v22_couts_c0/* (loader scripts/run_v22_couts_c0.py 4d4b0e58)"
+      ],
+      "preuve": "runs/v22_couts_c0/loader_audit.json (CPU, torch.equal par cle)",
+      "hors_scope": "runs ANTERIEURS a v22_a2_eval (dont bug 28/224) : versions loader a dater par la matrice @ag-4, non re-verifiees ici"
+    },
+    {
+      "correctif": "ancrage PREDIT (pas gold) : memoire via ext.extract(), start predit, reponses depuis p_T/candidats predits",
+      "artefacts_couverts": [
+        "runs/v22_a2_eval/* (prop_answer)",
+        "runs/v22_couts_c0/* (run_a2, accord 1.0 batch8)",
+        "runs/v22_a3_eval/* (a3_answers, collate public seul)",
+        "runs/v22_couts_c0/* (run_a3)"
+      ],
+      "preuve": "chemins d'inference publics ci-dessus + accord C0-vs-publie (1.0 b8 ; 0.975 A3-B3-b1 documente)",
+      "hors_scope": "runs avec ancrage gold historique : a dater par la matrice @ag-4"
+    }
+  ]
+}

@@ -1,13 +1,16 @@
 {
-  "snapshot_date": "2026-09-25",
+  "snapshot_date": "2026-09-26",
   "source_repositories": {
     "decision-coprocessor": "V1, 20 commits, closed 2026-09-24",
-    "decision-coprocessor-v2": "V2/V2.1/V2.2 all closed, 63 commits at final snapshot"
+    "decision-coprocessor-v2": "V2/V2.1/V2.2 + confirmation C0/C1/C2 all closed, 85 commits, snapshot 2026-09-26"
   },
   "note": "Read-only snapshots copied for traceability; the source repositories remain authoritative.",
   "files": {
-    "PROVENANCE.json": "eeb876dc32cf75627c91938893939b7067281a0cc2ca4f2b1d8b82fdefc16a3a",
-    "README.md": "5f98ec495c7f7ae9e0ba39de30292f57a2c5a319204ca3986daadcb1d3a24bdc",
+    "PROVENANCE.json": "89da827df8e464c1fba9ac9dbcf36db1bfe6a14e09fbeb9d766966f9206c581b",
+    "README.md": "e386296e360666909b1a9e832e4e1f822b1c56552ce9c50edf29f24ba037caeb",
+    "audits/DECISION-COPROCESSOR-AUDIT-RELANCE-V2.md": "fab4b37b2ed37eabf92e7cf6f93a1a713eded546a51e028e021532ce668155bc",
+    "audits/DECISION-COPROCESSOR-AUDIT-V2-VALIDATION.md": "f11704d8901003c823048dbed8777d5b8f4eab2450195dede29cddcc3efe44ff",
+    "audits/DECISION-COPROCESSOR-AUDIT-V22-CONFIRMATION.md": "d47186ec845c392b0cacfb8c12ae09eb82e3838b1c480abde306b2157b8a8b6f",
     "v1/configs/controls_main.yaml": "5ef8f38c43f841d5067862603cb8434ebcb98857d5b6628ae850f2096ccb3634",
     "v1/configs/fast_head.yaml": "1561d435a2094d3759284017644040b7db9adf3538091ff1ebe48ca6d7897069",
     "v1/configs/gate.yaml": "2f093086f92543f68fb8abf7776bcd7c7f3a79121a44c59df1417157139784f3",
@@ -18,6 +21,12 @@
     "v1/model/sidecar.py": "8d55bf94730ee70b7e75e6307bc0664979a3d27552ed2aaa19868ff8507c5fa3",
     "v1/reports/final.md": "f4c47d1d2456840b9bf62e8a5f55eb312c2a788fb47bd9dcb072d9c898cd171a",
     "v1/reports/preregistration.md": "548550d6b6b48649a9a11d37c517910fdbc3c603b89341669dca9f8241321ba7",
+    "v2/configs/c2/c2a_a2_s18.yaml": "85ff79337d5ed2845638658b25f2dd4403e7744252f84a12162b9145918b9ef6",
+    "v2/configs/c2/c2a_a2_s19.yaml": "a7e477db9c16e6a79cc2f4fd006748acda5f01263b3848af2ed28fa1252ad624",
+    "v2/configs/c2/c2a_a3_s18.yaml": "b88723bcc1efacd08f20020e4de432cb2ec131666be98ebc2f40e99c786a5c5e",
+    "v2/configs/c2/c2a_a3_s19.yaml": "beed689833457f1792927b21128b34c86b0a434594b641019d4cde19236d6400",
+    "v2/configs/c2/c2b_a2_s20.yaml": "feb748a460b0beb9e3024368fe4681d507655673d3b0638131be4dbdef19b5e0",
+    "v2/configs/c2/c2b_a3_s21.yaml": "5d5f4a21bc1b56019bd92985354ee28407a8fb4d74ca6a87c659de8362f85953",
     "v2/configs/e1.yaml": "40717158ee2556dc55ca51805cca173b1f41a3ec090349b8365c20c3e251fac3",
     "v2/configs/e3bis.yaml": "d816e1dea56ce97149fbb3543c8970b59ba298fd6af1be48c85e7cafbaea8cc6",
     "v2/configs/e4b_train.yaml": "3ed46f51f8bc6de7e30480794a1faf7ece68d4a1f8a927fd569b423d67abb691",
@@ -43,16 +52,26 @@
     "v2/protocols/V22_A1BIS_SPEC.md": "d9337317d3192e48f1a5341a930d74fd0ebf88f32028bf0dae17219a9f9490c5",
     "v2/protocols/V22_A2_ADDENDUM.md": "2334c67b9ae0d18a0b6758bb669661f1f4fa99a8e69f34aac2be9115135b3b9c",
     "v2/protocols/V22_A3_SPEC.md": "2f58f02ba47354cc9dcaf50387983dc344f1f632b22bbf88953aadec7fffa887",
+    "v2/protocols/V22_C2_PROTOCOL.md": "6dd53719e8f5dc7cc902c05d807c681cf455c0f3668f7c085569261bc1c35bd4",
     "v2/protocols/V22_PROTOCOL.md": "6fc9d7d457f2073f9278054584a120154fb984930a051a08113dee513e18a93e",
     "v2/protocols/data_contract.md": "8141b2b73329314e2836ca41a26a16594783b282c019fc0297b31c713c8bbf94",
-    "v2/protocols/research_register.md": "c351d96a28dcafa51a0b8e341615ff442d70b110bca847d99e067c735375c3d3",
+    "v2/protocols/research_register.md": "fb0bdeb748082afb5b8a6c4eaa1b11fa6589ddb177fbf271debd182905d3f321",
+    "v2/protocols/v22_release_manifest.json": "e42551168038b8b1766bca059e5f35cb12c3752bfc842af1150b6b6befee035a",
+    "v2/reports/c1_complements_ag3.md": "3302478c02223e65ef34e86bc80a447c82ac7c0e2ff589c4047d5c5904a86d0c",
+    "v2/reports/c2_final.md": "947bafdf06923038cb3909295ebc7217a746087001c17ea787a292c765b2f717",
     "v2/reports/final_v2.md": "5dde7e1c2c765fdc18a6ccf02c5bd1d6d350d79635c91c9ca6ff0e6ef5b21bf4",
+    "v2/reports/p_cell_v21_summary.json": "92948b67156860a5d3b3e3cca8c61c2cabb4a7783d2429d6419e8f671f7bb3e8",
     "v2/reports/v21_results.md": "c1d5366f8921018aab5264e87ff6534aa272b59dd9e31159e10dbde46837a4bb",
     "v2/reports/v22_a1_qa_review.md": "f48618b6740cac662a59b39ba34f4fcea9dc9bf8f1addd2b21e660d152026cb8",
     "v2/reports/v22_a2_qa_review.md": "bb21fbcd008434f863b6636bd4d0d7d0798f2a4100978d5df68ada329543c253",
     "v2/reports/v22_a3_qa_review.md": "7b95985c590914c7105e10284b5f84af8e765783e6365ac372038e38dd0e07c9",
+    "v2/reports/v22_c2_qa_review.md": "4feaabdf57c4999253cb7184818b01d479f095d79fb12139b6dacf61c813d8c5",
+    "v2/reports/v22_confirmation_qa_review.md": "52ba8cef717a17fbce9aeb44ae07233e685bfdc1cb05501689502971ebf2187d",
     "v2/reports/v22_couts_COUT_TABLE.md": "25199d9cd6a4ce33df717bc26928d90ca2c212c8392d6a96f3e6c4923eea0a1b",
-    "v2/reports/v22_final.md": "0298d9308ed61cfd8ab820ce6fedacf859cd18ccb4ca436eea34e6b038ef0826",
-    "v2/reports/v22_final_qa_review.md": "7292480ec2ede6b7c3c1784b5f6e69784aaac88527c70c29dc291b273d8b488d"
+    "v2/reports/v22_final.md": "8a3834f2410cf07aaf559141f5e1abf2b799f19c49203f7b63a971e7511c2584",
+    "v2/reports/v22_final_qa_review.md": "7292480ec2ede6b7c3c1784b5f6e69784aaac88527c70c29dc291b273d8b488d",
+    "v2/reports/v22_loader_impact_matrix.md": "70124e6688ba32219a94746247aa6bae1140e7ac6aef73baa175428d5ca91bd5",
+    "v2/reports/v22_public_inference_audit.md": "1a46ed5f72ba71a7f2e865f595fb7db594cdca5ba74b5b7ad7c43b697dbb6cf2",
+    "v2/reports/v22_scope_erratum.md": "a25ab7577458bf9318ab6cde61d464fae8c3681ebbe7787c14bfea1dd40ccb79"
   }
 }

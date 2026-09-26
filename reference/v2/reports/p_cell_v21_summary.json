@@ -1,0 +1,50 @@
+{
+  "cell": "parser+solveur_exact",
+  "predictions": "/home/cgarrot/zob/multi-step-jev/decision-coprocessor-v2/predictions/p_cell_v21.jsonl",
+  "n": 3200,
+  "correct": 3200,
+  "accuracy": 1.0,
+  "per_bench": {
+    "B1-court": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B2-prof6": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B3-prof8": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B4-prof10": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B5-surface": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B6-distract": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B7-options": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    },
+    "B8-depart": {
+      "n": 400,
+      "correct": 400,
+      "accuracy": 1.0
+    }
+  },
+  "label": "cellule table produit (audit §4.1) — contrôle d'ingénierie hybride symbolique, borné aux templates"
+}

@@ -5,7 +5,7 @@
 | Repo | Commits | Status | Contents |
 |---|---:|---|---|
 | `decision-coprocessor/` | 20 | closed | V1 code, data generators, 53,500-example corpus, runs, 66 prediction files, final report, bundle |
-| `decision-coprocessor-v2/` | 63 | **closed** (V2, V2.1, V2.2) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, V2.2 archives |
+| `decision-coprocessor-v2/` | 85 | **closed** (V2, V2.1, V2.2, confirmation C0/C1/C2) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, all run archives |
 
 Both are local Git repositories (no remote at snapshot). This compendium is the public-facing entry point; core code is snapshotted under [`reference/`](../reference/) with provenance.
 
@@ -48,13 +48,27 @@ v22_a3/      A3 checkpoint, metrics.json, train_log.txt (selection best@800)
 v22_a3_eval/ 8×pred_a3 + a3_eval_verdict.json
 v22_couts/   end-to-end cost harness outputs (couts_metrics.json, COUT_TABLE.md)
 ```
-Pre-registrations: `V22_PROTOCOL.md` (6fc9d7d4), A2 amendment (2334c67b), A1-bis spec (d9337317), A3 spec (2f58f02b); selection bench `S-selection.jsonl` sha `7089876d…`. All hashes are mirrored in the registry entries.
+Pre-registrations: `V22_PROTOCOL.md` (6fc9d7d4), A2 amendment (2334c67b), A1-bis spec (d9337317), A3 spec (2f58f02b), C2 protocol (6dd53719); selection benches sha `7089876d` (2213) and seeds 2214–2216 (C2). All hashes are mirrored in the registry entries.
+
+### Confirmation-programme archives (`decision-coprocessor-v2/`)
+```
+runs/c1_ablation/   anti-leak JSON, sweep + decoder v2, 16 per-item probability archives,
+                    complete-Brier inputs (toolchain-stamped)
+runs/c2*/           six training checkpoints/logs (s18/s19 confirmation, s20/s21 blind),
+runs/c2_eval/       8 evaluations with per-item predictions and margins
+v22_release_manifest.json   checkpoints + sha256 + loaders + inference path (C0)
+reports/{v22_scope_erratum.md, v22_public_inference_audit.md,
+         c1_complements_ag3.md, c2_final.md,
+         v22_confirmation_qa_review.md, v22_c2_qa_review.md}
+scripts/{qa_c1_replay.py, qa_c2_review.py, qa_diff_stages.py, run_c1_complement.py}
+```
+The A2 public inference path (`MemoryExtractor.extract → propagation → answer`) is published in `v22_public_inference_audit.md` and the release manifest; **the S executor is not invoked**.
 
 ## 4. Registry and provenance
 
-- `experiment_registry.jsonl` — append-only: `id`, stage, config sha256, start/finish, status (`registered` / `running` / `pass` / `fail` / `blocked` / annotations), 141 entries.
-- `registry/costs.jsonl` — measured seconds, examples seen, updates, FLOPs estimates (29 lines for V2).
-- `research_register.md` — REG-01…REG-81 observations/hypotheses/tests, never rewritten, always appended.
+- `experiment_registry.jsonl` — append-only: `id`, stage, config sha256, start/finish, status (`registered` / `running` / `pass` / `fail` / `blocked` / annotations), 160+ entries.
+- `registry/costs.jsonl` — measured seconds, examples seen, updates, FLOPs estimates.
+- `research_register.md` — 86 entries REG-01…REG-86 observations/hypotheses/tests, never rewritten, always appended.
 - `reports/` — every gate has a report and a QA review; reports state denominators, thresholds and verdicts. V2.2 closure: `v22_final.md` + `v22_final_qa_review.md` (nine QA requirements, four formulation micro-corrections M1–M4 applied, cost section validated as the last gate, REG-81).
 - `predictions/` — per-item predictions with raw logits where required, so QA can recompute every metric.
 
@@ -91,7 +105,7 @@ Ground rules: scripts committed **before** use; config hashed and registered **b
 - **sealed sets are absent by design**: `E5_eval` (1007) and `E5v2_eval` (1107) were never generated/archived; no reproduction can open them (this is a feature);
 - **adaptive campaigns**: V2-T and V2.1 used dev/selection data for checkpoint choices; reproducing the exact best checkpoints requires the same data and selection code, which is versioned;
 - **thermal/laptop**: V1 latency figures come from a warm second pass on a laptop; they are not transposable to server hardware;
-- **V2.2 archives** are the authoritative status for A1/A1-bis/A2/A3, the router bound and the cost measurements; all registry entries carry `done` / `qa_validated` annotations.
+- **V2.2 and confirmation archives** are the authoritative status for A1/A1-bis/A2/A3, the router bound, the cost measurements, the C1 attribution and the C2 confirmation; all registry entries carry `done` / `qa_validated` annotations.
 
 ## 7. What a reviewer can verify in under an hour
 
@@ -99,8 +113,9 @@ Ground rules: scripts committed **before** use; config hashed and registered **b
 2. `reports/final_v2.md` + `reports/e5v3a_dev.md` + QA addendum v1.9 → stage T verdict and fairness reversal.
 3. `reports/v21_results.md` + `qa_v21_q1_metrics.json` → depth reversal table.
 4. `reports/v22_a1_qa_review.md` addendum D → A1-bis PASS with zero training.
-5. `reports/v22_a1_qa_review.md` + `v22_a2_qa_review.md`, `v22_a3_qa_review.md`, `v22_final.md`, `v22_final_qa_review.md` → A2 PASS, architectural superiority of propagation 8/8, router useless, costs, closure.
-6. `experiment_registry.jsonl` + `research_register.md` (REG-01…REG-81) → chronology and pre-registration order (hashes, dates, commit ids).
-7. `figures/make_figures.py` (this repo) → every plot in the paper regenerated from the numbers published here.
+5. `reports/v22_a1_qa_review.md` + `v22_a2_qa_review.md`, `v22_a3_qa_review.md`, `v22_final.md`, `v22_final_qa_review.md` → A2 PASS, architectural superiority of propagation 8/8, router bound, costs, closure.
+6. `reports/v22_scope_erratum.md`, `v22_public_inference_audit.md`, `c1_complements_ag3.md`, `c2_final.md`, `v22_confirmation_qa_review.md`, `v22_c2_qa_review.md` → audit #3 corrections, same-reader attribution, three-seed confirmation, blind extrapolation, all reserves closed.
+7. `experiment_registry.jsonl` + `research_register.md` (REG-01…REG-86) → chronology and pre-registration order (hashes, dates, commit ids).
+8. `figures/make_figures.py` (this repo) → every plot in the paper regenerated from the numbers published here.
 
 A “where to check each claim” mapping exists in the original compaction dossiers (files 05 and 11 of the V2 review corpus).

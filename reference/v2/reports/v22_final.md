@@ -18,6 +18,16 @@ reviews `reports/v22_a1_qa_review.md`, `v22_a2_qa_review.md`, `v22_a3_qa_review.
 | B7 options (K=6) | 0.800 | 0.855 | **0.995** | 0.9600 | 0.9400 | +3.5 [+1.50,+5.50] |
 | B8 départ | 0.765 | 0.858 | **0.9975** | 0.8550 | 0.8400 | +14.25 [+11.0,+18.0] |
 
+**Solution bornée non-neuronale (table produit, audit §4.1)** : cellule
+parser+solveur-exact MESURÉE (predictions/p_cell_v21.jsonl, registre
+V2.2-p-cell) : **1.0000 sur les 8 bancs (3200/3200)** — le hybride
+symbolique borné aux templates résout déterministement 100 % du domaine
+synthétique courant : borne haute de tout système appris ICI. A2
+(0.995–1.000) l'approche sans l'égaler strictement. **La valeur d'un
+lecteur neuronal est de généraliser AU-DELÀ des templates, pas en
+dessous** — c'est ce que C2 devra trancher (objectif à arbitrer :
+confirmer le système vs extrapolation).
+
 ˟ **saturation déclarée** (B5/B6 = 1.000 : ces bancs ne séparent plus les
 systèmes au-dessus de 0.995). Δ vs direct V2.1 et vs discret : voir
 `runs/v22_a2_eval/a2_eval_metrics.json` (IC>0 partout). **(p) parser
@@ -28,7 +38,13 @@ possible ; il ne mesure aucune voie apprise.
 **Qualité probabiliste A2** (capture dédiée, assertions prédiction ==
 publiées) : NLL 0.0044–0.0294, Brier(gold-class) (1−p_oracle)² 0.0007–0.0061 selon le banc — à
 comparer au direct V2.1 : NLL 0.59→**8.85** nats aux profondeurs (ECE B1
-0.061). A2 est exact ET calibré ; le direct sait qu'il échoue mais échoue.
+0.061). A2 montre une bonne qualité probabiliste sur ces exemples (NLL
+   faible sur un domaine quasi résolu ≠ étude de calibration complète) ; le
+   direct présente une **qualité probabiliste dégradée** — sa capacité à
+   **détecter ses propres erreurs reste À MESURER** (une NLL élevée
+   n'implique pas la connaissance des erreurs : contre-exemple
+   confiant-faux ; outils requis : confiance à l'inférence,
+   séparation erreurs/succès, courbe risque-couverture).
 
 ## 2. Conclusions (règles figées appliquées verbatim)
 
@@ -52,8 +68,12 @@ comparer au direct V2.1 : NLL 0.59→**8.85** nats aux profondeurs (ECE B1
 Protocole V2.2 14:03 (sha 6fc9d7d4) avant A1 14:11 → A1-bis préenregistrement registre **14:22:44** (commit f6460e29) → run **14:37:44** ; doc V22_A1BIS_SPEC.md (d9337317) déposé **14:56** (post-run, extrait verbatim de l'entrée de registre) → amendement A2 2334c67b (14:18,
 contre-signé 14:20) avant run 15:29 → spec A3 2f58f02b (17:05, QA REG-77
 avant run) avant run 17:20. Sélection UNIQUEMENT sur banc 2213 (sha
-7089876d, étiquette selection_only) ; bancs V2.1 scellés = évaluation pure,
-jamais sélectionnés (vérifié QA à chaque porte).
+7089876d, étiquette selection_only) ; bancs V2.1 : **hors gradients et hors sélection de checkpoints, mais
+   réutilisés/observés pendant une campagne adaptative de développement**
+   (V2.1 → A1 → A1-bis → A2 → A3) — évaluation développement, PAS une
+   confirmation entièrement indépendante (C2 requise). Le banc 2213
+   contient 50 % de profondeurs 6/8 : la performance d'A2 en profondeur
+   n'est PAS une extrapolation aveugle (la sélection s'y est appuyée).
 
 ## 4. Incidents et transparence (causes + corrections, impact nul sur les chiffres publiés)
 
@@ -96,7 +116,7 @@ rétroactif sur V2.1, publié avec son caveat). Aucun mélange d'environnement.
 | B1 p95 | 46.2 ms | 38.1 ms | ×1.21 |
 | B3 p50 | 51.59 ms | 40.52 ms | ×1.27 (+11.1 ms) |
 | B3 p95 | 55.4 ms | 43.5 ms | ×1.27 |
-| débit B1 / B3 | 22.6 / 18.7 it/s | 29.0 / 23.6 it/s | ×0.78–0.79 |
+| débit B1 / B3 | 22.6 / 18.7 lots/s (batch 8 → ~181/150 ex/s amortis) | 29.0 / 23.6 lots/s | ×0.78–0.79 |
 | **propagation p@A** | **0.59–0.66 ms (≈1.3–1.5 % du p50 A2)** | — | **négligeable, mesurée** (microbench CPU 0.187 ms) |
 | VRAM alloc batch8 | ~1472–1512 MiB | parité | — |
 
@@ -113,7 +133,13 @@ coûts : le prix se paie en extraction (lecteur), pas en calcul.
 ## 8. La réponse à l'audit, en une phrase par section
 
 - §6.2 (transitions incertaines) : **validée deux fois** — zéro entraînement
-  (A1-bis 0.85 invariant) puis supervisée (A2 0.995+, plafond parser dépassé).
+  (A1-bis 0.85 invariant) puis supervisée (A2 0.995+). **Réconciliation
+   parser (audit §4.1)** : le parser déterministe mesure 1.000/1.000
+   (couverture/accord, 3200/3200) — le « plafond 0.95 » cité en V2.2 était
+   une approximation erronée héritée du framing du GO (proche des
+   diagnostics chemin_seul 0.95–0.98, PAS une mesure du parser). A2 à
+   0.995–1.000 **rejoint mais ne dépasse pas** la solution déterministe
+   bornée aux templates — voir la table produit élargie ci-dessous.
 - §3.1/§3.3 (portée, généralisation) : le « définitif » de V2 était un
   artefact de chaînes courtes — le croisement prof 4↔6 (V2.1) puis la
   domination complète (V2.2) l'établissent.

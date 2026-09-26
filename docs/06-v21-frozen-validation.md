@@ -64,7 +64,7 @@ Metrics: all-in (abstention = error) plus coverage/risk; per bench and per depth
 - **(a) = 1.000 everywhere, including depth 10** → the executor composes; **the entire pipeline deficit is in reading**.
 - **Oracle corrector "path only"**: 0.950 / 0.965 / 0.9825 / 0.9825 (B1→B4) vs baseline 0.800 / 0.667 / 0.598 / 0.560. Correcting only the **useful-path edges** recovers almost everything; correcting only the start or only off-path edges changes nothing. **The deficit is precisely the path edges.**
 - Active-successor accuracy ~0.89 (stable), END detection 98.7–99 %.
-- **Direct NLL:** 0.59 → 5.43 → 8.85 → 7.45 nats (B1→B4). The direct path "knows" it is uncertain at depth (ECE on B1 = 0.061).
+- **Direct NLL:** 0.59 → 5.43 → 8.85 → 7.45 nats (B1→B4). A high NLL means the gold answer receives little probability — **degraded probabilistic quality, not demonstrated error awareness** (a high NLL is compatible with confident errors; error-detection measurements are a published open item). ECE on B1 = 0.061.
 - **Abstention filter:** naked > filtered by +5.25 to +6.0 pts all-in (c ≡ b: executor ≡ solver on valid graphs) → published as a coverage/risk ablation.
 - **Complementarity** (pipeline right, direct wrong): 123 / 400 at depth 6, 172 at depth 8, 163 at depth 10 → a router line is relevant; **an oracle router bound must be measured before building anything**.
 - **(p) deterministic parser:** coverage 1.0000 and agreement 1.0000 on 8/8 benches (3200/3200, zero UNKNOWN), public-text only, QA-reproduced. Reading: deterministic extraction from public text **is possible** (existence proof); the deficit is in the **learned extraction + interface**, not in the information (bounded to templates; this does not quantify learning difficulty).

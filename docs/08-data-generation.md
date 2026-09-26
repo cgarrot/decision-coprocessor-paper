@@ -94,7 +94,8 @@ Text↔structure oracle: `parse_state` recovers the private edges/terminals exac
 - V1 reserved test: opened **once** after pre-registration v2.1; no post-hoc metric change possible.
 - `E5_eval` v1 (seed 1007): sealed forever after the bench was found defective; **0 artefacts**.
 - `E5v2_eval` (seed 1107): sealed forever; **0 artefacts**; no conclusion depends on it; verified by QA.
-- V2.1 benches: pure evaluation, never used for selection.
-- Seed 2213: selection only for A2; never used for evaluation.
+- V2.1 benches: held out from training and checkpoint selection, but **observed during the adaptive development campaign** (`V2.1 → A1 → A1-bis → A2 → A3`) — labelled *development evaluation*, not independent confirmation.
+- C2 benches/seeds (2214–2216): fresh, total anti-duplicate constraints, protocol frozen before generation; C2-b additionally restricts **checkpoint selection** to short chains (blind extrapolation).
+- Seed 2213: selection only for V2.2; never used for evaluation. Seeds 2214–2216: C2 evaluation; 2216 selection for C2-b only.
 
 This discipline is the reason the project can publish a grey-zone result as a grey zone and an experience stop as an experience stop.

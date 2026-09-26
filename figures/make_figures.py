@@ -320,33 +320,36 @@ def fig06_a1bis():
 # Figure 7 — timeline
 # ---------------------------------------------------------------------------
 def fig07_timeline():
-    fig, ax = new_canvas(12.8, 6.6)
-    title(ax, "Project timeline — 24–25 September 2026 (~33 h of continuous work, 83 commits)")
+    fig, ax = new_canvas(13.0, 7.2)
+    title(ax, "Project timeline — 24–26 September 2026 (~48 h of continuous work, 105 commits)")
 
     # lanes: (name, y, [(x, label), ...], color)
     lanes = [
-        ("V1", 86, [(6, "P0 bootstrap 12:07"), (16, "P1 data 12:41"), (23, "pilot 13:03"),
+        ("V1", 90, [(6, "P0 bootstrap 12:07"), (16, "P1 data 12:41"), (23, "pilot 13:03"),
                     (33, "B2 x3 seeds 15:05"), (50, "R/B3/B4 x3 seeds 20:19"),
-                    (60, "gate P5 21:33"), (66, "final report 22:04"), (70, "closed 22:11")], C_ORANGE),
-        ("V2-S", 70, [(72, "E0 23:43"), (77, "E1/E2 23:54"), (83, "E3/E4b 00:26")], C_PURPLE),
-        ("V2-T", 54, [(74, "E5 prep 01:15"), (78, "bench defective"),
+                    (60, "gate P5 21:33"), (67, "closed 22:11")], C_ORANGE),
+        ("V2-S", 76, [(72, "E0 23:43"), (77, "E1/E2 23:54"), (83, "E3/E4b 00:26")], C_PURPLE),
+        ("V2-T", 62, [(74, "E5 prep 01:15"), (78, "bench defective"),
                       (84, "it1-it3 02:24-06:25"), (91, "E5v3-A LoRA"), (96, "closed 10:34")], C_BLUE),
-        ("V2.1", 38, [(14, "protocol 11:40"), (34, "8 benches seed 2205-2212"), (52, "QA recalc 13:53"),
-                      (66, "depth reversal published")], C_GREEN),
-        ("V2.2", 22, [(20, "protocol 14:03"), (36, "A1 FAIL 14:15"), (50, "A1-bis PASS 14:52"),
-                      (64, "A2 PASS 16:32"), (78, "A3 8/8 architectural"), (90, "costs 18:54")], C_RED),
-        ("QA", 6, [(90, "all V2.2 gates closed — REG-81, 19:06")], "#6A4FA3"),
+        ("V2.1", 48, [(14, "protocol 11:40"), (34, "8 benches 2205-2212"), (52, "QA recalc 13:53"),
+                      (66, "depth reversal")], C_GREEN),
+        ("V2.2", 34, [(70, "protocol 14:03"), (74, "A1 FAIL"), (78, "A1-bis PASS"),
+                      (83, "A2 PASS 16:32"), (88, "A3 8/8"), (93, "closed 19:06")], C_RED),
+        ("Audit #3 + C0/C1", 20, [(78, "audit 19:25"), (84, "C0 errata"),
+                                  (88, "C1 attribution 21:39"), (93, "release manifest")], "#6A4FA3"),
+        ("C2 (night)", 6, [(80, "protocol 22:20"), (86, "6 trainings overnight"),
+                           (93, "C2 closed 10:23"), (97, "QA REG-86 10:37")], "#2E8B57"),
     ]
     for name, y, events, color in lanes:
-        ax.plot([4, 96], [y, y], color=color, lw=2.4, alpha=0.65, zorder=1)
-        ax.text(2.2, y, name, ha="right", va="center", fontsize=10, weight="bold", color=color)
+        ax.plot([4, 98], [y, y], color=color, lw=2.4, alpha=0.65, zorder=1)
+        ax.text(2.2, y, name, ha="right", va="center", fontsize=9, weight="bold", color=color)
         for i, (x, label) in enumerate(events):
             ax.plot([x], [y], "o", color=color, ms=6, zorder=3)
             above = (i % 2 == 0)
-            ax.text(x, y + (2.3 if above else -2.3), label, ha="center",
-                    va="bottom" if above else "top", fontsize=7.2, color="#374151")
+            ax.text(x, y + (1.9 if above else -1.9), label, ha="center",
+                    va="bottom" if above else "top", fontsize=6.8, color="#374151")
 
-    ax.text(50, 1.5, "time, 24/09 12:00 -> 25/09 19:06 (not to scale; V2.1/V2.2 lanes compressed)",
+    ax.text(50, 0.5, "time, 24/09 12:00 -> 26/09 10:37 (not to scale; lanes compressed)",
             ha="center", fontsize=7.6, color=C_GREY)
     save(fig, "fig07-timeline")
 
@@ -422,6 +425,54 @@ def fig09_v22_final():
     save(fig, "fig09-v22-final")
 
 
+# ---------------------------------------------------------------------------
+# Figure 10 — Confirmation programme: C1 attribution + C2 confirmation/blind
+# ---------------------------------------------------------------------------
+def fig10_confirmation():
+    benches = ["B1\nshort", "B2\n6", "B3\n8", "B4\n10", "B5\nsurface", "B6\ndistract", "B7\noptions", "B8\nstart"]
+    r0_hard = [0.8100, 0.6650, 0.5775, 0.5500, 0.8175, 0.8100, 0.8100, 0.7850]
+    r0_soft = [0.8550, 0.8375, 0.8525, 0.8550, 0.8525, 0.8325, 0.8550, 0.8575]
+    r1_hard = [0.8750, 0.7850, 0.8450, 0.8425, 0.8875, 0.8550, 0.8750, 0.8300]
+    r1_soft = [0.9950, 0.9975, 0.9975, 0.9975, 1.0000, 1.0000, 0.9950, 0.9975]
+
+    x = np.arange(len(benches))
+    width = 0.2
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13.4, 5.0), gridspec_kw={"width_ratios": [1.5, 1]})
+
+    ax1.bar(x - 1.5 * width, r0_hard, width, label="R0 hard (frozen reader, discret.)", color="#B8C4D0")
+    ax1.bar(x - 0.5 * width, r0_soft, width, label="R0 soft (propagation)", color=C_PURPLE, alpha=0.85)
+    ax1.bar(x + 0.5 * width, r1_hard, width, label="R1 hard (A2 reader, discret.)", color=C_ORANGE, alpha=0.85)
+    ax1.bar(x + 1.5 * width, r1_soft, width, label="R1 soft (A2 + propagation)", color=C_GREEN)
+    ax1.set_xticks(x, benches, fontsize=8)
+    ax1.set_ylim(0, 1.08)
+    ax1.set_ylabel("accuracy (n=400/bench)")
+    ax1.set_title("C1 same-reader 2×2: both factors contribute (soft > hard; R1 > R0)")
+    ax1.legend(fontsize=7.4, ncol=2, loc="lower left")
+    ax1.grid(alpha=0.25, axis="y")
+
+    seeds = ["s17", "s18", "s19", "blind s20"]
+    a2_deep = [0.9950, 0.9983, 0.9983, 0.9867]
+    a3_deep = [0.3419, 0.3578, 0.3169, 0.2710]
+    xs = np.arange(len(seeds))
+    ax2.bar(xs - 0.19, a2_deep, 0.36, label="A2 (propagation)", color=C_GREEN)
+    ax2.bar(xs + 0.19, a3_deep, 0.36, label="A3 (direct + equal aux.)", color=C_ORANGE)
+    ax2.axhline(0.90, color=C_RED, ls="--", lw=1.3)
+    ax2.text(3.45, 0.91, "blind criterion ≥ 0.90", fontsize=7.5, color=C_RED, ha="right")
+    for i, (a, b) in enumerate(zip(a2_deep, a3_deep)):
+        ax2.text(i, a + 0.015, f"{a:.4f}", ha="center", fontsize=7.6)
+        ax2.text(i, b + 0.015, f"{b:.4f}", ha="center", fontsize=7.6)
+        ax2.text(i, 0.50, f"Δ +{(a-b)*100:.1f}", ha="center", fontsize=8, weight="bold", color="#374151")
+    ax2.set_xticks(xs, seeds, fontsize=8.5)
+    ax2.set_ylim(0, 1.08)
+    ax2.set_ylabel("pooled deep accuracy (6+8+10)")
+    ax2.set_title("C2: 3-seed confirmation + blind extrapolation")
+    ax2.legend(fontsize=8, loc="center left")
+    ax2.grid(alpha=0.25, axis="y")
+
+    fig.tight_layout()
+    save(fig, "fig10-confirmation")
+
+
 if __name__ == "__main__":
     fig01_v1_architecture()
     fig02_v2_executor()
@@ -432,4 +483,5 @@ if __name__ == "__main__":
     fig07_timeline()
     fig08_reader()
     fig09_v22_final()
+    fig10_confirmation()
     print("all figures written to", OUT)

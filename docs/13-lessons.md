@@ -76,7 +76,7 @@
 
 ## 11. Decomposition is a trade, not a virtue
 
-**Episode.** The decomposed pipeline wins when the direct path collapses (depth ≥ 6 on frozen checkpoints: +14 to +32 pts) and loses when the direct path can learn end-to-end (fair adaptation: −23.8 pts on short chains). Its bottleneck is the extraction interface, which can be partially repaired without retraining (A1-bis) but still leaves a gap to the 0.95 ceiling.
+**Episode.** The decomposed pipeline wins when the direct path collapses (depth ≥ 6 on frozen checkpoints: +14 to +32 pts) and loses when the direct path can learn end-to-end (fair adaptation: −23.8 pts on short chains). Its bottleneck is the extraction interface, repairable without retraining (A1-bis) and then with distributional training (A2, 0.995–1.000), under the bound of the **deterministic parser** (1.000/1.000 coverage/agreement on this synthetic domain): the learned system matches, but does not exceed, a symbolic solution bounded to the templates.
 
 **Lesson.** The value of explicit decomposition is conditional on (i) the baseline's failure profile and (ii) the fidelity of the interface. State the conditions; never claim "decomposition helps" as a general law.
 
@@ -98,7 +98,13 @@
 
 **Lesson.** A routing mechanism can only capture the gap between the best single expert and the best possible per-item choice. Measure that bound before designing the router: in this project it saved an entire engineering branch, and it shows that "complementarity exists" is not the same as "complementarity is exploitable after improving the experts."
 
-## 15. What we would do differently
+## 15. A correct result still needs attribution — and errata
+
+**Episode.** After V2.2's success, a third external audit accepted the numbers but found seven over-strong formulations (the “0.95 parser ceiling” that contradicted the parser's own 1.000/1.000; “the direct path knows it fails” from a high NLL; “sealed benches” for a development campaign; “free” propagation; “excellent short range for the direct path” carried over from another version; ambiguous CI sources). It also demanded the attribution experiment V2.2 had not run: the **same-reader 2×2** (readers R0/R1 × hard/soft decoding). That experiment showed the truth was more interesting than either claim: **both** uncertainty conservation and better local reading contribute (soft > hard at fixed reader; R1 > R0 in hard), and the complete multiclass Brier (0.0016–0.0119 vs 0.30–0.58) exposed the frozen reader's accumulating UNKNOWN leak that the candidate-only Brier had hidden.
+
+**Lesson.** A positive result is not finished when it passes its gates; it is finished when its *wording* matches its protocol and its *gain* is attributed to a mechanism by a controlled ablation on identical outputs. Errata that change no number are part of the science — and an audit that forces them is doing its job. Conversely: never silently rewrite old scores; a correction that changes a prediction creates a new, identified version.
+
+## 16. What we would do differently
 
 1. Design text compactness and depth coverage from the start (V1 lost 23 % of the depth test to the 512-token limit).
 2. Fix the representation-fairness rule before the first pipeline/direct comparison (it inverted a conclusion).

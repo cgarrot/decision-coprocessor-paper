@@ -14,7 +14,7 @@ The project was executed by a mesh of five specialised agents over roughly 36 ho
 
 The user interacted through an `@ag-ask` channel; user GO was required for any new budget (for example E5v3-A LoRA, V2.2). Independence of QA was structural: the QA never wrote the artefacts it validated, and its findings could block gates (they did: v1.1, v1.3, v1.7bis, v1.8, R7/R11, REG-74).
 
-The `role="assistant"` ledger, the append-only research register (`research_register.md`, 81 entries REG-01…REG-81) and the experiment registry (`experiment_registry.jsonl`, 141 entries) record observations, hypotheses and tests with dates and statuses.
+The `role="assistant"` ledger, the append-only research register (`research_register.md`, 86 entries REG-01…REG-86) and the experiment registry (`experiment_registry.jsonl`, 160+ entries) record observations, hypotheses and tests with dates and statuses.
 
 ## 2. Pre-registration
 
@@ -61,7 +61,7 @@ The QA's method is constant: **recompute from archived per-item predictions**, n
 
 **F2 — Cache invalidation.** If backbone weights change (LoRA), any cached hidden state is invalid by construction; caches are keyed by adapter state.
 
-**F3 — No selection on evaluation data.** Layer choices, thresholds and checkpoints are chosen on train/dev (and in V2.2 on a fresh selection bench), never on sealed evaluation benches.
+**F3 — No selection on evaluation data.** Layer choices, thresholds and checkpoints are chosen on train/dev (and in V2.2 on a fresh selection bench), never on evaluation benches. A distinct, explicit label is attached to development campaigns: V2.1 benches were held out from training and checkpoint selection but observed during the adaptive V2.1→V2.2 campaign, so they are *development* evaluation; independent confirmation requires fresh benches and seeds (C2: 2214–2216, blind selection protocol).
 
 **F4 — Pre-registered abstention, symmetric.** Any abstention rule must be frozen before the run and given to both paths; primary metric all-in (abstention = error), coverage/risk published separately.
 

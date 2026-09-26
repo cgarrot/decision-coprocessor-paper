@@ -1,4 +1,4 @@
-# 12 — Timeline: 2026-09-24 10:08 → 2026-09-25 19:06 (closed)
+# 12 — Timeline: 2026-09-24 10:08 → 2026-09-26 10:37 (closed)
 
 *Reconstructed from git histories, registries, run logs and reports. All times are local (CEST).*
 
@@ -101,4 +101,17 @@ Along the way, **two E0 bugs found and fixed** (pointer not reinjected: ~2-hop c
 | 18:48–18:54 | **End-to-end costs**: A2 ×1.235–1.273 vs A3 (p50), throughput ×0.78–0.79, propagation 0.59–0.66 ms ≈ 1.3–1.5 % of A2 p50, VRAM parity |
 | 19:05–19:06 | **V2.2 final report** (`v22_final.md`, nine QA requirements, M1–M4 applied) + **QA closure REG-81: all gates closed** |
 
-**Final state:** 20 commits in V1, 63 in V2 (83 total), ≈33 h of continuous work, registered V2 compute ≈ 4.96 h + V2.2 runs; every gate of every program closed by independent QA. Remaining declared milestones (out of scope): UNKNOWN/partially observed worlds, harder benches than the B5/B6 saturation, multi-seed confirmation, OOD generalisation.
+## Act VIII — Third audit + confirmation programme C0/C1/C2 (09-25 19:25 → 09-26 10:37, closed)
+
+| Time | Event |
+|---|---|
+| 19:25 | **Third external audit** (`DECISION-COPROCESSOR-AUDIT-V22-CONFIRMATION.md`, sha d47186ec, 596 lines): positive result acknowledged; 7 scope corrections demanded; C0–C3 programme proposed |
+| 20:05–20:31 | **C0**: scope erratum (NLL wording, Brier naming, parser reconciliation 1.000/1.000, bench status, cost wording, canonical CIs, short-depth claim); public inference audit (**S executor not invoked in A2**); parser+solveur cell measured **1.0000 (3200/3200)**; release manifest; loader impact matrix |
+| 20:08–20:51 | Actions closed: R-E tie-break semantics documented (REG-82); R-D CPU/GPU localisation → first divergent stage = backbone h14, ≈0.49 % bf16 drift, decisions stable (REG-83); margins top-2 archived (REG-84) |
+| 21:37–21:39 | **C1 complete** (REG-85): 2×2 same-reader ablation (R0/R1 × hard/soft) → **both factors contribute**; anti-leak 3 layers PASS; complete multiclass Brier (R1 0.0016–0.0119 vs R0 0.30–0.58); budget sweep (R0 leaks, R1 plateaus); toolchain divergence localised to the backbone forward |
+| 22:20–22:31 | **C2 protocol frozen before generation** (`V22_C2_PROTOCOL.md`, sha 6dd53719); fresh benches seeds 2214–2216 with total anti-duplicates; night chain launched (6 trainings) |
+| 25/09 22:31 → 26/09 10:23 | **C2 night**: A2/A3 seeds s18–s19 (confirmation) + s20/s21 (blind, short-only selection); incident >512 tokens (generator ≠ consumer rendering) excluded uniformly (1/2000), 8 evals replayed on the common population |
+| 26/09 10:23 | **C2 closed (commit e7e7165b)**: **C2-a PASS** — Δ(A2−A3) pooled deep +65.30/+64.05/+68.14 (mean **+65.83**, CI low > 0 ×3), dispersion ≤0.33 pt; **C2-b largely successful** — blind extrapolation 0.9867 vs control 0.2710 |
+| 10:25–10:37 | **QA REG-86** validates both verdicts; reserves closed: exact incident cause, top-2 margins captured on the 8 evals, “pooled” convention named; micro-label corrected |
+
+**Final state:** 20 commits in V1, 85 in V2 (**105 total**), ≈48 h of continuous work (24/09 10:08 → 26/09 10:37), every gate and every QA reserve of every programme closed. Remaining declared milestones (out of scope, Lot C3): UNKNOWN/partially observed worlds, harder benches than the B5/B6 saturation, one extension axis (renderings, multi-question contexts, larger graphs), OOD generalisation.
