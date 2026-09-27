@@ -66,7 +66,7 @@ Sources: `reports/e5*.md`, `final_v2.md`, `E5_GATE_CRITERIA.md` (v1.0→v1.9), Q
 | E5v3-A edge trajectory | 0.331@100 → 0.812@400 → 0.919@700 → 0.928@1200 |
 | E5v3-A direct trajectory | 0.552@100 → 0.973@200 → 0.998@600 → **1.000@1000** → 0.998@1200 |
 | E5v3-A cells (a/b/c/cn/d) | 1.000 / 0.7616 / 0.7616 / 0.8200 / **1.0000** |
-| **Δ(c−d)** | **−23.84 pts [−28.33; −19.60]** → issue (iii) |
+| **Δ(c−d)** | **−23.84 pts [−28.19; −19.76]** → issue (iii) |
 | Causal profile (c) | 0.780 / 0.588 / 0.932 (decisive/distractor/permutation) |
 | Causal profile (d) | **0.996 / 0.996 / 0.988** |
 | Broken chain | det 0/411 (structural limitation) |
@@ -141,6 +141,28 @@ Sources: `reports/{v22_scope_erratum.md,v22_public_inference_audit.md,c1_complem
 | C2 margins top-2 | A2 medians 0.9963/0.9955/0.9914 (s17/s18/s19), 0.9882 blind; A3 all-cells 0.9631; A2 deep-only ≤1e-2 on 0.08–1.50 % |
 | C2 cost | 6 trainings ≈70 min each + 8 evals ≈40 s ≈ **7 h GPU** under the single-job lock |
 | QA closure | REG-82→86; C2-a PASS + C2-b largely successful validated; reserves R-C2-0/1/2 closed (exact incident cause, top-2 margins archived, “pooled” convention named) |
+
+## V2.3 + P2 + E2-bis (closed 2026-09-27)
+
+Sources: `reports/v23_final.md`, QA reviews `v23_e1a/e1_l2l3/e2/e3`, `v23_c2_qa_review.md`, `v22_c2_qa_review.md`, `reports/qa_e2bis_metrics.json`, protocols `V23_P2_PROTOCOL.md` (cf6ae3cc…), `V23_E2BIS_PROTOCOL.md` (4f0677af…), canonical verdicts `V23_CANONICAL_VERDICTS.md` (REG-74→94). All QA-recalculated.
+
+| Quantity | Value |
+|---|---|
+| **V2.3 E1 L1-a paraphrases** | A2 variant **1.000 × 3 seeds**; A3 0.951; parser 1.00/1.00 → PASS total |
+| **V2.3 E1 L2-inv inversions** | **A2 0.545 × 3** (Q2 −45 pts), **A3 0.72** → A2 breaks, reversal A2 < A3; parser variant coverage 0.00 (by construction) |
+| V2.3 E1 L3-lbl / L3-adv | Δ ≈ 0 (0/−1.5/0 pts) / A2 0.998–1.000 |
+| **V2.3 E2 retraining (25/30/45 mixture)** | L2-inv **0.9375 / 0.94** (2 seeds); A2 > A3 on 16/16 pairs; no significant regression (L3-lbl −1/−2 pts published) |
+| **V2.3 E3 language×depth** | canonical/paraphrases 0.99–1.00 all depths; A2-E2 inversions **0.957/0.927 (short) → 0.797/0.680 (depth 10)**; A3 inversions ≤ 0.86 (short) → ~0.30 (deep); crossed extrapolation **partial** |
+| **P2 diagnosis** | `p(edge|inv)` **0.845–0.854 (s22) / 0.819–0.839 (s24)** constant with depth; terminal 0.51→0.27, **UNKNOWN 0.38→0.57** (s22; 0.42→0.20 / 0.47→0.64 s24); **H-A partially supported** (O1 failed 0.007–0.017; fit violated), **H-B not supported** (V4 unrun), **H-C rejected** |
+| **E2-bis (2 seeds)** | inv×depth: s26 **0.980/0.973/0.953/0.930**; s28 **0.977/0.940/0.937/0.900**; A3 0.85/0.83 → 0.24–0.29 deep; non-regression total |
+| E2-bis criteria | accuracy inv×p10 ≥ 0.85 → **PASS (0.930/0.900)**; **UNKNOWN mass ≤ 0.25 → FAILED (0.38–0.41)**; non-regression ±2 pts → PASS; Δ(A2−A3) CI low > 0 → PASS |
+| E2-bis qualification | **Blind extrapolation** (data-proven: mixture + selection only depths 1–4); stronger than the initial “coverage” label |
+| E2-bis non-regression detail | L1a 0.9925–1.000 · canonical 0.993–1.000 · L2-inv court 0.978–0.985 · L3-lbl 0.930–0.9525 · L3-adv 0.988–0.9975 |
+| P2/E2-bis mass conventions | `mass_term` = p_T[correct terminal]; `mass_inconnu` = p_T[UNKNOWN sink]; `mass_hors` = off-candidate nodes; argmax over candidate **nodes only** (sink never a candidate); tie-break eps=1e-3 alphabetical |
+| V2.3 compute | ≈ **9 h GPU** for the campaign (E1 ~2 h + E2 ~5 h + E3 ~1.5 h), batch 8 profile — campaign cost, not decision latency |
+| Canonical Δ(c−d) V2-T | **−23.844 pts [−28.19; −19.76]** (canonical verdicts; replaces the earlier [−28.33; −19.60] bootstrap bounds) |
+| Final documentary audit | **“CLOS AVEC RÉSIDUS”**: 5 blocking documentary residuals (B1–B5: E2-bis domain wording, verdict hierarchy, P2 reserves, release inventory, parser/adapter flow), no new experiment required; minors: mass definitions, anti-overwrite scope, chronology; cosmetic: “doubling” = ×1.8 |
+| V2.4 status | **In user arbitration** (residual leak objective, UNKNOWN semantics, can↔inv coherence) — not started |
 
 ## Cost ledger
 

@@ -18,4 +18,5 @@ Start with the [root README](../README.md) or the [paper](../paper/PAPER.md). Ea
 | 11 | [Reproducibility](11-reproducibility.md) | Artefacts, hashes, procedures, caveats |
 | 12 | [Timeline](12-timeline.md) | Hour-by-hour chronology with commits |
 | 13 | [Lessons](13-lessons.md) | Fourteen transferable lessons and a retrospective, each backed by an episode |
+| 14 | [V2.3 language robustness](14-v23-language-robustness.md) | Paraphrases/inversions/lexical levels, P2 failure diagnosis (mass leak), E2-bis coverage (blind extrapolation), final documentary audit and V2.4 questions |
 | — | [Glossary](glossary.md) | Terms and metrics used across the project |

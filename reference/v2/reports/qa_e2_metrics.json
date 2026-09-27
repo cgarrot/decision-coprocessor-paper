@@ -1,0 +1,218 @@
+{
+  "evals": {
+    "s22_a2_L1a_canonique": {
+      "acc": 0.9975,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L1a_variante": {
+      "acc": 0.995,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L2-inv_canonique": {
+      "acc": 0.995,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L2-inv_variante": {
+      "acc": 0.9375,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L3-lbl_canonique": {
+      "acc": 0.95,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L3-lbl_variante": {
+      "acc": 0.95,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L3-adv_canonique": {
+      "acc": 1.0,
+      "n": 400,
+      "marges": true
+    },
+    "s22_a2_L3-adv_variante": {
+      "acc": 1.0,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L1a_canonique": {
+      "acc": 0.9075,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L1a_variante": {
+      "acc": 0.94,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L2-inv_canonique": {
+      "acc": 0.9275,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L2-inv_variante": {
+      "acc": 0.87,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L3-lbl_canonique": {
+      "acc": 0.92,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L3-lbl_variante": {
+      "acc": 0.8925,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L3-adv_canonique": {
+      "acc": 0.9125,
+      "n": 400,
+      "marges": true
+    },
+    "s23_a3_L3-adv_variante": {
+      "acc": 0.93,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L1a_canonique": {
+      "acc": 0.995,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L1a_variante": {
+      "acc": 0.9975,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L2-inv_canonique": {
+      "acc": 1.0,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L2-inv_variante": {
+      "acc": 0.94,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L3-lbl_canonique": {
+      "acc": 0.97,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L3-lbl_variante": {
+      "acc": 0.9675,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L3-adv_canonique": {
+      "acc": 0.9975,
+      "n": 400,
+      "marges": true
+    },
+    "s24_a2_L3-adv_variante": {
+      "acc": 0.9975,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L1a_canonique": {
+      "acc": 0.9375,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L1a_variante": {
+      "acc": 0.9475,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L2-inv_canonique": {
+      "acc": 0.935,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L2-inv_variante": {
+      "acc": 0.8675,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L3-lbl_canonique": {
+      "acc": 0.9225,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L3-lbl_variante": {
+      "acc": 0.9375,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L3-adv_canonique": {
+      "acc": 0.9625,
+      "n": 400,
+      "marges": true
+    },
+    "s25_a3_L3-adv_variante": {
+      "acc": 0.96,
+      "n": 400,
+      "marges": true
+    }
+  },
+  "checks": {
+    "e2_s22_a2_L1a_var": {
+      "n": 400,
+      "marges": true
+    },
+    "e2_s22_a2_L2inv_can": {
+      "n": 400,
+      "marges": true
+    },
+    "e2_s22_a2_L2inv_var": {
+      "n": 400,
+      "marges": true
+    },
+    "e2_s23_a3_L2inv_var": {
+      "n": 400,
+      "marges": true
+    },
+    "A2-A3_22/23": {
+      "L1a_canonique": 0.09,
+      "L1a_variante": 0.055,
+      "L2-inv_canonique": 0.0675,
+      "L2-inv_variante": 0.0675,
+      "L3-lbl_canonique": 0.03,
+      "L3-lbl_variante": 0.0575,
+      "L3-adv_canonique": 0.0875,
+      "L3-adv_variante": 0.07
+    },
+    "A2-A3_24/25": {
+      "L1a_canonique": 0.0575,
+      "L1a_variante": 0.05,
+      "L2-inv_canonique": 0.065,
+      "L2-inv_variante": 0.0725,
+      "L3-lbl_canonique": 0.0475,
+      "L3-lbl_variante": 0.03,
+      "L3-adv_canonique": 0.035,
+      "L3-adv_variante": 0.0375
+    },
+    "A2_L2inv_var": [
+      0.9375,
+      0.94
+    ],
+    "porte_ok": true,
+    "non_regression_E1": {
+      "L1a_canonique": -0.0008,
+      "L1a_variante": -0.005,
+      "L2-inv_canonique": -0.0033,
+      "L2-inv_variante": 0.3925,
+      "L3-lbl_canonique": -0.0217,
+      "L3-lbl_variante": -0.0117,
+      "L3-adv_canonique": 0.0017,
+      "L3-adv_variante": 0.0025
+    },
+    "A2_A3_partout_positif": true
+  }
+}

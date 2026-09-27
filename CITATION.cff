@@ -13,8 +13,8 @@ authors:
   - family-names: Garrot
     given-names: C.
   - name: "The agent mesh (@ag-1..@ag-5)"
-version: "2026-09-26"
-date-released: "2026-09-26"
+version: "2026-09-27"
+date-released: "2026-09-27"
 license: CC-BY-4.0
 repository-code: "https://github.com/cgarrot/decision-coprocessor-paper"
 keywords:

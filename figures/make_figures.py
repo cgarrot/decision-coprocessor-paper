@@ -320,36 +320,39 @@ def fig06_a1bis():
 # Figure 7 — timeline
 # ---------------------------------------------------------------------------
 def fig07_timeline():
-    fig, ax = new_canvas(13.0, 7.2)
-    title(ax, "Project timeline — 24–26 September 2026 (~48 h of continuous work, 105 commits)")
+    fig, ax = new_canvas(13.2, 8.4)
+    title(ax, "Project timeline — 24–27 September 2026 (~44 h, 141 commits)")
 
     # lanes: (name, y, [(x, label), ...], color)
     lanes = [
-        ("V1", 90, [(6, "P0 bootstrap 12:07"), (16, "P1 data 12:41"), (23, "pilot 13:03"),
-                    (33, "B2 x3 seeds 15:05"), (50, "R/B3/B4 x3 seeds 20:19"),
+        ("V1", 92, [(6, "P0 bootstrap 12:07"), (16, "P1 data 12:41"), (23, "pilot 13:03"),
+                    (33, "B2 x3 seeds 15:05"), (50, "R/B3/B4 x3 20:19"),
                     (60, "gate P5 21:33"), (67, "closed 22:11")], C_ORANGE),
-        ("V2-S", 76, [(72, "E0 23:43"), (77, "E1/E2 23:54"), (83, "E3/E4b 00:26")], C_PURPLE),
-        ("V2-T", 62, [(74, "E5 prep 01:15"), (78, "bench defective"),
-                      (84, "it1-it3 02:24-06:25"), (91, "E5v3-A LoRA"), (96, "closed 10:34")], C_BLUE),
-        ("V2.1", 48, [(14, "protocol 11:40"), (34, "8 benches 2205-2212"), (52, "QA recalc 13:53"),
+        ("V2-S", 80, [(72, "E0 23:43"), (77, "E1/E2 23:54"), (83, "E3/E4b 00:26")], C_PURPLE),
+        ("V2-T", 68, [(74, "E5 prep 01:15"), (78, "bench defective"),
+                      (84, "it1-it3"), (91, "E5v3-A LoRA"), (96, "closed 10:34")], C_BLUE),
+        ("V2.1", 56, [(14, "protocol 11:40"), (34, "8 benches"), (52, "QA recalc"),
                       (66, "depth reversal")], C_GREEN),
-        ("V2.2", 34, [(70, "protocol 14:03"), (74, "A1 FAIL"), (78, "A1-bis PASS"),
-                      (83, "A2 PASS 16:32"), (88, "A3 8/8"), (93, "closed 19:06")], C_RED),
-        ("Audit #3 + C0/C1", 20, [(78, "audit 19:25"), (84, "C0 errata"),
-                                  (88, "C1 attribution 21:39"), (93, "release manifest")], "#6A4FA3"),
-        ("C2 (night)", 6, [(80, "protocol 22:20"), (86, "6 trainings overnight"),
-                           (93, "C2 closed 10:23"), (97, "QA REG-86 10:37")], "#2E8B57"),
+        ("V2.2", 44, [(70, "protocol 14:03"), (74, "A1 FAIL"), (78, "A1-bis"),
+                      (83, "A2 PASS"), (88, "A3 8/8"), (93, "closed 19:06")], C_RED),
+        ("C0/C1/C2", 32, [(78, "audit #3 19:25"), (84, "C0 errata"), (88, "C1 21:39"),
+                          (92, "C2 protocol"), (97, "C2 closed 10:23")], "#6A4FA3"),
+        ("V2.3", 20, [(74, "proposal 11:30"), (80, "E1 12:50"), (86, "E2 19:19"),
+                      (89, "E3 21:10"), (93, "V2.3 closed")], "#0E7490"),
+        ("P2 + E2-bis", 8, [(78, "audit #5 21:25"), (84, "P2 22:01"),
+                            (88, "E2-bis frozen 22:06"), (95, "PASS 05:55"),
+                            (98, "closed 06:12")], "#B45309"),
     ]
     for name, y, events, color in lanes:
-        ax.plot([4, 98], [y, y], color=color, lw=2.4, alpha=0.65, zorder=1)
-        ax.text(2.2, y, name, ha="right", va="center", fontsize=9, weight="bold", color=color)
+        ax.plot([4, 99], [y, y], color=color, lw=2.4, alpha=0.65, zorder=1)
+        ax.text(2.2, y, name, ha="right", va="center", fontsize=8.2, weight="bold", color=color)
         for i, (x, label) in enumerate(events):
-            ax.plot([x], [y], "o", color=color, ms=6, zorder=3)
+            ax.plot([x], [y], "o", color=color, ms=5.5, zorder=3)
             above = (i % 2 == 0)
-            ax.text(x, y + (1.9 if above else -1.9), label, ha="center",
-                    va="bottom" if above else "top", fontsize=6.8, color="#374151")
+            ax.text(x, y + (1.7 if above else -1.7), label, ha="center",
+                    va="bottom" if above else "top", fontsize=6.5, color="#374151")
 
-    ax.text(50, 0.5, "time, 24/09 12:00 -> 26/09 10:37 (not to scale; lanes compressed)",
+    ax.text(50, 0.5, "time, 24/09 12:00 -> 27/09 06:12 (not to scale; lanes compressed)",
             ha="center", fontsize=7.6, color=C_GREY)
     save(fig, "fig07-timeline")
 
@@ -473,6 +476,62 @@ def fig10_confirmation():
     save(fig, "fig10-confirmation")
 
 
+# ---------------------------------------------------------------------------
+# Figure 11 — V2.3 language robustness + E2-bis repair
+# ---------------------------------------------------------------------------
+def fig11_v23_robustness():
+    depths = [0, 1, 2, 3]  # short, p6, p8, p10 (index)
+    ticklabels = ["short", "prof 6", "prof 8", "prof 10"]
+    a2e1_inv = [0.580, 0.270, 0.240, 0.265]
+    a2e2_s22 = [0.957, 0.847, 0.797, 0.797]
+    a2e2_s24 = [0.927, 0.823, 0.753, 0.680]
+    a2e2bis_s26 = [0.980, 0.973, 0.953, 0.930]
+    a2e2bis_s28 = [0.977, 0.940, 0.937, 0.900]
+    a3_e2bis = [0.840, 0.360, 0.250, 0.285]
+    canon = [0.995, 1.000, 0.997, 0.995]
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13.0, 4.9), gridspec_kw={"width_ratios": [1.45, 1]})
+
+    ax1.plot(depths, a2e1_inv, "-o", color=C_RED, lw=2.0, ms=6, label="A2-E1 inversions (frozen) — breaks")
+    ax1.plot(depths, a2e2_s22, "-s", color=C_BLUE, lw=1.8, ms=5, alpha=0.85, label="A2-E2 inversions s22 (mixture)")
+    ax1.plot(depths, a2e2_s24, "-s", color="#6FA8DC", lw=1.8, ms=5, alpha=0.85, label="A2-E2 inversions s24")
+    ax1.plot(depths, a2e2bis_s26, "-D", color=C_GREEN, lw=2.2, ms=6, label="A2-E2bis inversions s26")
+    ax1.plot(depths, a2e2bis_s28, "-D", color="#7CCB8E", lw=2.2, ms=6, label="A2-E2bis inversions s28")
+    ax1.plot(depths, a3_e2bis, "-^", color=C_ORANGE, lw=1.8, ms=5, label="A3-E2bis (direct) inversions")
+    ax1.plot(depths, canon, "--", color=C_GREY, lw=1.6, label="A2 canonical / paraphrases (≈0.99–1.00)")
+    ax1.axhline(0.85, color=C_RED, ls=":", lw=1.2)
+    ax1.text(3.42, 0.86, "gate 0.85", fontsize=7.5, color=C_RED, ha="right")
+    ax1.set_xticks(depths, ticklabels)
+    ax1.set_ylim(0, 1.08)
+    ax1.set_xlabel("chain depth")
+    ax1.set_ylabel("accuracy (inversion rendering)")
+    ax1.set_title("V2.3 → E2-bis: the crossed inversion×depth frontier is pushable with data")
+    ax1.grid(alpha=0.25)
+    ax1.legend(fontsize=6.9, loc="lower left")
+
+    # masses
+    labels = ["E2 (depth 10)", "E2-bis (depth 10)"]
+    inconnu = [0.57, 0.395]
+    terminal = [0.27, 0.575]
+    xs = np.arange(2)
+    ax2.bar(xs - 0.18, inconnu, 0.36, label="UNKNOWN mass", color=C_RED, alpha=0.85)
+    ax2.bar(xs + 0.18, terminal, 0.36, label="correct-terminal mass", color=C_BLUE, alpha=0.85)
+    ax2.axhline(0.25, color=C_RED, ls="--", lw=1.3)
+    ax2.text(1.45, 0.265, "threshold 0.25", fontsize=7.5, color=C_RED, ha="right")
+    for i, (a, b) in enumerate(zip(inconnu, terminal)):
+        ax2.text(i - 0.18, a + 0.015, f"{a:.2f}", ha="center", fontsize=8)
+        ax2.text(i + 0.18, b + 0.015, f"{b:.2f}", ha="center", fontsize=8)
+    ax2.set_xticks(xs, labels, fontsize=8.5)
+    ax2.set_ylim(0, 0.75)
+    ax2.set_ylabel("mass at depth 10")
+    ax2.set_title("Residual leak: reduced, not eliminated (published failure)")
+    ax2.legend(fontsize=8, loc="upper left")
+    ax2.grid(alpha=0.25, axis="y")
+
+    fig.tight_layout()
+    save(fig, "fig11-v23-robustness")
+
+
 if __name__ == "__main__":
     fig01_v1_architecture()
     fig02_v2_executor()
@@ -484,4 +543,5 @@ if __name__ == "__main__":
     fig08_reader()
     fig09_v22_final()
     fig10_confirmation()
+    fig11_v23_robustness()
     print("all figures written to", OUT)

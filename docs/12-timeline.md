@@ -106,7 +106,7 @@ Along the way, **two E0 bugs found and fixed** (pointer not reinjected: ~2-hop c
 | Time | Event |
 |---|---|
 | 19:25 | **Third external audit** (`DECISION-COPROCESSOR-AUDIT-V22-CONFIRMATION.md`, sha d47186ec, 596 lines): positive result acknowledged; 7 scope corrections demanded; C0–C3 programme proposed |
-| 20:05–20:31 | **C0**: scope erratum (NLL wording, Brier naming, parser reconciliation 1.000/1.000, bench status, cost wording, canonical CIs, short-depth claim); public inference audit (**S executor not invoked in A2**); parser+solveur cell measured **1.0000 (3200/3200)**; release manifest; loader impact matrix |
+| 20:05–20:31 | **C0**: scope erratum (NLL wording, Brier naming, parser reconciliation 1.000/1.000, bench status, cost wording, canonical CIs, short-depth claim); public inference audit (**S executor not invoked in A2**); parser+solver cell measured **1.0000 (3200/3200)**; release manifest; loader impact matrix |
 | 20:08–20:51 | Actions closed: R-E tie-break semantics documented (REG-82); R-D CPU/GPU localisation → first divergent stage = backbone h14, ≈0.49 % bf16 drift, decisions stable (REG-83); margins top-2 archived (REG-84) |
 | 21:37–21:39 | **C1 complete** (REG-85): 2×2 same-reader ablation (R0/R1 × hard/soft) → **both factors contribute**; anti-leak 3 layers PASS; complete multiclass Brier (R1 0.0016–0.0119 vs R0 0.30–0.58); budget sweep (R0 leaks, R1 plateaus); toolchain divergence localised to the backbone forward |
 | 22:20–22:31 | **C2 protocol frozen before generation** (`V22_C2_PROTOCOL.md`, sha 6dd53719); fresh benches seeds 2214–2216 with total anti-duplicates; night chain launched (6 trainings) |
@@ -114,4 +114,20 @@ Along the way, **two E0 bugs found and fixed** (pointer not reinjected: ~2-hop c
 | 26/09 10:23 | **C2 closed (commit e7e7165b)**: **C2-a PASS** — Δ(A2−A3) pooled deep +65.30/+64.05/+68.14 (mean **+65.83**, CI low > 0 ×3), dispersion ≤0.33 pt; **C2-b largely successful** — blind extrapolation 0.9867 vs control 0.2710 |
 | 10:25–10:37 | **QA REG-86** validates both verdicts; reserves closed: exact incident cause, top-2 margins captured on the 8 evals, “pooled” convention named; micro-label corrected |
 
-**Final state:** 20 commits in V1, 85 in V2 (**105 total**), ≈48 h of continuous work (24/09 10:08 → 26/09 10:37), every gate and every QA reserve of every programme closed. Remaining declared milestones (out of scope, Lot C3): UNKNOWN/partially observed worlds, harder benches than the B5/B6 saturation, one extension axis (renderings, multi-question contexts, larger graphs), OOD generalisation.
+## Act IX — V2.3 language robustness + P2 diagnosis + E2-bis (09-26 ≈11:30 → 09-27 06:12, closed)
+
+| Time | Event |
+|---|---|
+| 11:16–11:32 | **Fourth audit** (C2 amendments → V2.3, `DECISION-COPROCESSOR-REVUE-C2-AMENDEMENTS-V23.md`) → V2.3 proposal frozen (separate roles P_eval/V_sem/Renderer/PublicAdapter, no circular round-trip, separate linguistic levels, E2 on separate GO) |
+| 12:10–12:52 | **E1** (frozen weights, 48 evals): L1-a paraphrases **1.000 ×3** PASS; **L2-inv inversions A2 breaks 0.545** (A2 < A3 0.72; parser variant coverage 0.00); L3-lbl Δ≈0; QA kill-switch → parser/mapping fixes, parse_state_v2 restored |
+| 19:19 | **E2 PASS**: retraining on the frozen 25/30/45 mixture recovers inversions **0.9375/0.94**; A2 > A3 on 16/16; lexical cost −1/−2 pts published (QA REG-91) |
+| 19:20–21:10 | **E3** (language×depth, 96 evals, fresh benches): canonical/paraphrases 0.99–1.00 all depths; **crossed inversion×depth only partial 0.68 at depth 10**; A3 collapsed (QA REG-92); V2.3 final report |
+| 21:25 | **Fifth audit** (`DECISION-COPROCESSOR-AUDIT-V23-DIAGNOSTIC-V24.md`, 580 lines): preserve the result, diagnose the crossed limit before V2.4; H1–H4, 9 formulation corrections, diagnostic protocol |
+| 21:39–21:50 | **P0/P0bis**: anti-overwrite guards (silent refusal + explicit `FORCE_EVAL`); tag-collision losses restored — **24 lost evals replayed, 120/120**; **two seeds per path published** (s22 0.957→0.797, s24 0.927→0.680 at depth 10) |
+| 21:50–22:07 | **P2 diagnosis** (pre-registered, no training): `p(edge|inv)` constant 0.845–0.854 / 0.819–0.839; terminal 0.51→0.27, **UNKNOWN 0.38→0.57**; **H-A partially supported** (O1 failed, fit violated), H-B not supported (V4 unrun), H-C rejected; E2-bis recommended |
+| 22:06 | **E2-bis protocol frozen** (`V23_E2BIS_PROTOCOL.md`, sha 4f0677af…): mixture 25/30/45, thresholds prefixed, short-only selection; night chain launched |
+| 27/09 05:55 | **E2-bis PASS COUVERTURE** (2 seeds): inv×p10 **0.930 / 0.900** (gate ≥0.85), non-regression total, A3 0.24–0.29; residual UNKNOWN mass 0.38–0.41 (**mechanistic threshold ≤0.25 failed, published**) |
+| 06:09 | **Final documentary audit** (`AUDIT-CLOTURE-FINALE…`): **“CLOS AVEC RÉSIDUS”** — 5 blocking documentary residuals (B1–B5), no new experiment required; scope/correction list (P2 reserves, “data ceiling” not established, global formulations bounded) |
+| 06:12 | **E2-bis requalified EXTRAPOLATION AVEUGLE** (data-proven: mixture + selection only depths 1–4); **canonical verdicts** (`V23_CANONICAL_VERDICTS.md`, REG-74→94) become the source of truth; V2.4 in user arbitration |
+
+**Final state:** 20 commits in V1, 121 in V2 (**141 total**), ≈44 h of continuous work (24/09 10:08 → 27/09 06:12). All programmes closed: V1 · V2 (S demonstrated, T local failure) · V2.1 (depth reversal) · V2.2 (architectural superiority, router bound, costs) · C0/C1/C2 (errata, attribution, confirmation, blind extrapolation) · V2.3 (language robustness map) · P2 (mass-leak diagnosis) · E2-bis (depth-10 inversions 0.90–0.93, blind, residual leak). Documentary closure remains **“with residuals”** (five traceability items, no new experiment). V2.4 is in user arbitration.

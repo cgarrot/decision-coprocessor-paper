@@ -1,0 +1,172 @@
+{
+  "pairing": {
+    "n_groupes": 400,
+    "graphes_identiques": 400,
+    "textes_differents": 400,
+    "profondeurs": {
+      "1": 100,
+      "2": 100,
+      "3": 100,
+      "4": 100
+    }
+  },
+  "parser": {
+    "canonique": {
+      "n": 400,
+      "parsed": 400,
+      "coverage": 1.0,
+      "agree_with_private": 400,
+      "accuracy_if_parsed": 1.0,
+      "inconnu_reasons": {},
+      "label": "diagnostic — contrôle d'ingénierie (p), hors benchmark (V21_PROTOCOL.md §0.3)"
+    },
+    "variante": {
+      "n": 400,
+      "parsed": 400,
+      "coverage": 1.0,
+      "agree_with_private": 400,
+      "accuracy_if_parsed": 1.0,
+      "inconnu_reasons": {},
+      "label": "diagnostic — contrôle d'ingénierie (p), hors benchmark (V21_PROTOCOL.md §0.3)"
+    }
+  },
+  "seeds": {
+    "s17": {
+      "a2_canonique": {
+        "acc": 0.9975,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a2_variante": {
+        "acc": 1.0,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a3_canonique": {
+        "acc": 0.935,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a3_variante": {
+        "acc": 0.9375,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "Q2_appariee_A2": {
+        "delta": 0.0025,
+        "ic95": [
+          0.0,
+          0.0075
+        ],
+        "n": 400
+      },
+      "Q3_variante": {
+        "delta": 0.0625,
+        "a2": 1.0,
+        "a3": 0.9375
+      }
+    },
+    "s18": {
+      "a2_canonique": {
+        "acc": 0.9975,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a2_variante": {
+        "acc": 1.0,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a3_canonique": {
+        "acc": 0.9325,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a3_variante": {
+        "acc": 0.9475,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "Q2_appariee_A2": {
+        "delta": 0.0025,
+        "ic95": [
+          0.0,
+          0.0075
+        ],
+        "n": 400
+      },
+      "Q3_variante": {
+        "delta": 0.05249999999999999,
+        "a2": 1.0,
+        "a3": 0.9475
+      }
+    },
+    "s19": {
+      "a2_canonique": {
+        "acc": 1.0,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a2_variante": {
+        "acc": 1.0,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a3_canonique": {
+        "acc": 0.925,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "a3_variante": {
+        "acc": 0.9675,
+        "n": 400,
+        "marges_presentes": true
+      },
+      "Q2_appariee_A2": {
+        "delta": 0.0,
+        "ic95": [
+          0.0,
+          0.0
+        ],
+        "n": 400
+      },
+      "Q3_variante": {
+        "delta": 0.03249999999999997,
+        "a2": 1.0,
+        "a3": 0.9675
+      }
+    }
+  },
+  "interdits_L1a": {
+    "pronoms": 105,
+    "negation": 680
+  },
+  "verdicts": {
+    "Q1": {
+      "plancher_L1": 0.9482999999999999,
+      "a2_variante": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "conforme": true
+    },
+    "Q2": {
+      "seuil_drop_L1_pts": 10.0,
+      "drop_pts": [
+        -0.25,
+        -0.25,
+        -0.0
+      ],
+      "conforme": true
+    },
+    "Q3": {
+      "deltas_pts": [
+        6.25,
+        5.249999999999999,
+        3.2499999999999973
+      ],
+      "note": "descriptif au L1 (primaire Q2 au L2)"
+    }
+  }
+}

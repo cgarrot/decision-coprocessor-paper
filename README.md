@@ -2,8 +2,8 @@
 
 **A two-part empirical study of multi-step decision making with small language backbones: a latent recurrent sidecar (V1, negative result) and a supervised transition executor (V2, mechanism demonstrated; decomposition initially refuted under fair comparison, then fixed and re-validated; interface ablations closed).**
 
-> **Status:** private research compendium, final snapshot of **2026-09-26**.
-> **All programs are closed** — V1, V2, V2.1, V2.2 (A1, A1-bis, A2, A3, router bound, costs) and the **confirmation programme C0/C1/C2** (third-audit errata, same-reader attribution, three-seed confirmation, blind extrapolation) — every gate and every QA reserve closed (REG-86).
+> **Status:** private research compendium, final snapshot of **2026-09-27 06:12**.
+> **All programmes are closed** — V1, V2, V2.1, V2.2, the confirmation programme C0/C1/C2, and V2.3/P2/E2-bis — every gate and QA reserve closed (REG-86, REG-87→94). The canonical verdicts document (`V23_CANONICAL_VERDICTS.md`, QA) **is the source of truth and replaces historical formulations**; the final documentary audit is **“closed with residuals”** (five traceability items, no new experiment required — see [`docs/14`](docs/14-v23-language-robustness.md)).
 > All quantitative claims in this repository are traced to versioned reports, hash-pinned configs and archived predictions in the two source repositories.
 
 ---
@@ -22,7 +22,7 @@ The two working repositories remain the source of truth for raw runs and per-ite
 | Repository | Role | State |
 |---|---|---|
 | `decision-coprocessor/` | V1: frozen-backbone + recurrent sidecar | closed, negative result published |
-| `decision-coprocessor-v2/` | V2 / V2.1 / V2.2 / confirmation C0-C1-C2 | **all closed** (85 commits) |
+| `decision-coprocessor-v2/` | V2 / V2.1 / V2.2 / C0-C1-C2 / V2.3-P2-E2-bis | **all closed** (121 commits) |
 
 ---
 
@@ -51,10 +51,15 @@ The two working repositories remain the source of truth for raw runs and per-ite
 | V1 | Latency / VRAM (L512, batch 1) | B2 46.18 ms · R4 50.04 ms · 1.199 GiB reserved |
 | V2-S | Transition executor, E1–E4 | trajectory 1.000 everywhere; zero-shot depths 6/8/10/16 = 1.000; stress 399/399 |
 | V2-T | Adapted reader (LoRA, dev n = 411) | edge F1 **0.9278** · validity 0.917 · solve **0.7616** (4/4 gates, first time) |
-| V2-T | Adapted direct vs pipeline (short chains) | **1.000 vs 0.762** · Δ **−23.84 pts** [−28.33; −19.60] → experience stop |
+| V2-T | Adapted direct vs pipeline (short chains) | **1.000 vs 0.762** · Δ **−23.84 pts** [−28.19; −19.76] → experience stop |
 | V2.1 | Depth-8 bench (n = 400, frozen) | direct 0.2800 · pipeline 0.5975 · propagation 0.8525 |
 | V2.2 | A1-bis propagation, zero training | c_prop **0.83–0.86 invariant in depth**; Δ vs discretisation IC > 0 on 8/8 |
-| **V2.2** | **A2 propagation, distributionally trained** | **c_prop 0.995–1.000 on 8/8 held-out benches**; Δ vs direct **+5.75 (short) … +71.75 (depth 8)**, IC > 0 8/8; NLL 0.0044–0.0294 |
+| **V2.2** | **A2 propagation, distributionally trained** | **c_prop 0.995–1.000 on 8/8 held-out benches**; Δ vs direct **+5.75 (short) … +71.75 (depth 8)**, IC > 0 8/8 |
+| **C2-a / C2-b** | **3-seed confirmation + blind extrapolation** | **+65.83 pts mean** (dispersion ≤0.33 pt); A2-blind pooled deep **0.9867** vs control 0.271 |
+| **V2.3 E1** | Paraphrases / inversions / lexical, frozen weights | paraphrases **1.000** (PASS); **inversions 0.545** (A2 breaks; A3 0.72); lexical Δ≈0 |
+| **V2.3 E2/E3** | Retraining + language×depth | inversions recovered **0.9375/0.94**; canonical/paraphrases 0.99–1.00 all depths; **crossed inversion×depth partial 0.68** at depth 10 |
+| **E2-bis** | Inversions at varied depths in the mixture (2 seeds) | inv×depth-10 **0.930 / 0.900** (gate ≥0.85 PASS); A3 0.24–0.29; **UNKNOWN mass 0.38–0.41 > 0.25 → mechanistic criterion FAILED (published)**; data-proven **blind extrapolation** |
+| **P2** | Failure diagnosis (no training) | `p(edge|inv)` **constant** 0.82–0.85; terminal 0.51→0.27, **UNKNOWN 0.38→0.57**; H-A partial, H-B not supported (V4 unrun), H-C rejected |
 | **V2.2** | **A3 equal-supervision direct control** | depth 0.2475–0.2825 → **Δ(A2−A3) +3.25 … +75.0 pts, IC low > 0 8/8** → architectural superiority |
 | **C1** | **Same-reader 2×2 (R0/R1 × hard/soft)** | both factors contribute; soft > hard at fixed reader (+14…+22 pts); complete Brier R1 0.0016–0.0119 vs R0 0.30–0.58; anti-leak 3 layers PASS |
 | **C2-a** | **3-seed confirmation (fresh benches/seeds)** | Δ(A2−A3) pooled deep **+65.83 pts mean** (s17 +65.30 · s18 +64.05 · s19 +68.14, CI low > 0), **dispersion ≤0.33 pt** |
@@ -71,10 +76,11 @@ The two working repositories remain the source of truth for raw runs and per-ite
 1. **[`paper/PAPER.md`](paper/PAPER.md)** — the full paper (renders directly on GitHub, figures included). LaTeX version: [`paper/main.tex`](paper/main.tex).
 2. **[`docs/00-overview.md`](docs/00-overview.md)** — 10-minute overview of the whole project.
 3. **[`docs/12-timeline.md`](docs/12-timeline.md)** — what happened, when, with which evidence.
-4. **[`docs/07-v22-interface-ablations.md`](docs/07-v22-interface-ablations.md)** — the final resolution: A1 → A2 → A3 → router → costs → audit #3 → C1 attribution → C2 confirmation.
-5. **[`docs/09-methodology.md`](docs/09-methodology.md)** — pre-registration, independent QA, sealed test sets, fairness rules.
-6. **[`docs/10-results-reference.md`](docs/10-results-reference.md)** — every published number with its source report.
-7. **[`docs/11-reproducibility.md`](docs/11-reproducibility.md)** — where the code/configs/hashes live.
+4. **[`docs/07-v22-interface-ablations.md`](docs/07-v22-interface-ablations.md)** — V2.2 + the confirmation programme (A1 → A2 → A3 → router → costs → audit #3 → C1 → C2).
+5. **[`docs/14-v23-language-robustness.md`](docs/14-v23-language-robustness.md)** — the final act: language robustness (V2.3), failure diagnosis (P2), depth repair (E2-bis), canonical verdicts and documentary residuals.
+6. **[`docs/09-methodology.md`](docs/09-methodology.md)** — pre-registration, independent QA, sealed test sets, fairness rules.
+7. **[`docs/10-results-reference.md`](docs/10-results-reference.md)** — every published number with its source report.
+8. **[`docs/11-reproducibility.md`](docs/11-reproducibility.md)** — where the code/configs/hashes live.
 
 ---
 

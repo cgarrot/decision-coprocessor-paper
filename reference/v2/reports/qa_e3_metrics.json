@@ -1,0 +1,404 @@
+{
+  "data_eval": "data/E3_eval.jsonl",
+  "n_eval": 255,
+  "PASS_e3bis": {
+    "autonomous": {
+      "mode": "autonomous",
+      "n_lines": 255,
+      "n_used": 255,
+      "n_missing_targets": 0,
+      "n_missing_states": 0,
+      "final_from_self_report": 0,
+      "final_recalculable_independamment": true,
+      "complete_trajectory_accuracy": 1.0,
+      "next_state_accuracy": 1.0,
+      "next_state_denominator": 704,
+      "conditional_transition_accuracy": 1.0,
+      "conditional_transition_denominator": 704,
+      "final_answer_accuracy": 1.0,
+      "final_answer_n": 255,
+      "first_divergence_histogram": {
+        "None": 255
+      },
+      "by_depth": {
+        "1": {
+          "n": 17,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        },
+        "2": {
+          "n": 95,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        },
+        "3": {
+          "n": 75,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        },
+        "4": {
+          "n": 68,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        }
+      },
+      "final_by_answer_index": {
+        "index<=9": {
+          "n": 187,
+          "accuracy": 1.0
+        },
+        "index>9": {
+          "n": 68,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "teacher": {
+      "mode": "teacher",
+      "n_lines": 255,
+      "n_used": 255,
+      "n_missing_targets": 0,
+      "n_missing_states": 0,
+      "final_from_self_report": 0,
+      "final_recalculable_independamment": true,
+      "complete_trajectory_accuracy": 1.0,
+      "next_state_accuracy": 1.0,
+      "next_state_denominator": 704,
+      "conditional_transition_accuracy": 1.0,
+      "conditional_transition_denominator": 704,
+      "final_answer_accuracy": 1.0,
+      "final_answer_n": 255,
+      "first_divergence_histogram": {
+        "None": 255
+      },
+      "by_depth": {
+        "1": {
+          "n": 17,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        },
+        "2": {
+          "n": 95,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        },
+        "3": {
+          "n": 75,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        },
+        "4": {
+          "n": 68,
+          "complete_trajectory": 1.0,
+          "final_answer": 1.0
+        }
+      },
+      "final_by_answer_index": {
+        "index<=9": {
+          "n": 187,
+          "accuracy": 1.0
+        },
+        "index>9": {
+          "n": 68,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "per_step_autonomous": {
+      "0": 1.0,
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0,
+      "4": 1.0
+    },
+    "auditability": {
+      "checked": 255,
+      "mismatches": 0,
+      "missing_fields": 0
+    },
+    "sweep_k": {
+      "0": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 0.18823529411764706,
+        "response_change_vs_prev": null
+      },
+      "1": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 0.27058823529411763,
+        "response_change_vs_prev": 0.7803921568627451
+      },
+      "2": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 0.5215686274509804,
+        "response_change_vs_prev": 0.7215686274509804
+      },
+      "4": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 1.0,
+        "response_change_vs_prev": 0.47843137254901963
+      },
+      "8": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 1.0,
+        "response_change_vs_prev": 0.0
+      },
+      "16": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 1.0,
+        "response_change_vs_prev": 0.0
+      }
+    },
+    "direct_vs_executor": {
+      "n": 255,
+      "both_correct": 52,
+      "correction": 203,
+      "degradation": 0,
+      "both_wrong": 0,
+      "net": 203,
+      "direct_accuracy": 0.20392156862745098,
+      "executor_accuracy": 1.0
+    }
+  },
+  "FAIL_e3": {
+    "autonomous": {
+      "mode": "autonomous",
+      "n_lines": 255,
+      "n_used": 255,
+      "n_missing_targets": 0,
+      "n_missing_states": 0,
+      "final_from_self_report": 0,
+      "final_recalculable_independamment": true,
+      "complete_trajectory_accuracy": 0.00784313725490196,
+      "next_state_accuracy": 0.10653409090909091,
+      "next_state_denominator": 704,
+      "conditional_transition_accuracy": 0.09375,
+      "conditional_transition_denominator": 288,
+      "final_answer_accuracy": 0.22745098039215686,
+      "final_answer_n": 255,
+      "first_divergence_histogram": {
+        "1": 231,
+        "2": 20,
+        "3": 2,
+        "None": 2
+      },
+      "by_depth": {
+        "1": {
+          "n": 17,
+          "complete_trajectory": 0.058823529411764705,
+          "final_answer": 0.17647058823529413
+        },
+        "2": {
+          "n": 95,
+          "complete_trajectory": 0.010526315789473684,
+          "final_answer": 0.23157894736842105
+        },
+        "3": {
+          "n": 75,
+          "complete_trajectory": 0.0,
+          "final_answer": 0.16
+        },
+        "4": {
+          "n": 68,
+          "complete_trajectory": 0.0,
+          "final_answer": 0.3088235294117647
+        }
+      },
+      "final_by_answer_index": {
+        "index<=9": {
+          "n": 187,
+          "accuracy": 0.2620320855614973
+        },
+        "index>9": {
+          "n": 68,
+          "accuracy": 0.1323529411764706
+        }
+      }
+    },
+    "teacher": {
+      "mode": "teacher",
+      "n_lines": 255,
+      "n_used": 255,
+      "n_missing_targets": 0,
+      "n_missing_states": 0,
+      "final_from_self_report": 0,
+      "final_recalculable_independamment": true,
+      "complete_trajectory_accuracy": 0.00784313725490196,
+      "next_state_accuracy": 0.07386363636363637,
+      "next_state_denominator": 704,
+      "conditional_transition_accuracy": 0.09246575342465753,
+      "conditional_transition_denominator": 292,
+      "final_answer_accuracy": 0.24313725490196078,
+      "final_answer_n": 255,
+      "first_divergence_histogram": {
+        "1": 231,
+        "2": 20,
+        "3": 2,
+        "None": 2
+      },
+      "by_depth": {
+        "1": {
+          "n": 17,
+          "complete_trajectory": 0.058823529411764705,
+          "final_answer": 0.7058823529411765
+        },
+        "2": {
+          "n": 95,
+          "complete_trajectory": 0.010526315789473684,
+          "final_answer": 0.18947368421052632
+        },
+        "3": {
+          "n": 75,
+          "complete_trajectory": 0.0,
+          "final_answer": 0.18666666666666668
+        },
+        "4": {
+          "n": 68,
+          "complete_trajectory": 0.0,
+          "final_answer": 0.2647058823529412
+        }
+      },
+      "final_by_answer_index": {
+        "index<=9": {
+          "n": 187,
+          "accuracy": 0.18181818181818182
+        },
+        "index>9": {
+          "n": 68,
+          "accuracy": 0.4117647058823529
+        }
+      }
+    },
+    "per_step_autonomous": {
+      "0": 1.0,
+      "1": 0.09411764705882353,
+      "2": 0.09663865546218488,
+      "3": 0.06993006993006994,
+      "4": 0.2647058823529412
+    },
+    "auditability": {
+      "checked": 255,
+      "mismatches": 0,
+      "missing_fields": 0
+    },
+    "sweep_k": {
+      "0": {
+        "n": 255,
+        "state_correct": 1.0,
+        "prefix_states_correct": 1.0,
+        "final_accuracy": 0.2784313725490196,
+        "response_change_vs_prev": null
+      },
+      "1": {
+        "n": 255,
+        "state_correct": 0.09411764705882353,
+        "prefix_states_correct": 0.09411764705882353,
+        "final_accuracy": 0.27450980392156865,
+        "response_change_vs_prev": 0.6
+      },
+      "2": {
+        "n": 255,
+        "state_correct": 0.10196078431372549,
+        "prefix_states_correct": 0.01568627450980392,
+        "final_accuracy": 0.22745098039215686,
+        "response_change_vs_prev": 0.5333333333333333
+      },
+      "4": {
+        "n": 255,
+        "state_correct": 0.1843137254901961,
+        "prefix_states_correct": 0.00784313725490196,
+        "final_accuracy": 0.2235294117647059,
+        "response_change_vs_prev": 0.1568627450980392
+      },
+      "8": {
+        "n": 255,
+        "state_correct": 0.19215686274509805,
+        "prefix_states_correct": 0.00784313725490196,
+        "final_accuracy": 0.2235294117647059,
+        "response_change_vs_prev": 0.24313725490196078
+      },
+      "16": {
+        "n": 255,
+        "state_correct": 0.19215686274509805,
+        "prefix_states_correct": 0.00784313725490196,
+        "final_accuracy": 0.22745098039215686,
+        "response_change_vs_prev": 0.08627450980392157
+      }
+    },
+    "direct_vs_executor": {
+      "n": 255,
+      "both_correct": 25,
+      "correction": 33,
+      "degradation": 38,
+      "both_wrong": 159,
+      "net": -5,
+      "direct_accuracy": 0.24705882352941178,
+      "executor_accuracy": 0.22745098039215686
+    }
+  },
+  "registry": {
+    "entries": [
+      {
+        "id": "E3-official-concat-s0",
+        "event": "register",
+        "status": "registered",
+        "config": "configs/e3.yaml",
+        "config_sha256_registered": "22471646eef67413373096180f7c661bfcd9f3fd1dea0a8d3b78df9a4780ff9d",
+        "config_sha256_actual": "22471646eef67413373096180f7c661bfcd9f3fd1dea0a8d3b78df9a4780ff9d",
+        "config_hash_ok": true
+      },
+      {
+        "id": "E3-official-tied-s0",
+        "event": "register",
+        "status": "registered",
+        "config": "configs/e3_tied.yaml",
+        "config_sha256_registered": "babd71a2de94040eba1f34521ff8545a6416532f8c5d5e4b21585346a603da18",
+        "config_sha256_actual": "babd71a2de94040eba1f34521ff8545a6416532f8c5d5e4b21585346a603da18",
+        "config_hash_ok": true
+      },
+      {
+        "id": "E3-official-concat-s0",
+        "event": "start",
+        "status": "running"
+      },
+      {
+        "id": "E3-official-concat-s0",
+        "event": "finish",
+        "status": "fail"
+      },
+      {
+        "id": "E3-official-concat-lr1e3-s0",
+        "event": "register",
+        "status": "registered",
+        "config": "configs/e3bis.yaml",
+        "config_sha256_registered": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "config_sha256_actual": "d816e1dea56ce97149fbb3543c8970b59ba298fd6af1be48c85e7cafbaea8cc6",
+        "config_hash_ok": false
+      },
+      {
+        "id": "E3-official-concat-lr1e3-s0",
+        "event": "start",
+        "status": "running"
+      },
+      {
+        "id": "E3-official-concat-lr1e3-s0",
+        "event": "finish",
+        "status": "pass"
+      }
+    ],
+    "config_hash_mismatches": [
+      "E3-official-concat-lr1e3-s0"
+    ]
+  }
+}

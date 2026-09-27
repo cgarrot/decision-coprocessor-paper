@@ -105,7 +105,7 @@ Same recipe: 0.552@100 → 0.973@200 → 0.998@600 → **1.000@1000 (best)** →
 | (cn) naked | 0.8200 | 0.840 / 0.632 / 1.000 |
 | **(d\|LoRA) direct** | **1.0000** | **0.996 / 0.996 / 0.988** |
 
-**Δ(c − d) = −23.84 pts, CI95 [−28.33 ; −19.60] → issue (iii), definitive.**
+**Δ(c − d) = −23.84 pts, CI95 [−28.19 ; −19.76] → issue (iii), definitive.**
 
 - P+ fails (pipeline distractor stability 0.588 < 0.80).
 - D− fails (the direct path is causally superior).

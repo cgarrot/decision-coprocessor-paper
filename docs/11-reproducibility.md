@@ -5,7 +5,7 @@
 | Repo | Commits | Status | Contents |
 |---|---:|---|---|
 | `decision-coprocessor/` | 20 | closed | V1 code, data generators, 53,500-example corpus, runs, 66 prediction files, final report, bundle |
-| `decision-coprocessor-v2/` | 85 | **closed** (V2, V2.1, V2.2, confirmation C0/C1/C2) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, all run archives |
+| `decision-coprocessor-v2/` | 121 | **closed** (V2, V2.1, V2.2, C0/C1/C2, V2.3/P2/E2-bis) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, all run archives |
 
 Both are local Git repositories (no remote at snapshot). This compendium is the public-facing entry point; core code is snapshotted under [`reference/`](../reference/) with provenance.
 
@@ -64,6 +64,19 @@ scripts/{qa_c1_replay.py, qa_c2_review.py, qa_diff_stages.py, run_c1_complement.
 ```
 The A2 public inference path (`MemoryExtractor.extract → propagation → answer`) is published in `v22_public_inference_audit.md` and the release manifest; **the S executor is not invoked**.
 
+### V2.3 / P2 / E2-bis archives (`decision-coprocessor-v2/`)
+```
+V23_CANONICAL_VERDICTS.md   QA canonical verdicts, REG-74→94 (source of truth)
+V23_PROPOSAL.md             V2.3 scope (frozen)
+V23_P2_PROTOCOL.md          P2 pre-registration (cpu, no training)
+V23_E2BIS_PROTOCOL.md       E2-bis pre-registration (mixture 25/30/45)
+reports/v23_final.md        V2.3 + P2 + E2-bis consolidated report
+reports/{v23_e1a_,v23_e1_l2l3_,v23_e2_,v23_e3_}qa_review.md
+reports/qa_{e1a,e1_l2l3,e2,e3,e2bis}_metrics.json
+predictions/{p_cell_L2-inv,p_cell_L3-lbl,p_cell_L3-adv}.json
+```
+Final documentary audit and fifth audit live at the workspace top level (see `reference/audits/`).
+
 ## 4. Registry and provenance
 
 - `experiment_registry.jsonl` — append-only: `id`, stage, config sha256, start/finish, status (`registered` / `running` / `pass` / `fail` / `blocked` / annotations), 160+ entries.
@@ -105,7 +118,7 @@ Ground rules: scripts committed **before** use; config hashed and registered **b
 - **sealed sets are absent by design**: `E5_eval` (1007) and `E5v2_eval` (1107) were never generated/archived; no reproduction can open them (this is a feature);
 - **adaptive campaigns**: V2-T and V2.1 used dev/selection data for checkpoint choices; reproducing the exact best checkpoints requires the same data and selection code, which is versioned;
 - **thermal/laptop**: V1 latency figures come from a warm second pass on a laptop; they are not transposable to server hardware;
-- **V2.2 and confirmation archives** are the authoritative status for A1/A1-bis/A2/A3, the router bound, the cost measurements, the C1 attribution and the C2 confirmation; all registry entries carry `done` / `qa_validated` annotations.
+- **V2.3 / P2 / E2-bis archives** and the **canonical verdicts** (`V23_CANONICAL_VERDICTS.md`) are the authoritative status for the final programme; the canonical document replaces historical formulations, and the final documentary audit lists the remaining traceability residuals.
 
 ## 7. What a reviewer can verify in under an hour
 

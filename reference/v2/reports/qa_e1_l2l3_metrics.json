@@ -1,0 +1,363 @@
+{
+  "cells": {
+    "L2-inv": {
+      "n_groupes": 400,
+      "graphes_identiques": 400,
+      "usage_tags": {
+        "eval_only": 400
+      },
+      "parser": {
+        "canonique": {
+          "coverage": 1.0,
+          "accuracy_if_parsed": 1.0
+        },
+        "variante": {
+          "coverage": 0.0,
+          "accuracy_if_parsed": null
+        }
+      },
+      "seeds": {
+        "17": {
+          "a2_canonique": {
+            "acc": 0.995,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.545,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.94,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.735,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.45,
+            "ic95": [
+              -0.5,
+              -0.4025
+            ]
+          },
+          "Q3_delta_A2_A3_variante": -0.18999999999999995
+        },
+        "18": {
+          "a2_canonique": {
+            "acc": 1.0,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.545,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.95,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.7,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.455,
+            "ic95": [
+              -0.5025,
+              -0.4075
+            ]
+          },
+          "Q3_delta_A2_A3_variante": -0.15499999999999992
+        },
+        "19": {
+          "a2_canonique": {
+            "acc": 1.0,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.545,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.9475,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.7225,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.455,
+            "ic95": [
+              -0.5025,
+              -0.4075
+            ]
+          },
+          "Q3_delta_A2_A3_variante": -0.1775
+        }
+      }
+    },
+    "L3-lbl": {
+      "n_groupes": 400,
+      "graphes_identiques": 0,
+      "usage_tags": {
+        "eval_only": 400
+      },
+      "parser": {
+        "canonique": {
+          "coverage": 0.9825,
+          "accuracy_if_parsed": 1.0
+        },
+        "variante": {
+          "coverage": 0.975,
+          "accuracy_if_parsed": 1.0
+        }
+      },
+      "seeds": {
+        "17": {
+          "a2_canonique": {
+            "acc": 0.9725,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.9775,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.91,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.9125,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": 0.005,
+            "ic95": [
+              -0.015,
+              0.025
+            ]
+          },
+          "Q3_delta_A2_A3_variante": 0.06500000000000006
+        },
+        "18": {
+          "a2_canonique": {
+            "acc": 0.96,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.9325,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.925,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.885,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.0275,
+            "ic95": [
+              -0.0575,
+              0.0025
+            ]
+          },
+          "Q3_delta_A2_A3_variante": 0.04749999999999999
+        },
+        "19": {
+          "a2_canonique": {
+            "acc": 0.9825,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.975,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.915,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.9275,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.0075,
+            "ic95": [
+              -0.0275,
+              0.0125
+            ]
+          },
+          "Q3_delta_A2_A3_variante": 0.04749999999999999
+        }
+      }
+    },
+    "L3-adv": {
+      "n_groupes": 400,
+      "graphes_identiques": 400,
+      "usage_tags": {
+        "adversarial_separate": 400
+      },
+      "parser": {
+        "canonique": {
+          "coverage": 1.0,
+          "accuracy_if_parsed": 1.0
+        },
+        "variante": {
+          "coverage": 1.0,
+          "accuracy_if_parsed": 1.0
+        }
+      },
+      "seeds": {
+        "17": {
+          "a2_canonique": {
+            "acc": 0.995,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 1.0,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.935,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.9475,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": 0.005,
+            "ic95": [
+              0.0,
+              0.0125
+            ]
+          },
+          "Q3_delta_A2_A3_variante": 0.05249999999999999
+        },
+        "18": {
+          "a2_canonique": {
+            "acc": 1.0,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.9975,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.93,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.9325,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.0025,
+            "ic95": [
+              -0.0075,
+              0.0
+            ]
+          },
+          "Q3_delta_A2_A3_variante": 0.06500000000000006
+        },
+        "19": {
+          "a2_canonique": {
+            "acc": 1.0,
+            "n": 400,
+            "marges": true
+          },
+          "a2_variante": {
+            "acc": 0.995,
+            "n": 400,
+            "marges": true
+          },
+          "a3_canonique": {
+            "acc": 0.945,
+            "n": 400,
+            "marges": true
+          },
+          "a3_variante": {
+            "acc": 0.9475,
+            "n": 400,
+            "marges": true
+          },
+          "Q2_A2_par_item": {
+            "delta": -0.005,
+            "ic95": [
+              -0.0125,
+              0.0
+            ]
+          },
+          "Q3_delta_A2_A3_variante": 0.04749999999999999
+        }
+      }
+    }
+  },
+  "limites_512": {
+    "L2-inv-canonique": {
+      "direct_max": 387,
+      "reader_max": 354,
+      "reader_over512": 0
+    },
+    "L2-inv-variante": {
+      "direct_max": 385,
+      "reader_max": 349,
+      "reader_over512": 0
+    },
+    "L3-lbl-canonique": {
+      "direct_max": 443,
+      "reader_max": 403,
+      "reader_over512": 0
+    },
+    "L3-lbl-variante": {
+      "direct_max": 439,
+      "reader_max": 399,
+      "reader_over512": 0
+    },
+    "L3-adv-canonique": {
+      "direct_max": 386,
+      "reader_max": 353,
+      "reader_over512": 0
+    },
+    "L3-adv-variante": {
+      "direct_max": 395,
+      "reader_max": 358,
+      "reader_over512": 0
+    }
+  }
+}

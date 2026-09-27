@@ -104,7 +104,13 @@
 
 **Lesson.** A positive result is not finished when it passes its gates; it is finished when its *wording* matches its protocol and its *gain* is attributed to a mechanism by a controlled ablation on identical outputs. Errata that change no number are part of the science — and an audit that forces them is doing its job. Conversely: never silently rewrite old scores; a correction that changes a prediction creates a new, identified version.
 
-## 16. What we would do differently
+## 16. A result can be closed experimentally and still be open documentary
+
+**Episode.** The final inspection returned **“CLOS AVEC RÉSIDUS”**: the experimental state (all thresholds prefixed, all QA verdicts, mass leak published as a failed mechanistic objective) was accepted, but five **traceability** residuals blocked a “no-residual” certification — an E2-bis domain wording contradiction (solved by the data-proven requalification to *blind extrapolation*), an incomplete multi-criteria verdict hierarchy, unpropagated P2 QA reserves, an unsettled release inventory (83 evaluated directories vs 76 announced), and an unfinished parser/adapter flow description. None required a new experiment; all required assembling and qualifying existing artefacts.
+
+**Lesson.** “Finished” has two layers: the science (experiments stopped, verdicts published, negatives kept) and the record (verdict → authoritative files → code → weights → data → environment → command → exclusions, atomically archived). A project can legitimately stop on the first while the second remains open — and the honest label is *closed with residuals*, not *fully certified*. Plan the record as a deliverable, not as a by-product: one canonical verdict document that makes faith and explicitly replaces historical formulations is worth more than a hundred scattered reports.
+
+## 17. What we would do differently
 
 1. Design text compactness and depth coverage from the start (V1 lost 23 % of the depth test to the 512-token limit).
 2. Fix the representation-fairness rule before the first pipeline/direct comparison (it inverted a conclusion).

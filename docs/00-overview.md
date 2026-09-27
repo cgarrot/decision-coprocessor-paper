@@ -1,6 +1,6 @@
 # 00 — Overview
 
-*Snapshot: 2026-09-26. All programmes (V1, V2, V2.1, V2.2 and the confirmation C0/C1/C2) are closed; the paper and this compendium reflect the final state.*
+*Snapshot: 2026-09-27 06:12. All programmes (V1, V2, V2.1, V2.2, C0/C1/C2 and V2.3/P2/E2-bis) are closed; the canonical verdicts document is the source of truth; the final documentary audit is “closed with residuals”.*
 
 ## 1. One paragraph
 
@@ -18,6 +18,7 @@ The *Decision Coprocessor* project studies whether a **small, explicitly computa
 | VI. V2.1 validation | 09-25 ≈11:40 → 14:00 | Frozen checkpoints on 8 new held-out benches (n=400): depth 1–10, surface, distractors, options, start; error attribution; deterministic parser control | **Depth reversal**: pipeline wins at depth 6–10 (+14/+32/+25 pts); deficit localised to path edges; parser 1.000/1.000 |
 | VII. V2.2 interface ablations | 09-25 14:03 → 19:06 | A1 FAIL (unsupervised head), A1-bis PASS (zero training, 0.85 invariant), A2 PASS (distributional training, 0.995–1.000), A3 (equal-supervision direct control), router bound, costs | **The interface was the whole deficit**: architectural superiority of propagation validated 8/8; router useless for accuracy; propagation ≈1.3–1.5 % of latency |
 | VIII. Audit #3 + confirmation (C0/C1/C2) | 09-25 19:25 → 09-26 10:37 | C0 scope errata (7) + public inference audit (S executor not invoked in A2) + parser reconciliation; C1 same-reader 2×2 ablation, anti-leak 3 layers, complete Brier, budget sweep, toolchain/CPU-GPU localisation; C2 protocol frozen, night chain: 3-seed confirmation + blind extrapolation | **Both factors contribute** (uncertainty conservation + better reading); **C2-a PASS** (Δ +65.83 pts mean, dispersion ≤0.33 pt); **C2-b blind extrapolation largely successful** (0.9867 vs 0.271); all QA reserves closed (REG-86) |
+| IX. V2.3 language + diagnosis + E2-bis | 09-26 ≈11:30 → 09-27 06:12 | V2.3 (E1 frozen: paraphrases PASS 1.000, inversions break 0.545; E2 retraining recovers 0.94; E3 language×depth: canonical/paraphrase robust, crossed inversion×depth partial 0.68); P2 diagnosis (mass leak to UNKNOWN 0.38→0.57, H-A partial); E2-bis (25→45 % inversions, inv×depth-10 0.90–0.93, blind extrapolation) | **Failed threshold published**: UNKNOWN mass 0.38–0.41 > 0.25; canonical verdicts (REG-74→94) replace historical formulations; final audit **“CLOS AVEC RÉSIDUS”** (5 documentary residuals, no new experiment); V2.4 in user arbitration |
 
 ## 3. What was actually demonstrated (final state)
 
@@ -29,7 +30,9 @@ The *Decision Coprocessor* project studies whether a **small, explicitly computa
 6. **The result is confirmed independently (C2).** Three seeds: Δ(A2−A3) pooled deep **+65.83 pts mean**, dispersion **≤0.33 pt**, CI low > 0 on all three. **Blind extrapolation:** with training (gradients) and checkpoint selection restricted to depths ≤ 4, A2-blind reaches **0.9867 pooled deep** (criterion ≥0.90 = largely successful) while the equal-supervision direct control collapses to 0.271.
 7. **A router is unnecessary for accuracy.** Oracle bound +0.00 to +0.50 pts over A2 alone. (A compute-saving router would need its own pre-declared objective; the propagation step is already ≈1.3–1.5 % of latency.)
 8. **Fair-comparison discipline repeatedly changed the conclusions.** Frozen vs adapted representation inverted T; A3 equalised supervision; C2 removed the depth exposure from selection. Each audit round turned an over-strong claim into a sharper, scoped one.
-9. **What remains genuinely open**: UNKNOWN/partially observed worlds (defined, trained for, not evaluated), harder benches beyond the B5/B6 saturation, OOD generalisation, and Lot C3 (one extension axis) — explicitly out of scope for this compendium.
+9. **The language interface is robust where it should be, and brittle exactly where its training data is absent** (V2.3). Paraphrases and lexical renaming cost ≈0; inverted syntax at frozen weights collapses (0.545) and A2 loses to A3; retraining on a frozen mixture recovers inversions (0.94) but the crossed inversion×depth extrapolation is only partial (0.68). **E2-bis** then showed the frontier is **pushable with data**: +25 % → 45 % inversions suffices for 0.90–0.93 at depth 10, with gradients *and* selection restricted to depths 1–4 (blind extrapolation) — at the cost of a **residual UNKNOWN mass of 0.38–0.41**, a prefixed threshold that **failed** and is published as such.
+10. **Documentary closure is a distinct deliverable.** The final inspection returned **“CLOS AVEC RÉSIDUS”**: the experimental state is closed, but five traceability residuals (domain contradiction, verdict hierarchy, P2 reserves, release inventory, parser/adapter flow) block a “no-residual” certification. No new experiment is required; assembling and qualifying the existing artefacts is.
+11. **What remains genuinely open**: UNKNOWN semantics for partially observed worlds, the residual mass leak, can↔inv coherence, harder benches beyond the B5/B6 saturation, and the V2.4 arbitration — explicitly out of scope for this compendium.
 
 ## 4. Methodological core (the durable part)
 
