@@ -1,6 +1,6 @@
 # 00 — Overview
 
-*Snapshot: 2026-09-27 06:12. All programmes (V1, V2, V2.1, V2.2, C0/C1/C2 and V2.3/P2/E2-bis) are closed; the canonical verdicts document is the source of truth; the final documentary audit is “closed with residuals”.*
+*Snapshot: 2026-09-27 06:23. **The project is closed and attestable.** All programmes (V1, V2, V2.1, V2.2, C0/C1/C2, V2.3/P2/E2-bis) and the documentary residuals B1–B5 are closed; the canonical verdicts make faith for the numbers, `FINAL_SYNTHESIS.md` for the formulations, and `v23_release_manifest.json` for the record.*
 
 ## 1. One paragraph
 
