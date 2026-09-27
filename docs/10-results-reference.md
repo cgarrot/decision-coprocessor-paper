@@ -161,8 +161,11 @@ Sources: `reports/v23_final.md`, QA reviews `v23_e1a/e1_l2l3/e2/e3`, `v23_c2_qa_
 | P2/E2-bis mass conventions | `mass_term` = p_T[correct terminal]; `mass_inconnu` = p_T[UNKNOWN sink]; `mass_hors` = off-candidate nodes; argmax over candidate **nodes only** (sink never a candidate); tie-break eps=1e-3 alphabetical |
 | V2.3 compute | ≈ **9 h GPU** for the campaign (E1 ~2 h + E2 ~5 h + E3 ~1.5 h), batch 8 profile — campaign cost, not decision latency |
 | Canonical Δ(c−d) V2-T | **−23.844 pts [−28.19; −19.76]** (canonical verdicts; replaces the earlier [−28.33; −19.60] bootstrap bounds) |
-| Final documentary audit | **“CLOS AVEC RÉSIDUS”**: 5 blocking documentary residuals (B1–B5: E2-bis domain wording, verdict hierarchy, P2 reserves, release inventory, parser/adapter flow), no new experiment required; minors: mass definitions, anti-overwrite scope, chronology; cosmetic: “doubling” = ×1.8 |
-| V2.4 status | **In user arbitration** (residual leak objective, UNKNOWN semantics, can↔inv coherence) — not started |
+| Final documentary audit | First verdict **“CLOS AVEC RÉSIDUS”** (5 blockers B1–B5) → **all resolved within the hour, no new experiment**: B1 E2-bis requalified (data-proven blind extrapolation), B2 explicit multi-criteria hierarchy (accuracy PASS / UNKNOWN FAILED), B3 P2 reserves propagated, B4 `v23_release_manifest.json` 83/83 (83 = 80 official + 3 pilots; the “76” was a listing undercount), B5 `v23_adapter_flow.md` (5 roles, INFERENCE vs TARGETS) |
+| Final status | **Project closed and attestable** (commit `c2d7d760`, REG-95); document of record `FINAL_SYNTHESIS.md` (claims + conditions, corrected formulations, open items, bounded publication anchor) |
+| Total project cost | **≈ 35–40 h GPU over 3 days** (one RTX 3070, one job at a time; campaign cost, not decision latency ≈40–50 ms) |
+| Publication anchor | *A learned relational interface (LoRA reader + fact-level heads) and explicit propagation produce a depth generalisation far superior to the compared direct models, confirmed on new data and several seeds for the main system, and a genuine blind extrapolation (E2-bis 0.90–0.93 at depth 10 without ever seeing depth > 4). Linguistic robustness is asymmetric: paraphrases perfect, inversions recoverable with data, residual mass leak documented (UNKNOWN ≈0.40 in depth). Results conditional on the described synthetic benches, seeds and protocols; thresholds, incidents and reserves published in full.* |
+| V2.4 status | **Open items recorded, not started** (residual UNKNOWN leak, UNKNOWN/partial worlds, can↔inv coherence, multi-relations/cycles/negation/coreference, a third blind seed, batch-1 raw-text costs) |
 
 ## Cost ledger
 

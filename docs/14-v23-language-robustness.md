@@ -83,21 +83,28 @@ Protocol frozen before generation (`V23_E2BIS_PROTOCOL.md`, sha `4f0677af…`): 
 
 **What this changes:** the V2.3 frontier (0.93 short → 0.68 at depth 10) is **pushable with data** (+25 % → 45 % inversions, ×1.8, suffices to cover inv×depth-10 at 0.90–0.93). The residual leak suggests an interface that better conserves mass (e.g. the can↔inv coherence constraint) could push further — **recorded for V2.4 arbitration, not executed**.
 
-## 5. Final documentary audit: “CLOS AVEC RÉSIDUS”
+## 5. Final closure: from “closed with residuals” to “closed and attestable”
 
-A sixth inspection (`AUDIT-CLOTURE-FINALE-DECISION-COPROCESSOR.md`, 2026-09-27 06:09) validated the experimental state and the canonical verdicts, and identified **five blocking documentary residuals** (none requiring a new experiment):
+The final inspection (`AUDIT-CLOTURE-FINALE-DECISION-COPROCESSOR.md`, 06:09) had returned **“CLOS AVEC RÉSIDUS”** with five documentary blockers. They were all closed within the hour (commits 06:16–06:23), without any new experiment:
 
-| ID | Residual | Resolution path |
+| ID | Residual | Resolution |
 |---|---|---|
-| B1 | E2-bis domain contradiction (“in-domain” vs 1–4) | corrected by the data-proven requalification: **blind extrapolation** (this doc §4) |
-| B2 | Multi-criteria verdict incomplete (failed threshold hierarchy) | explicit hierarchy table (§4) |
-| B3 | P2 QA reserves not propagated into summaries | authorised partial-attribution formulation (§3) |
-| B4 | Release/inventory not settled (unfrozen files, manifest, 83 vs 76 dirs, early closures not recertifiable) | designate the final archive, classify evaluations, attach closure pieces |
-| B5 | Parser/adapter flow not consolidated (public inputs and semantic roles) | publish the existing schema or document the executed path — no leak claimed |
+| **B1** | E2-bis domain contradiction (“in-domain” vs 1–4) | requalified by the data: **blind extrapolation** (mixture + selection only depths 1–4) — §4 |
+| **B2** | Incomplete multi-criteria verdict hierarchy | explicit table: accuracy inv×p10 **PASS** / UNKNOWN mass **FAILED** / non-regression PASS / Δ(A2−A3) PASS — §4 |
+| **B3** | P2 QA reserves not propagated | authorised partial-attribution formulation (“compatible with… attribution partial”) — §3 |
+| **B4** | Release/inventory not settled | `v23_release_manifest.json`: checkpoints (4), loaders (224/224 names+values), predictions (83 + sha), replay command, environment, seals; classification **83 = 80 official + 3 pilot** (the “76” was a directory-listing undercount, frozen during an s29 campaign); **archive of record** |
+| **B5** | Parser/adapter flow not consolidated | `v23_adapter_flow.md`: five roles, **INFERENCE vs TARGETS** separation — the extended parser supplies fact spans and per-line entities at inference; edges/terminals/trajectories/start/nodes are training targets, never at inference; harness asymmetry (silent loss) removed; ≤512 limit binds the direct prompt |
 
-Minor residuals: mass definitions (populations/normalisation to be stated), anti-overwrite scope (previous-version preservation and atomic publication), chronology/convention housekeeping; cosmetic: “doubling” = ×1.8. **None changes a number.**
+**Final status: project closed and attestable** (commit `c2d7d760`, “CLOTURE SANS RESIDU”). The document of record is [`FINAL_SYNTHESIS.md`](../reference/v2/protocols/FINAL_SYNTHESIS.md), which:
 
-**Established in one sentence (audit wording):** *in a synthetic French relation-tracking domain, an adapted reader coupled with explicit distribution propagation outperformed the compared direct models, with confirmation and depth generalisation in the documented conditions, then reached 90–93 % on inversions at depth 10 after E2-bis — without eliminating the residual UNKNOWN mass or establishing general reasoning ability or product validation.*
+- states each demonstrated claim **with its exact conditions** (S on E1–E4; architectural superiority on the 8 pre-registered benches with 3 seeds; blind extrapolation only for C2-b and E2-bis; paraphrase robustness L1-a 3 seeds; data-driven inversion recovery; composed mass leak P2);
+- replaces historical over-strong formulations (“T refuted definitively” → on this protocol; “A2 dominates everywhere” → on the measured benches/cells; “no regression at all” → ±2 pts with the published L3-lbl −1/−2; “real composition” → functional robustness on tested interventions; “calibrated” → low NLL on a near-solved domain; “perfect depth invariance” → very strong robustness; “coverage” → blind extrapolation; “doubling” → ×1.8/+20 pts);
+- records what remains open (residual UNKNOWN leak 0.38–0.41, UNKNOWN/partial worlds, multi-relations/cycles/negation/coreference, a third blind seed, batch-1 raw-text costs);
+- reports the **total project cost ≈ 35–40 h GPU over 3 days** on one RTX 3070 (campaign cost; a single question is ≈40–50 ms).
+
+**Publication anchor (bounded formulation, final review):**
+
+> A learned relational interface (LoRA reader + fact-level heads) and an explicit propagation (`p_{t+1} = p_t A`) produce a depth generalisation far superior to the compared direct models, confirmed on new data and several seeds for the main system, and a genuine blind extrapolation (E2-bis 0.90–0.93 at depth 10 without ever seeing depth > 4). Linguistic robustness is asymmetric: paraphrases perfect, inversions recoverable with data, residual mass leak documented (UNKNOWN ≈0.40 in depth). Results are conditional on the synthetic benches, seeds and protocols described; thresholds, incidents and reserves are published in full.
 
 ## 6. What remains open (V2.4 arbitration)
 
@@ -106,4 +113,4 @@ Minor residuals: mass definitions (populations/normalisation to be stated), anti
 3. **can↔inv coherence:** which relational invariant to impose between equivalent formulations while remaining sensitive to genuine inversions.
 4. Lot C3 items from before (new renderings, multi-question contexts, larger graphs) remain listed but unstarted.
 
-No further training is running. All V2.3/P2/E2-bis thresholds were prefixed, all incidents documented, and the canonical verdicts (`V23_CANONICAL_VERDICTS.md`, REG-74→94) are the single document that makes faith, replacing historical formulations.
+No further training is running. All V2.3/P2/E2-bis thresholds were prefixed, all incidents documented, and the closure chain is explicit: **canonical verdicts** (`V23_CANONICAL_VERDICTS.md`, QA REG-74→95) make faith for the numbers, **`FINAL_SYNTHESIS.md`** makes faith for the formulations (replacing historical over-strong wording) and carries the bounded **publication anchor**, and `v23_release_manifest.json` + `v23_adapter_flow.md` close the release and interface traceability. The project is **closed and attestable**.

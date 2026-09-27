@@ -28,8 +28,11 @@ reference/
     ├── protocols/   data_contract.md · V2*_PROTOCOL.md · V22_A{1BIS,2,3}_SPEC/ADDENDUM ·
     │                V22_C2_PROTOCOL.md · V2.3_PROPOSAL.md · V23_P2_PROTOCOL.md ·
     │                V23_E2BIS_PROTOCOL.md · MODEL_NOTES.md · research_register.md
-    │                (REG-01…REG-94) · v22_release_manifest.json ·
-    │                **V23_CANONICAL_VERDICTS.md (QA source of truth)**
+    │                (REG-01…REG-95) · v22_release_manifest.json ·
+    │                **V23_CANONICAL_VERDICTS.md (QA source of truth for numbers)** ·
+    │                **FINAL_SYNTHESIS.md (document of record for formulations,
+    │                publication anchor)** · **v23_release_manifest.json (83/83)** ·
+    │                **v23_adapter_flow.md (INFERENCE vs TARGETS)**
     └── reports/     final_v2.md · v21_results.md · v22_a{1,2,3}_qa_review.md ·
                      v22_final.md · v22_final_qa_review.md · v22_couts_COUT_TABLE.md ·
                      v22_scope_erratum.md · v22_public_inference_audit.md ·

@@ -2,12 +2,12 @@
   "snapshot_date": "2026-09-27",
   "source_repositories": {
     "decision-coprocessor": "V1, 20 commits, closed 2026-09-24",
-    "decision-coprocessor-v2": "V2/V2.1/V2.2/C0-C2/V2.3-P2-E2-bis all closed, 121 commits, snapshot 2026-09-27 06:12"
+    "decision-coprocessor-v2": "all programmes closed and attestable, 124 commits, snapshot 2026-09-27 06:23"
   },
-  "note": "Read-only snapshots copied for traceability; the source repositories remain authoritative. V23_CANONICAL_VERDICTS.md is the QA source of truth (REG-74->94).",
+  "note": "Read-only snapshots copied for traceability; the source repositories remain authoritative. V23_CANONICAL_VERDICTS.md is the QA source of truth for numbers (REG-74->95); FINAL_SYNTHESIS.md is the document of record for formulations.",
   "files": {
-    "PROVENANCE.json": "4f63c2f626b670a21578ef90324fe4095939fe2d3ddb7148c3c0cc0da0e2d6e3",
-    "README.md": "7d286378d1a71bc930aff982cecead4f5768f1180c23275a4d4bae541982a640",
+    "PROVENANCE.json": "15f98b10e5e62237d2355d9b03de257577cf9eb28d2c907356ec08c1978d5c79",
+    "README.md": "6fab9d7626443fd23cd0c6f1b502fcfae728acb83773825a47f4c4325807bc44",
     "audits/AUDIT-CLOTURE-FINALE-DECISION-COPROCESSOR.md": "ea21d509319c467f1312a39c5f6b581c3269d67f40bf9e53633821ebfa08b60b",
     "audits/DECISION-COPROCESSOR-AUDIT-RELANCE-V2.md": "fab4b37b2ed37eabf92e7cf6f93a1a713eded546a51e028e021532ce668155bc",
     "audits/DECISION-COPROCESSOR-AUDIT-V2-VALIDATION.md": "f11704d8901003c823048dbed8777d5b8f4eab2450195dede29cddcc3efe44ff",
@@ -50,6 +50,7 @@
     "v2/model/relation_data.py": "fb713782a169baebf689fd9ac1b0382644c10fc024828009f6fe738ced0690ec",
     "v2/model/solver.py": "befde8447fab71b523f4369a08e5af5b70bf1f6ffe0dcf8232eb411a26673805",
     "v2/model/train.py": "6e84684f6a83861e69ec16d7e6ad6b1cbd24ba8ceb95f56cd2e77fbad28ea81d",
+    "v2/protocols/FINAL_SYNTHESIS.md": "745e88bcec46187adb7bf198d3d8f0c65b3cc47ce80000554f6382e10c4f4b47",
     "v2/protocols/MODEL_NOTES.md": "bc4334962a11ed59667054d937aa014d4b750f606e698dd8870b2a9f273f3b55",
     "v2/protocols/V2.3_PROPOSAL.md": "f6b66296268b910d2e489738c2a7ad9227b04ceaf81d75a6547459c853fd4450",
     "v2/protocols/V21_PROTOCOL.md": "293b25c3fa4a058ec7939c7f689af0f1fcc9949e7d1eaf5477733f83af82e1e6",
@@ -64,6 +65,8 @@
     "v2/protocols/data_contract.md": "8141b2b73329314e2836ca41a26a16594783b282c019fc0297b31c713c8bbf94",
     "v2/protocols/research_register.md": "959d4d25887b9953ef394a6c4f7e87609bcd1e5b4bfc7618adc858d640fc8b65",
     "v2/protocols/v22_release_manifest.json": "e42551168038b8b1766bca059e5f35cb12c3752bfc842af1150b6b6befee035a",
+    "v2/protocols/v23_adapter_flow.md": "cafcc60f859284d4b73aee6b0a9f6db4598335aa620f3b28d89734215389fb5e",
+    "v2/protocols/v23_release_manifest.json": "6034768a7e81d971a5b5a6aefe62d6fe99f4ba8b7933d406511e9a0211a28f57",
     "v2/reports/c1_complements_ag3.md": "3302478c02223e65ef34e86bc80a447c82ac7c0e2ff589c4047d5c5904a86d0c",
     "v2/reports/c2_final.md": "947bafdf06923038cb3909295ebc7217a746087001c17ea787a292c765b2f717",
     "v2/reports/final_v2.md": "5dde7e1c2c765fdc18a6ccf02c5bd1d6d350d79635c91c9ca6ff0e6ef5b21bf4",

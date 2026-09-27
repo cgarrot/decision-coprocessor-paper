@@ -321,7 +321,7 @@ def fig06_a1bis():
 # ---------------------------------------------------------------------------
 def fig07_timeline():
     fig, ax = new_canvas(13.2, 8.4)
-    title(ax, "Project timeline — 24–27 September 2026 (~44 h, 141 commits)")
+    title(ax, "Project timeline — 24–27 September 2026 (~44 h, 144 commits)")
 
     # lanes: (name, y, [(x, label), ...], color)
     lanes = [
@@ -341,7 +341,7 @@ def fig07_timeline():
                       (89, "E3 21:10"), (93, "V2.3 closed")], "#0E7490"),
         ("P2 + E2-bis", 8, [(78, "audit #5 21:25"), (84, "P2 22:01"),
                             (88, "E2-bis frozen 22:06"), (95, "PASS 05:55"),
-                            (98, "closed 06:12")], "#B45309"),
+                            (98, "closed+attestable 06:23")], "#B45309"),
     ]
     for name, y, events, color in lanes:
         ax.plot([4, 99], [y, y], color=color, lw=2.4, alpha=0.65, zorder=1)

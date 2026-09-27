@@ -5,7 +5,7 @@
 | Repo | Commits | Status | Contents |
 |---|---:|---|---|
 | `decision-coprocessor/` | 20 | closed | V1 code, data generators, 53,500-example corpus, runs, 66 prediction files, final report, bundle |
-| `decision-coprocessor-v2/` | 121 | **closed** (V2, V2.1, V2.2, C0/C1/C2, V2.3/P2/E2-bis) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, all run archives |
+| `decision-coprocessor-v2/` | 124 | **closed and attestable** (V2, V2.1, V2.2, C0/C1/C2, V2.3/P2/E2-bis) | executor, extractor, propagation, data pools, gates, reports, registry, bundles, all run archives |
 
 Both are local Git repositories (no remote at snapshot). This compendium is the public-facing entry point; core code is snapshotted under [`reference/`](../reference/) with provenance.
 
@@ -74,6 +74,9 @@ reports/v23_final.md        V2.3 + P2 + E2-bis consolidated report
 reports/{v23_e1a_,v23_e1_l2l3_,v23_e2_,v23_e3_}qa_review.md
 reports/qa_{e1a,e1_l2l3,e2,e3,e2bis}_metrics.json
 predictions/{p_cell_L2-inv,p_cell_L3-lbl,p_cell_L3-adv}.json
+FINAL_SYNTHESIS.md         document of record: claims + conditions, corrected formulations, open items, publication anchor
+v23_adapter_flow.md        B5: 5 roles, INFERENCE vs TARGETS, ≤512 limit binding the direct prompt
+v23_release_manifest.json  B4: checkpoints, loaders 224/224, predictions 83+sha, replay, environment, seals
 ```
 Final documentary audit and fifth audit live at the workspace top level (see `reference/audits/`).
 

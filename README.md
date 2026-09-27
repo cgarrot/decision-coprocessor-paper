@@ -2,8 +2,8 @@
 
 **A two-part empirical study of multi-step decision making with small language backbones: a latent recurrent sidecar (V1, negative result) and a supervised transition executor (V2, mechanism demonstrated; decomposition initially refuted under fair comparison, then fixed and re-validated; interface ablations closed).**
 
-> **Status:** private research compendium, final snapshot of **2026-09-27 06:12**.
-> **All programmes are closed** — V1, V2, V2.1, V2.2, the confirmation programme C0/C1/C2, and V2.3/P2/E2-bis — every gate and QA reserve closed (REG-86, REG-87→94). The canonical verdicts document (`V23_CANONICAL_VERDICTS.md`, QA) **is the source of truth and replaces historical formulations**; the final documentary audit is **“closed with residuals”** (five traceability items, no new experiment required — see [`docs/14`](docs/14-v23-language-robustness.md)).
+> **Status:** private research compendium, final snapshot of **2026-09-27 06:23**.
+> **All programmes are closed — the project is closed and attestable.** V1, V2, V2.1, V2.2, the confirmation programme C0/C1/C2, V2.3/P2/E2-bis, and the five documentary residuals B1–B5 (release manifest 83/83, adapter flow, verdict hierarchy, P2 reserves, E2-bis requalification). The **canonical verdicts** (`V23_CANONICAL_VERDICTS.md`, QA REG-74→95) make faith for the numbers; **[`FINAL_SYNTHESIS.md`](reference/v2/protocols/FINAL_SYNTHESIS.md)** makes faith for the formulations and carries the bounded publication anchor.
 > All quantitative claims in this repository are traced to versioned reports, hash-pinned configs and archived predictions in the two source repositories.
 
 ---
@@ -22,7 +22,7 @@ The two working repositories remain the source of truth for raw runs and per-ite
 | Repository | Role | State |
 |---|---|---|
 | `decision-coprocessor/` | V1: frozen-backbone + recurrent sidecar | closed, negative result published |
-| `decision-coprocessor-v2/` | V2 / V2.1 / V2.2 / C0-C1-C2 / V2.3-P2-E2-bis | **all closed** (121 commits) |
+| `decision-coprocessor-v2/` | V2 / V2.1 / V2.2 / C0-C1-C2 / V2.3-P2-E2-bis | **closed and attestable** (124 commits) |
 
 ---
 
@@ -67,7 +67,7 @@ The two working repositories remain the source of truth for raw runs and per-ite
 | **V2.2** | **Router oracle bound** | **+0.00 to +0.50 pts** over A2 → no router built for accuracy |
 | **V2.2** | **Costs (batch 8)** | A2 ×1.23–1.27 vs A3 latency; **propagation 0.59–0.66 ms ≈ 1.3–1.5 % (low in this profile)**; VRAM parity |
 | **Parser** | Deterministic parser + exact solver (bounded to templates) | **1.0000 on 8/8 benches (3200/3200)** — the upper bound of any system on this synthetic domain |
-| total | registered compute | V2 ≈ **4.96 h** GPU + V2.2 runs (A2 ≈ 68 min, A3, costs) + **C2 night ≈ 7 h**; VRAM peak ≈ 2.1 GiB |
+| total | project compute (final synthesis) | **≈ 35–40 h GPU over 3 days** on one RTX 3070 8 GB, one job at a time (campaign cost; a single question ≈40–50 ms); VRAM peak ≈ 2.1 GiB |
 
 ---
 
